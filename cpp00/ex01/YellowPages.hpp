@@ -1,23 +1,28 @@
 #ifndef YELLOWPAGES_HPP
 #define YELLOWPAGES_HPP
 
+#include <iostream>
+#include <string>
+
 class Contact
 {
-
+public:
+	std::string	firstName;
+	std::string	lastName;
+	std::string	nickname;
+	std::string	phoneNumber;
+	std::string	secret;
 };
 
 class PhoneBook
 {
 public:
-	PhoneBook(void);
-	~PhoneBook(void);	
-
-private:
+	int		size;
+	int		index;
 	Contact	Contacts[8];
-	void	search(void);
-	void	add(void);
-	void	index(void);
-	void	printIndex(void);
 };
+
+void	add(PhoneBook *book);
+void	search(PhoneBook *book);
 
 #endif
