@@ -1,6 +1,7 @@
 NAME = yellow_pages
 
-SRC = yellow_pages.cpp
+SRC =	YellowPages.cpp\
+		functions.cpp\
 
 OBJ = $(SRC:%.cpp=%.o)
 
@@ -11,7 +12,7 @@ CPP = clang++
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CPP) $(FLAG) -o $@ $^
+	@$(CPP) $(FLAGS) -o $@ $^
 	@echo "\033[0;31yellow_pages ready\033[0m"
 
 %o: %.cpp

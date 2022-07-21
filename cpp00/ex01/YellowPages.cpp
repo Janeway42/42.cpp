@@ -14,14 +14,14 @@ int main(int argc, char **argv)
 	{
 		std::cin >> command;
 		command[6] = '\0';
-		if (command == "EXIT")
+		if (strcmp(command, "EXIT") == 0)
 			break;
-		else if (command == "ADD")
+		else if (strcmp(command, "ADD") == 0)
 			add(&YellowPages);
-		else if (command == "SEARCH")
+		else if (strcmp(command, "SEARCH") == 0)
 			search(&YellowPages);
 		else
-			std::cout << "Invalid Input" << std::endl;
+			std::cout << "Invalid Input \n Please input ADD, SEARCH or EXIT to continue." << std::endl;
 	}
 	return (0);
 }
