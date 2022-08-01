@@ -6,23 +6,37 @@
 
 class Contact
 {
+private:
+	std::string	_firstName;
+	std::string	_lastName;
+	std::string	_nickname;
+	std::string	_phoneNumber;
+	std::string	_secret;
+
 public:
-	std::string	firstName;
-	std::string	lastName;
-	std::string	nickname;
-	std::string	phoneNumber;
-	std::string	secret;
+	Contact(void);
+	~Contact(void);
+
+	void	writeContact(void);
+	void	printRow(int i);
+	void	printContact(void);
+
 };
 
 class PhoneBook
 {
-public:
-	int		size;
-	int		index;
-	Contact	Contacts[8];
-};
+private:
+	Contact Contacts[8];
 
-void	add(PhoneBook *book);
-void	search(PhoneBook *book);
+public:
+
+	PhoneBook(void);
+	~PhoneBook(void);
+
+	int		index;
+
+	void	add(void);
+	void	search(void);
+};
 
 #endif

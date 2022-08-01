@@ -1,7 +1,8 @@
 NAME = yellow_pages
 
 SRC =	YellowPages.cpp\
-		functions.cpp\
+		functions_PhoneBook.cpp\
+		functions_Contact.cpp\
 
 OBJ = $(SRC:%.cpp=%.o)
 
@@ -13,7 +14,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(CPP) $(FLAGS) -o $@ $^
-	@echo "\033[0;31yellow_pages ready\033[0m"
+	@echo "\033[0;31myellow_pages ready\033[0m"
 
 %o: %.cpp
 	@$(CPP) $(FLAG) -o $@ -c $<

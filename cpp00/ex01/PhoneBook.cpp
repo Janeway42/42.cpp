@@ -25,9 +25,6 @@ PhoneBook::PhoneBook(void)
 	return;
 }
 
-
-// ~Phonebook
-
 void	add()
 {
 	char input[30];
