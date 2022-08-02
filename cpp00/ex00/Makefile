@@ -4,7 +4,7 @@ SRC = megaphone.cpp
 
 OBJ = $(SRC:%.cpp=%.o)
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -std=c++98
 
 CPP = clang++
 
@@ -22,6 +22,7 @@ clean:
 	@echo "clean done"
 
 fclean:
+	@rm -f $(OBJ)
 	@rm -f $(NAME)
 	@echo "fclean done"
 

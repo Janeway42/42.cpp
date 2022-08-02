@@ -1,9 +1,10 @@
-NAME = yellow_pages
+NAME = Violence
 
-SRC =	YellowPages.cpp\
-		PhoneBook.cpp\
-		Contact.cpp\
-		
+SRC =	main.cpp\
+		Weapon.cpp\
+		HumanA.cpp\
+		HumanB.cpp\
+
 OBJ = $(SRC:%.cpp=%.o)
 
 FLAGS = -Wall -Werror -Wextra -std=c++98
@@ -14,7 +15,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(CPP) $(FLAGS) -o $@ $^
-	@echo "\033[0;31myellow_pages ready\033[0m"
+	@echo "\033[0;31mViolence ready\033[0m"
 
 %o: %.cpp
 	@$(CPP) $(FLAG) -o $@ -c $<

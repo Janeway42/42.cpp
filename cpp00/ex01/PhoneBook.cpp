@@ -1,40 +1,58 @@
 #include <iostream>
 #include <string.h>
-#include "YellowPages.hpp"
+#include "PhoneBook.hpp"
 
-PhoneBook::PhoneBook(void)
+PhoneBook:: PhoneBook(void)
 {
-	char command[7];
-
-	std::cout << "Yellow Pages" << std::endl;
-	while(1)
-	{
-		bzero(command, 7);
-		std::cout << "$";
-		std::cin >> command;
-		command[6] = '\0';
-		if (strcmp(command, "EXIT") == 0)
-			break;
-		else if (strcmp(command, "ADD") == 0)
-			add();
-		else if (strcmp(command, "SEARCH") == 0)
-			search();
-		else
-			std::cout << "Invalid Input" << std::endl;
-	}
+	index = 0;
+	std::cout << "Initializing Yellow Pages\n";
 	return;
 }
 
-void	add()
+PhoneBook::	~PhoneBook(void)
 {
-	char input[30];
+	std::cout << "Yellow Pages out!\n";
+	return;
+}
 
-	bzero(input, 30);
+void	PhoneBook::add(void)
+{
+	Contacts[index].writeContact();
+	index++;
+	if (index == 8)
+		index = 0;
+}
 
-	std::cout << "First Name: ";
-	std::cin >> input;
-	std::cout << "Last Name: ";
-	std::cout << "Nickname: ";
-	std::cout << "Phone Number: ";
-	std::cout << "Darkest Secret: ";
+void PhoneBook::search(void)
+{
+	int	i;
+	int	nr;
+	std::string	temp;
+
+	std::cout << "--------------Yellow-----Pages---------------" <<std::endl;
+	std::cout << "|----------|---------------------|----------|" <<std::endl;
+	std::cout << "|-----Index|-FirstName|--LastName|--Nickname|" <<std::endl;
+	std::cout << "|----------|----------|----------|----------|" <<std::endl;
+	
+	for (i = 1; i < 9; i++)
+		Contacts[i - 1].printRow(i);
+
+	std::cout << "---------------------------------------------" <<std::endl;
+	
+	std::cout << "Specify contact index to preview all details: " << std::endl;
+	while (true)
+	{
+		try	
+		{
+			std::getline(std::cin, temp);
+			nr = stoi(temp);
+			break;
+			
+		}
+		catch(const std::exception e) // catch(const std::exception& e)
+		{
+			std::cout << "Specify contact index to preview all details: " << std::endl;
+		}
+	}
+	Contacts[nr - 1].printContact();
 }

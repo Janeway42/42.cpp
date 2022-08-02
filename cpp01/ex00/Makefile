@@ -1,8 +1,9 @@
-NAME = yellow_pages
+NAME = BraiiiiiiinnnzzzZ
 
-SRC =	YellowPages.cpp\
-		PhoneBook.cpp\
-		Contact.cpp\
+SRC =	main.cpp\
+		newZombie.cpp\
+		randomChump.cpp\
+		Zombie.cpp\
 		
 OBJ = $(SRC:%.cpp=%.o)
 
@@ -14,7 +15,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(CPP) $(FLAGS) -o $@ $^
-	@echo "\033[0;31myellow_pages ready\033[0m"
+	@echo "\033[0;31mBraiiiiiiinnnzzzZ ready\033[0m"
 
 %o: %.cpp
 	@$(CPP) $(FLAG) -o $@ -c $<

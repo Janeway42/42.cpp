@@ -1,8 +1,6 @@
 NAME = yellow_pages
 
-SRC =	YellowPages.cpp\
-		PhoneBook.cpp\
-		Contact.cpp\
+SRC =	tests.cpp\
 		
 OBJ = $(SRC:%.cpp=%.o)
 

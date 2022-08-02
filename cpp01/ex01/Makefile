@@ -1,9 +1,9 @@
-NAME = yellow_pages
+NAME = MoreBrainz
 
-SRC =	YellowPages.cpp\
-		PhoneBook.cpp\
-		Contact.cpp\
-		
+SRC =	main.cpp\
+		Zombie.cpp\
+		zombieHorde.cpp\
+
 OBJ = $(SRC:%.cpp=%.o)
 
 FLAGS = -Wall -Werror -Wextra -std=c++98
@@ -14,7 +14,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(CPP) $(FLAGS) -o $@ $^
-	@echo "\033[0;31myellow_pages ready\033[0m"
+	@echo "\033[0;31mMoreBrainz ready\033[0m"
 
 %o: %.cpp
 	@$(CPP) $(FLAG) -o $@ -c $<
