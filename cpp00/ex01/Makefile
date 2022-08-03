@@ -1,6 +1,6 @@
 NAME = yellow_pages
 
-SRC =	YellowPages.cpp\
+SRC =	main.cpp\
 		PhoneBook.cpp\
 		Contact.cpp\
 		

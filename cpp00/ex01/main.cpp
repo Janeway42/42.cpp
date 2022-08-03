@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 		else if (command.compare("SEARCH") == 0)
 			YellowPages.search();
 		else
-			std::cout << "Invalid Input \n Please input ADD, SEARCH or EXIT to continue." << std::endl;
+			std::cout << "Invalid Input! Please input ADD, SEARCH or EXIT to continue." << std::endl;
 	}
 	return (0);
 }
