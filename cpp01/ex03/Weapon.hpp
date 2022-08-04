@@ -10,14 +10,12 @@ private:
 
 public:
 
-	Weapon(std::string type);
+	Weapon(void);
+	Weapon(std::string weaponType);
 	~Weapon(void);
 
-	const	std::string& getType();
 	void	setType(std::string type);
+	const	std::string& getType();
 };
 
 #endif
-
-
-// A setType() member function that sets type using the new one passed as parameter.

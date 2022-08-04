@@ -14,14 +14,14 @@ int main (void)
 		club.setType("some other type of club");
 		bob.attack();
 	}
-
 	{
-		Weapon club = Weapon("crude apiked club");
+		Weapon club = Weapon("crude spiked club");
 	
 		HumanB jim("Jim");
 		jim.setWeapon(club);
 		jim.attack();
 		club.setType("some other type of club");
+		// std::cout << club.getType() << std::endl;
 		jim.attack();
 	}
 	return (0);
