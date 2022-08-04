@@ -1,6 +1,7 @@
 #include "Account.hpp"
 #include <string>
 #include <iostream>
+#include <iomanip>
 
 int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;
@@ -33,9 +34,22 @@ Account:: ~Account(void)
     return;
 } 
 
-void	Account::_displayTimestamp( void )
+void	Account::_displayTimestamp(void)
 {
-    std::cout << "[19920104_091532] ";
+	time_t		rawtime;
+  	struct tm	*timeinfo;
+	  
+    std::time(&rawtime);
+	timeinfo = std::localtime(&rawtime);
+	std::cout << "[" << timeinfo->tm_year + 1900;
+	std::cout << std::setfill('0') << std::setw(2) << timeinfo->tm_mon + 1;
+	std::cout << std::setfill('0') << std::setw(2) << timeinfo->tm_mday;
+	std::cout << "_";
+	std::cout << std::setfill('0') << std::setw(2) << timeinfo->tm_hour;
+	std::cout << std::setfill('0') << std::setw(2) << timeinfo->tm_min;
+	std::cout << std::setfill('0') << std::setw(2) << timeinfo->tm_sec;
+	std::cout << "] ";
+	
 }
 
 void Account::displayAccountsInfos( void )

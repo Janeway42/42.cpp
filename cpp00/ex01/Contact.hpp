@@ -20,9 +20,9 @@ public:
 	void	writeContact(void);
 	void	printRow(int i);
 	void	printContact(void);
-
 };
 
 void	printInfo(std::string name);
+int		errorEOF(void);
 
 #endif

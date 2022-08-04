@@ -45,14 +45,18 @@ void PhoneBook::search(void)
 		try	
 		{
 			std::getline(std::cin, temp);
+			if (std::cin.eof())
+				errorEOF();
 			nr = stoi(temp);
-			break;
-			
+			if (nr < 1 || nr > 8)
+				std::cout << "Specify contact index to preview all details: " << std::endl;
+			else
+				break;			
 		}
-		catch(const std::exception e) // catch(const std::exception& e)
+		catch(const std::exception e)
 		{
 			std::cout << "Specify contact index to preview all details: " << std::endl;
-		}
+		}		
 	}
 	Contacts[nr - 1].printContact();
 }

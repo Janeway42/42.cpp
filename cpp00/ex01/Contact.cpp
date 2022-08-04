@@ -16,15 +16,30 @@ void	Contact::writeContact(void)
 {
 	std::cout << "First Name: ";
 	std::getline(std::cin, this->_firstName);
+	if (std::cin.eof())
+		errorEOF();
 	std::cout << "Last Name: ";
-	std::getline(std::cin, this->_lastName);
+	std::getline(std::cin >> std::ws, this->_lastName);
+	if (std::cin.eof())
+		errorEOF();
 	std::cout << "Nickname: ";
 	std::getline(std::cin, this->_nickname);
+	if (std::cin.eof())
+		errorEOF();
 	std::cout << "Phone Number: ";
 	std::getline(std::cin, this->_phoneNumber);
+	if (std::cin.eof())
+		errorEOF();
 	std::cout << "Darkest Secret: ";
 	std::getline(std::cin, this->_secret);
+	if (std::cin.eof())
+		errorEOF();
+}
 
+int		errorEOF(void)
+{
+	std::cout << "\nEOF has been detected! Good bye!" << std::endl;
+	exit(1);
 }
 
 void	printInfo(std::string name)
