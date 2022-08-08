@@ -1,8 +1,6 @@
-NAME = MoreBrainz
+NAME = replace
 
 SRC =	main.cpp\
-		Zombie.cpp\
-		zombieHorde.cpp\
 
 OBJ = $(SRC:%.cpp=%.o)
 
@@ -14,7 +12,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(CPP) $(FLAGS) -o $@ $^
-	@echo "\033[0;31mMoreBrainz ready\033[0m"
+	@echo "\033[0;31mViolence ready\033[0m"
 
 %o: %.cpp
 	@$(CPP) $(FLAG) -o $@ -c $<

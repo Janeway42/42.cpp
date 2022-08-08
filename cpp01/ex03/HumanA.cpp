@@ -4,7 +4,6 @@
 HumanA:: HumanA(std::string name, Weapon& weaponType) : _weaponA(weaponType)
 {
 	_nameA = name;
-	// _weaponA = weaponType;
 	return;
 }
 

@@ -20,7 +20,7 @@ void HumanB::setWeapon(Weapon& weaponType)
 
 void HumanB::attack(void)
 {
-	if (_weaponB == NULL)
+	if (_weaponB != NULL)
 	{
 		std::cout << _nameB;
 		std::cout << " attacks with their weapon ";

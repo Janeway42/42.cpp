@@ -1,4 +1,4 @@
-NAME = Violence
+NAME = violence
 
 SRC =	main.cpp\
 		Weapon.cpp\
@@ -9,7 +9,7 @@ OBJ = $(SRC:%.cpp=%.o)
 
 FLAGS = -Wall -Werror -Wextra -std=c++98
 
-CPP = clang++
+CPP = c++
 
 all: $(NAME)
 
