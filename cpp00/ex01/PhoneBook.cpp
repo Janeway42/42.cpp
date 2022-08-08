@@ -49,13 +49,13 @@ void PhoneBook::search(void)
 				errorEOF();
 			nr = stoi(temp);
 			if (nr < 1 || nr > 8)
-				std::cout << "Specify contact index to preview all details: " << std::endl;
+				std::cout << "Specify contact index 1-8 to preview all details: " << std::endl;
 			else
 				break;			
 		}
 		catch(const std::exception e)
 		{
-			std::cout << "Specify contact index to preview all details: " << std::endl;
+			std::cout << "Specify contact index 1-8 to preview all details: " << std::endl;
 		}		
 	}
 	Contacts[nr - 1].printContact();

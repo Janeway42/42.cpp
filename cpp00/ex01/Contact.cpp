@@ -19,7 +19,7 @@ void	Contact::writeContact(void)
 	if (std::cin.eof())
 		errorEOF();
 	std::cout << "Last Name: ";
-	std::getline(std::cin >> std::ws, this->_lastName);
+	std::getline(std::cin, this->_lastName);
 	if (std::cin.eof())
 		errorEOF();
 	std::cout << "Nickname: ";
@@ -42,11 +42,24 @@ int		errorEOF(void)
 	exit(1);
 }
 
+std::string replace_tab(std::string name)
+{
+	int i;
+
+	for (i = 0; name[i] != '\0'; i++)
+	{
+		if (name[i] == '\t')
+			name[i] = ' ';
+	}
+	return (name);
+}
+
 void	printInfo(std::string name)
 {
 	size_t	size;
 	int		i;
 
+	name = replace_tab(name);
 	size = name.length();
 	if (size < 10)
 	{
