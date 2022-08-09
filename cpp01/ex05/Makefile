@@ -1,6 +1,7 @@
-NAME = replace
+NAME = harl
 
 SRC =	main.cpp\
+		Harl.cpp
 
 OBJ = $(SRC:%.cpp=%.o)
 
@@ -24,7 +25,6 @@ clean:
 fclean:
 	@rm -f $(OBJ)
 	@rm -f $(NAME)
-	@rm -f "new_file"
 	@echo "fclean done"
 
 re: fclean all
