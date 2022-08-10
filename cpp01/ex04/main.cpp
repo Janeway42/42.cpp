@@ -26,20 +26,26 @@ void    create_file(std::fstream *fs, std::string str1, std::string str2)
 		{
 			while (!(*fs).eof())
 			{
-				
 				getline((*fs), buffer);
-				
 				int out = buffer.find(str1, 0);
 				
-				while (out != std::string::npos)
+				if (out != std::string::npos)
 				{
-					temp = buffer.substr(0, out);
-					temp += str2;
-					temp += buffer.substr(out + str1.length(), buffer.length());
-					out = buffer.find(str1, out + str1.length());
+					while (out != std::string::npos)
+					{
+						temp = buffer.substr(0, out);
+						temp += str2;
+						temp += buffer.substr(out + str1.length(), buffer.length());
+						out = buffer.find(str1, out + str1.length());
+					}
+					new_file << temp;
+					new_file << std::endl;
 				}
-				new_file << temp;
-				new_file << std::endl;
+				else
+				{
+					new_file << buffer;
+					new_file << std::endl;
+				}
 			}
 		}
 		new_file.close();

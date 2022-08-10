@@ -15,7 +15,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(CPP) $(FLAGS) -o $@ $^
-	@echo "\033[0;31mViolence ready\033[0m"
+	@echo "\033[0;31mviolence ready\033[0m"
 
 %o: %.cpp
 	@$(CPP) $(FLAG) -o $@ -c $<

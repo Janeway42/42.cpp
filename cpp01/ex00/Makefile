@@ -1,4 +1,4 @@
-NAME = BraiiiiiiinnnzzzZ
+NAME = braiiiiiiinnnzzzZ
 
 SRC =	main.cpp\
 		newZombie.cpp\
@@ -15,7 +15,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(CPP) $(FLAGS) -o $@ $^
-	@echo "\033[0;31mBraiiiiiiinnnzzzZ ready\033[0m"
+	@echo "\033[0;31mbraiiiiiiinnnzzzZ ready\033[0m"
 
 %o: %.cpp
 	@$(CPP) $(FLAG) -o $@ -c $<

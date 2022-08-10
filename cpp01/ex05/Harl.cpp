@@ -3,18 +3,16 @@
 
 Harl:: Harl(void)
 {
-	return;
 }
 
 Harl:: ~Harl(void)
 {
-	return;
 }
 
 void Harl::complain(std::string level)
 {
-	std::string levelsArray[4] = {"DEBUGG", "INFO", "WARNING", "ERROR"};
-	void (Harl::*functions[4])() = {&Harl::_debug, &Harl::_info, &Harl::_warning, &Harl::_error};
+	std::string levelsArray[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+	void (Harl::*functions[])() = {&Harl::_debug, &Harl::_info, &Harl::_warning, &Harl::_error};
 
 	for (int i = 0; i < 4; i++)
 		if (level == levelsArray[i])
@@ -23,7 +21,6 @@ void Harl::complain(std::string level)
 
 void Harl::_debug(void)
 {
-	std::cout << "Test\n";
 	std::cout << DEBUG << std::endl;
 }
 
