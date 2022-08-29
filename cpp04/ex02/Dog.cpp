@@ -42,7 +42,10 @@ Dog& Dog::operator = (Dog const &existing)
 
 void Dog::makeSound(void)
 {
-	this->makeSound();
+	if (this->_type.compare("Dog") == 0)
+		std::cout << this->_type << ": Woof Woof!" << std::endl;
+	else
+		std::cout << "No comment!" << std::endl;
 }
 
 void Dog::printDogIdeas(void)

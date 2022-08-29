@@ -43,7 +43,10 @@ Cat& Cat::operator = (Cat const &existing)
 
 void Cat::makeSound(void)
 {
-	this->makeSound();
+	if (this->_type.compare("Cat") == 0)
+		std::cout << this->_type << ": Miau Miau!" << std::endl;
+	else
+		std::cout << "No comment!" << std::endl;
 }
 
 void Cat::printCatIdeas(void)
