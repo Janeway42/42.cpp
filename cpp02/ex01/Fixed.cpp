@@ -2,6 +2,8 @@
 #include <iostream>
 #include <cmath>
 
+//-----------Constructors & Destructors-----------
+
 Fixed ::Fixed(void)
 {
 	std::cout << "Default constructer called" << std::endl;
@@ -31,7 +33,7 @@ Fixed ::~Fixed(void)
 	std::cout << "Destructor called" << std::endl;
 }
 
-//-----------------------------------------
+//----------Overload operators-------------------
 
 Fixed& Fixed:: operator = (Fixed const &existing)
 {
@@ -41,13 +43,7 @@ Fixed& Fixed:: operator = (Fixed const &existing)
 	return (*this);
 }
 
-std::ostream & operator << (std::ostream &out, const Fixed &existing)
-{
-	out << existing.toFloat();
-	return(out);
-}
-
-//-----------------------------------------
+//-------------Public functions-----------------
 
 int Fixed::getRawBits(void) const
 {
@@ -61,8 +57,6 @@ void Fixed::setRawBits(int const raw)
 	_value = raw;
 }
 
-//-----------------------------------------
-
 float Fixed::toFloat(void) const
 {
 	return ((float)_value/(float)(1 << _bits));
@@ -71,4 +65,12 @@ float Fixed::toFloat(void) const
 int Fixed::toInt(void) const
 {
 	return ((int)(_value >> _bits));
+}
+
+//-------------Other Operators----------------------
+
+std::ostream & operator << (std::ostream &out, const Fixed &existing)
+{
+	out << existing.toFloat();
+	return(out);
 }

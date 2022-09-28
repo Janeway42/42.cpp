@@ -1,30 +1,36 @@
 #include "Fixed.hpp"
 #include <iostream>
 
-Fixed ::Fixed(void)
+//-----------Constructors & Destructors-----------
+
+Fixed::Fixed(void)
 {
 	_value = 0;
 	std::cout << "Default constructer called" << std::endl;
 }
 
-Fixed ::Fixed(const Fixed &existing)
+Fixed::Fixed(const Fixed &existing)
 {
 	std::cout << "Copy constructor called" << std::endl;
 	*this = existing;
 }
 
-Fixed ::~Fixed(void) 
+Fixed::~Fixed(void) 
 {
 	std::cout << "Destructor called" << std::endl;
 }
 
-Fixed& Fixed:: operator = (Fixed const &existing)
+//----------Overload operators-------------------
+
+Fixed& Fixed::operator = (Fixed const &existing)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &existing)
 		_value = existing.getRawBits();
 	return (*this);
 }
+
+//-------------Public functions-----------------
 
 int Fixed::getRawBits(void) const
 {
