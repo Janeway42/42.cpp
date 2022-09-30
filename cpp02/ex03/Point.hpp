@@ -17,8 +17,15 @@ class Point
 
         Point& operator =(Point const &existing);
 
-        Fixed& const getX(void)const;
+        Fixed getX(void)const;
+        Fixed getY(void)const;
 
 };
+
+// std::ostream & operator << (std::ostream &out, const Fixed &existing)
+// {
+// 	out << existing.toFloat();
+// 	return(out);
+// }
 
 #endif
