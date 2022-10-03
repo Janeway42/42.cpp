@@ -3,21 +3,14 @@
 
 //-----------Constructors & Destructor----------------
 
-Point::Point(void)
+Point::Point(void): _x(0), _y(0)
 {
 	std::cout << "Point default constructer called" << std::endl;
-    Fixed const _x(0);
-    Fixed const _y(0);
 }
 
-Point::Point(float const a, float const b)
+Point::Point(float const a, float const b): _x(a), _y(b)
 {
     std::cout << "Point float constructor called" << std::endl;
-    Fixed const _x(a);
-    Fixed const _y(b);
-    std::cout << _x << std::endl;
-    std::cout << _y << std::endl;
-
 }
 
 Point::Point(const Point &existing)

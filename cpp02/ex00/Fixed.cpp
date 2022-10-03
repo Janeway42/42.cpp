@@ -5,8 +5,8 @@
 
 Fixed::Fixed(void)
 {
-	_value = 0;
 	std::cout << "Default constructer called" << std::endl;
+	_value = 0;
 }
 
 Fixed::Fixed(const Fixed &existing)

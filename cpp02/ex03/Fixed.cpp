@@ -4,40 +4,39 @@
 
 //-----------Constructors & Destructor----------------
 
-Fixed::Fixed(void)
+Fixed::Fixed(void):_value(0)
 {
-	std::cout << "Default constructer called" << std::endl;
-	_value = 0;
+	std::cout << "Fixed default constructer called" << std::endl;
 }
 
 Fixed::Fixed(const int element)
 {
-	std::cout << "Int constructor called" << std::endl;
+	std::cout << "Fixed int constructor called" << std::endl;
 	_value = element << _bits;
 }
 
 Fixed ::Fixed(const float element)
 {
-	std::cout << "Float constructor called" << std::endl;
+	std::cout << "Fixed float constructor called" << std::endl;
 	_value = (int)roundf(element * (1 << _bits));
 }
 
 Fixed::Fixed(const Fixed &existing)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	std::cout << "Fixed copy constructor called" << std::endl;
 	*this = existing;
 }
 
 Fixed::~Fixed(void) 
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "Fixed destructor called" << std::endl;
 }
 
 //------------------Operators--------------------------
 
 Fixed& Fixed::operator = (Fixed const &existing)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
+	std::cout << "Fixed copy assignment operator called" << std::endl;
 	if (this != &existing)
 		_value = existing.getRawBits();
 	return (*this);
@@ -173,13 +172,13 @@ const Fixed& Fixed::max(const Fixed &one, const Fixed &two)
 
 int Fixed::getRawBits(void) const
 {
-	std::cout << "getRawbits member function called" << std:: endl;
+	std::cout << "Fixed getRawbits member function called" << std:: endl;
 	return(_value);
 }
 
 void Fixed::setRawBits(int const raw)
 {
-	std::cout << "setRawbits member function called" << std:: endl;
+	std::cout << "Fixed setRawbits member function called" << std:: endl;
 	_value = raw;
 }
 

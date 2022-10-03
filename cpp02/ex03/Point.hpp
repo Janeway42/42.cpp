@@ -19,13 +19,8 @@ class Point
 
         Fixed getX(void)const;
         Fixed getY(void)const;
-
 };
 
-// std::ostream & operator << (std::ostream &out, const Fixed &existing)
-// {
-// 	out << existing.toFloat();
-// 	return(out);
-// }
+bool bsp( Point const a, Point const b, Point const c, Point const point);
 
 #endif

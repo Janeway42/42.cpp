@@ -2,7 +2,8 @@ NAME = bsp
 
 SRC =	main.cpp\
 		Fixed.cpp\
-		Point.cpp
+		Point.cpp\
+		bsp.cpp
 
 OBJ = $(SRC:%.cpp=%.o)
 
