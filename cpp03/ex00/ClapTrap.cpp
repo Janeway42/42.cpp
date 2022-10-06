@@ -2,19 +2,17 @@
 
 //----------Constructors & Destructors----------------
 
-ClapTrap::ClapTrap(void)
+ClapTrap::ClapTrap(void): _name("anonymous")
 {
-	std::cout << "Default constructor has been called" << std::endl;
-	_name = "no name";
+	std::cout << "ClapTrap default constructor has been called" << std::endl;
 	_hitPoints = 10;
 	_energyPoints = 10;
 	_attackDamage = 0;
 }
 
-ClapTrap::ClapTrap(std::string name)
+ClapTrap::ClapTrap(std::string name): _name(name)
 {
-	std::cout << name << " constructor has been called" << std::endl;
-	_name = name;
+	std::cout << "ClapTrap " << name << " constructor has been called" << std::endl;
 	_hitPoints = 10;
 	_energyPoints = 10;
 	_attackDamage = 0;
@@ -22,13 +20,15 @@ ClapTrap::ClapTrap(std::string name)
 
 ClapTrap::ClapTrap(const ClapTrap &existing)
 {
-	std::cout << "Copy constructor has been called" << std::endl;
+	std::cout << "ClapTrap copy constructor has been called" << std::endl;
 	*this = existing;
 }
 
+//------------------Operators--------------------------
+
 ClapTrap& ClapTrap::operator = (ClapTrap const &existing)
 {
-	std::cout << "Copy assignment operator has been called" << std::endl;
+	std::cout << "ClapTrap copy assignment operator has been called" << std::endl;
 	if (this != &existing)
 	{
 		_name = existing._name;
@@ -41,10 +41,10 @@ ClapTrap& ClapTrap::operator = (ClapTrap const &existing)
 
 ClapTrap::~ClapTrap(void)
 {
-	std::cout << "Destructor " << this->_name << " has been called" << std::endl;
+	std::cout << "ClapTrap " << this->_name << " destructor has been called" << std::endl;
 }
 
-//----------Functions------------------------
+//----------Public Functions------------------------
 
 void ClapTrap::attack(const std::string& target)
 {

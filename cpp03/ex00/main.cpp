@@ -4,9 +4,9 @@ int main(void)
 {
 	ClapTrap One;
 	ClapTrap Two("Frodo");
-
 	std::cout << std::endl;
-	One.attack("Frodo");
+
+    One.attack("Frodo");
 	One.takeDamage(8);
 	One.beRepaired(6);
 	std::cout << std::endl;

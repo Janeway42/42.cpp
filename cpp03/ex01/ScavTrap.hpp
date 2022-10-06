@@ -1,5 +1,5 @@
 #ifndef SCAVTRAP_HPP
-#define SCAVTRAP_CPP
+#define SCAVTRAP_HPP
 
 #include "ClapTrap.hpp"
 
@@ -11,9 +11,17 @@ public:
 	ScavTrap(const ScavTrap &existing);
 	~ScavTrap(void);
 
-	// ScavTrap& operator = (ScavTrap const &existing);
+	ScavTrap& operator = (ScavTrap const &existing);
 
 	void guardGate();
+    void attack(const std::string& target);
+
+
+    std::string getScavName(void);
+    int getScavHit(void);
+    int getScavEnergy(void);
+    int getScavDamage(void);
+
 };
 
 #endif

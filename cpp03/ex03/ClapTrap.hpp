@@ -17,7 +17,10 @@ protected:
 	void setEnergy(unsigned int val);
 	void setDamage(unsigned int val);
 
-	std::string getName();
+	std::string getName()const;
+    int getHit(void)const;
+    int getEnergy(void)const;
+    int getDamage(void)const;
 
 public:
 	ClapTrap(void);
@@ -31,9 +34,6 @@ public:
 	void takeDamage(unsigned int amount);
 	void beRepaired(unsigned int amount);
 
-	unsigned int getHitPoints(void);
-	unsigned int getEnergyPoints(void);
-	unsigned int getAttackDamage(void);
 };
 
 #endif

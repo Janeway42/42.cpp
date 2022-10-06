@@ -7,14 +7,16 @@ int main(void)
 	ClapTrap One;
 	ClapTrap Two("Frodo");
 	std::cout << std::endl;
+
 	ScavTrap Three;
 	ScavTrap Four("The tower");
 	std::cout << std::endl;
+
 	FragTrap Five;
 	FragTrap Six("The Ring");
 	std::cout << std::endl;
 
-	std::cout << "-----ClapTrap-----" << std::endl;
+	std::cout << "---------- ClapTrap ----------" << std::endl;
 	One.attack("Frodo");
 	One.takeDamage(8);
 	One.beRepaired(6);
@@ -26,7 +28,7 @@ int main(void)
 	Two.takeDamage(15);
 	std::cout << std::endl;
 
-	std::cout << "-----ScavTrap-----" << std::endl;
+	std::cout << "---------- ScavTrap ----------" << std::endl;
 	Three.guardGate();
 	Three.attack("Frodo");
 	Three.takeDamage(8);
@@ -40,7 +42,7 @@ int main(void)
 	Four.takeDamage(15);
 	std::cout << std::endl;
 
-	std::cout << "-----FragTrap-----" << std::endl;
+	std::cout << "---------- FragTrap ----------" << std::endl;
 	Five.highFivesGuys();
 	Five.attack("Frodo");
 	Five.takeDamage(8);
