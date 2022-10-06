@@ -1,5 +1,4 @@
 #include "DiamondTrap.hpp"
-#include <iostream>
 
 //----------Constructors & Destructors----------------
 
