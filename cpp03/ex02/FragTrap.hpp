@@ -15,6 +15,10 @@ public:
 
 	void highFivesGuys(void);
 
+    std::string getFragName();
+    int getFragHit(void)const;
+    int getFragEnergy(void)const;
+    int getFragDamage(void)const;
 };
 
 #endif

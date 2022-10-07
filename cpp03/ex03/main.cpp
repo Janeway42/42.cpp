@@ -26,5 +26,11 @@ int main(void)
 	Nine.takeDamage(158);
     std::cout << std::endl;
 
+    Nine.highFivesGuys();
+	Nine.attack("Frodo");
+	Nine.takeDamage(58);
+	Nine.beRepaired(6);
+    std::cout << std::endl;
+
 	return (0);
 }

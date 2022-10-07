@@ -9,12 +9,12 @@ DiamondTrap::DiamondTrap(void): FragTrap(), ScavTrap()
 
 DiamondTrap::DiamondTrap(std::string name): ClapTrap("_clap_" + name), FragTrap(), ScavTrap()
 {
-	std::cout << "DiamondTrap " <<  this->_name << " constructor called" <<std::endl;
+	std::cout << "DiamondTrap " <<  this->getScavName() << " constructor called\n" <<std::endl;
 
-	FragTrap tempFrag("_clap_" + name);
+	FragTrap tempFrag("temp");
 
     setDiamondName(name);
-	FragTrap::setHit(tempFrag.getFragHit());	
+	FragTrap::setHit(tempFrag.getFragHit());
 	FragTrap::setDamage(tempFrag.getFragDamage());
 }
 

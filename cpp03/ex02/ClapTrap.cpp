@@ -4,7 +4,7 @@
 
 ClapTrap::ClapTrap(void): _name("annonymous")
 {
-	std::cout << "ClapTrap default constructor has been called" << std::endl;
+	std::cout << "ClapTrap default constructor called" << std::endl;
 	_hitPoints = 10;
 	_energyPoints = 10;
 	_attackDamage = 0;
@@ -12,7 +12,7 @@ ClapTrap::ClapTrap(void): _name("annonymous")
 
 ClapTrap::ClapTrap(std::string name): _name(name)
 {
-	std::cout << "ClapTrap "<< name << " constructor has been called" << std::endl;
+	std::cout << "ClapTrap "<< name << " constructor called" << std::endl;
 	_hitPoints = 10;
 	_energyPoints = 10;
 	_attackDamage = 0;
@@ -28,7 +28,7 @@ ClapTrap::ClapTrap(const ClapTrap &existing)
 
 ClapTrap& ClapTrap::operator = (ClapTrap const &existing)
 {
-	std::cout << "ClapTrap copy assignment operator has been called" << std::endl;
+	std::cout << "ClapTrap copy assignment operator called" << std::endl;
 	if (this != &existing)
 	{
 		_name = existing._name;
@@ -92,13 +92,15 @@ int ClapTrap::getDamage(void)const
 
 void ClapTrap::attack(const std::string& target)
 {
-	if (this->_energyPoints > 0 && this->_hitPoints > 0)
+    if (this->_hitPoints == 0)
+        std::cout << "ClapTrap " << _name << " can't attack " << target << " as it has already bit the bullet" << std::endl;
+	else if (this->_energyPoints > 0)
 	{
 		std::cout << "ClapTrap " << _name << " attacks " << target << ", causing " << this->_attackDamage << " points of damage!" << std::endl;
 		this->_energyPoints--;
 	}
-	else
-		std::cout << "ClapTrap " << this->_name << " does not have enough energy points to attack" << std:: endl;
+    else
+		std::cout << "ClapTrap " << _name << " does not have enough energy points to attack" << std:: endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
@@ -121,7 +123,7 @@ void ClapTrap::beRepaired(unsigned int amount)
 {
 	if (this->_energyPoints > 0 && this->_hitPoints > 0)
 	{
-		std::cout << "ClapTrap " << _name << " is being reppaied with " << amount << " points" << std::endl;
+		std::cout << "ClapTrap " << _name << " is being repaired with " << amount << " points" << std::endl;
 		this->_energyPoints--;
 		this->_hitPoints += amount;
 	}

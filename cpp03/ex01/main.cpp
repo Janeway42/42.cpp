@@ -11,8 +11,12 @@ int main(void)
 
     std::cout << "One: " << One.getScavName() << std::endl;
     std::cout << "Hit One: " << One.getScavHit() << std::endl;
+    std::cout << "Energy One: " << One.getScavEnergy() << std::endl;
+    std::cout << "Attack One: " << One.getScavDamage() << std::endl;
     std::cout << "Two: " << Two.getScavName() << std::endl;
     std::cout << "Hit Two: " << Two.getScavHit() << std::endl;
+    std::cout << "Energy Two: " << Two.getScavEnergy() << std::endl;
+    std::cout << "Attack Two: " << Two.getScavDamage() << std::endl;
 	std::cout << std::endl;
 
 	One.guardGate();
@@ -27,15 +31,17 @@ int main(void)
 
 	Two.beRepaired(10);
 	Two.takeDamage(12);
-	Two.beRepaired(3);
-	
-    Two.takeDamage(150);
+	Two.beRepaired(3);	
 	std::cout << std::endl;
 
     std::cout << "One: " << One.getScavName() << std::endl;
     std::cout << "Hit One: " << One.getScavHit() << std::endl;
+    std::cout << "Energy One: " << One.getScavEnergy() << std::endl;
+    std::cout << "Attack One: " << One.getScavDamage() << std::endl;
     std::cout << "Two: " << Two.getScavName() << std::endl;
     std::cout << "Hit Two: " << Two.getScavHit() << std::endl;
+    std::cout << "Energy Two: " << Two.getScavEnergy() << std::endl;
+    std::cout << "Attack Two: " << Two.getScavDamage() << std::endl;
 	std::cout << std::endl;
 
     std::cout << "------------ Copy Test -----------\n\n";
@@ -61,20 +67,41 @@ int main(void)
     std::cout << "Hit Two: " << Two.getScavHit() << std::endl;
     std::cout << "Energy Two: " << Two.getScavEnergy() << std::endl;
     std::cout << "Damage Two: " << Two.getScavDamage() << std::endl;
-
-    std::cout <<"------------ Dead Scav Tests -----------\n\n";
-
-	Two.guardGate();
-	Two.attack("The Ring");
-	Two.takeDamage(9);
-	Two.beRepaired(10);
-	Two.takeDamage(150);
 	std::cout << std::endl;
+
+    std::cout <<"------------ No Energy Tests -----------\n\n";
+     
+    for (int i = Two.getScavEnergy(); i > 0; i--)
+    {
+        std::cout << i << std::endl;
+        Two.beRepaired(1);
+    }
+    Two.attack("The Ring");
+	Two.beRepaired(10);
+	Two.guardGate();
 
     std::cout << "Two: " << Two.getScavName() << std::endl;
     std::cout << "Hit Two: " << Two.getScavHit() << std::endl;
     std::cout << "Energy Two: " << Two.getScavEnergy() << std::endl;
     std::cout << "Damage Two: " << Two.getScavDamage() << std::endl;
+	std::cout << std::endl;
+
+    std::cout <<"------------ Dead Scav Tests -----------\n\n";
+
+    ScavTrap Three("Another Frodo");
+	std::cout << std::endl;
+
+	Three.takeDamage(150);
+	Three.guardGate();
+	Three.attack("The Ring");
+	Three.beRepaired(10);
+	Three.takeDamage(9);
+	std::cout << std::endl;
+
+    std::cout << "Two: " << Three.getScavName() << std::endl;
+    std::cout << "Hit Two: " << Three.getScavHit() << std::endl;
+    std::cout << "Energy Two: " << Three.getScavEnergy() << std::endl;
+    std::cout << "Damage Two: " << Three.getScavDamage() << std::endl;
 	std::cout << std::endl;
 
     std::cout <<"------------ End Tests -----------\n\n";

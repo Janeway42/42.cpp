@@ -4,7 +4,7 @@
 
 ScavTrap::ScavTrap(void): ClapTrap()
 {
-	std::cout << "Default ScavTrap constructor called" << std::endl;
+	std::cout << "ScavTrap default constructor called" << std::endl;
     setHit(100);
 	setEnergy(50);
 	setDamage(20);
@@ -26,7 +26,7 @@ ScavTrap::ScavTrap(const ScavTrap &existing)
 
 ScavTrap::~ScavTrap(void)
 {
-	std::cout << "ScavTrap destructor " << this->getName() << " has been called" << std::endl;
+	std::cout << "ScavTrap " << this->getName() << " destructor has been called" << std::endl;
 }
 
 //------------------Operators--------------------------
@@ -70,7 +70,7 @@ int ScavTrap::getScavDamage(void)const
 
 void ScavTrap::guardGate()
 {
-    if (this->getHit() > 0 && this->getEnergy() > 0)
+    if (this->getHit() > 0)
     	std::cout << "Scavtrap " << this->getName() << " is now in Gate Keeper mode" << std ::endl;
     else
         std::cout << "ScavTrap " << this->getName() << " can't protect the gate because it has already bit the bullet" << std::endl;
@@ -78,7 +78,9 @@ void ScavTrap::guardGate()
 
 void ScavTrap::attack(const std::string& target)
 {
-	if (this->getEnergy() > 0 && this-> getHit() > 0)
+    if (this->getHit() == 0)
+        std::cout << "ScavTrap " << this->getName() << " can't attack " << target << " as it has already bit the bullet" << std::endl;
+	else if (this->getEnergy() > 0)
 	{
 		std::cout << "ScavTrap " << this->getName() << " attacks " << target << ", causing " << this->getDamage() << " points of damage!" << std::endl;
 		this->setEnergy(this->getEnergy() - 1);

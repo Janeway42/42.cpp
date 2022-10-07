@@ -45,5 +45,28 @@ FragTrap& FragTrap::operator =(FragTrap const &existing)
 
 void FragTrap::highFivesGuys(void)
 {
-	std::cout << "FragTrap " << this->getName() << " sends positive high fives!" << std::endl;
+    if (this->getFragHit() > 0)
+    	std::cout << "FragTrap " << this->getName() << " sends positive high fives!" << std::endl;
+    else
+        std::cout << "FragTrap " << this->getName() << " can't send positive high fives as it has already bit the bullet!" << std::endl;
+}
+
+std::string FragTrap::getFragName(void)
+{
+    return(this->getName());
+}
+
+int FragTrap::getFragHit(void)const
+{
+    return(this->getHit());
+}
+
+int FragTrap::getFragEnergy(void)const
+{
+    return(this->getEnergy());
+}
+
+int FragTrap::getFragDamage(void)const
+{
+    return(this->getDamage());
 }
