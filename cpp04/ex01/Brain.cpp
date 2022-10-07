@@ -6,9 +6,9 @@
 
 Brain::Brain(void)
 {
-	std::string randomSource = "0123456789";
-
 	std::cout << "Brain constructor called" << std::endl;
+
+	std::string randomSource = "0123456789";
 	for (int i = 0; i < 100; i++)
 		_ideas[i] = std::to_string(i) + "." + randomSource[rand() % randomSource.length()] + " ";
 }
@@ -16,8 +16,6 @@ Brain::Brain(void)
 Brain::Brain(const Brain &existing)
 {
 	std::cout << "Brain copy constructor called" << std::endl;
-	for (int i = 0; i < 100; i++)
-		this->_ideas[i] = existing._ideas[i];
 	*this = existing;
 }
 
@@ -31,10 +29,11 @@ Brain::~Brain(void)
 Brain& Brain::operator = (Brain const &existing)
 {
 	std::cout << "Brain copy assignment operator called" << std::endl;
-
 	if (this != &existing)
+    {
 		for (int i = 0; i < 100; i++)
 			this->_ideas[i] = existing._ideas[i];
+    }
 	return (*this);
 }
 

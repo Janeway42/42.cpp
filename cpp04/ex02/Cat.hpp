@@ -17,7 +17,7 @@ public:
 
 	Cat& operator = (Cat const &existing);
 
-	void makeSound();
+	void makeSound(void)const;
 	void printCatIdeas(void);
 
 };

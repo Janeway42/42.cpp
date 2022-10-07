@@ -3,23 +3,17 @@
 
 //-------------Constructors &Destructors------------
 
-Cat::Cat (void): Animal("Cat")
+Cat::Cat (void): Animal()
 {
 	std::cout << "Cat default constructor called" << std::endl;
-	_greyCells = new Brain();
-}
-
-Cat::Cat (std::string type): Animal(type)
-{
-	std::cout << "Cat type constructor called" << std::endl;
+    this->type = "Cat";
 	_greyCells = new Brain();
 }
 
 Cat::Cat(const Cat &existing)
 {
 	std::cout << "Cat copy constructor called" << std::endl;
-	this->_type = existing.getType();
-	this->_greyCells = new Brain(*(existing._greyCells));
+	*this = existing;
 }
 
 Cat::~Cat(void)
@@ -35,18 +29,22 @@ Cat& Cat::operator = (Cat const &existing)
 	std::cout << "Cat copy assignment operator called" << std::endl;
 
 	if (this != &existing)
+    {
+        this->_greyCells = new Brain();
+        this->type = existing.getType();
 		*this->_greyCells = *existing._greyCells;
+    }
 	return (*this);
 }
 
 //--------------Public Functions-------------------
 
-void Cat::makeSound(void)
+void Cat::makeSound(void)const
 {
-	if (this->_type.compare("Cat") == 0)
-		std::cout << this->_type << ": Miau Miau!" << std::endl;
-	else
-		std::cout << "No comment!" << std::endl;
+    if (this->type.compare("Cat") == 0)
+        std::cout << this->type << ": Miau Miau!" << std::endl;
+    else
+        std::cout << this->type << ": Say what?!" << std::endl;
 }
 
 void Cat::printCatIdeas(void)

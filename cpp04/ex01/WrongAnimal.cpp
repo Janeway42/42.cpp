@@ -3,19 +3,29 @@
 
 //-----------Constructors & Destructors--------------
 
-WrongAnimal::WrongAnimal(void)
+WrongAnimal::WrongAnimal(void): type("no type")
 {
 	std::cout << "WrongAnimal default constructor" << std::endl;
 }
 
-WrongAnimal::WrongAnimal(std::string type)
+WrongAnimal::WrongAnimal(const WrongAnimal &existing)
 {
-	this->type = type;
+    std::cout << "WrongAnimal copy constructor called" << std::endl;
+    *this = existing;
 }
 
 WrongAnimal::~WrongAnimal(void)
 {
 	std::cout << "WrongAnimal destructor called" << std::endl;
+}
+//------------------Operators--------------------------
+
+WrongAnimal& WrongAnimal::operator =(WrongAnimal const &existing)
+{
+    std::cout << "WrongAnimal copy assignment operator called" << std::endl;
+    if (this != &existing)
+        this->type = existing.getType();
+    return (*this);
 }
 
 //-------------Public Functions --------------------
@@ -27,9 +37,5 @@ std::string WrongAnimal::getType(void) const
 
 void WrongAnimal::makeSound(void) const
 {
-	if (this->type.compare("Dog") == 0)
-		std::cout << this->type << ": foow foow!" << std::endl;
-	if (this->type.compare("WrongCat") == 0)
-		std::cout << this->type << ": uaim uaim!" << std::endl;
+	std::cout << "WrongAnimal here! Not even default animal sound for you!" << std::endl;
 }
-

@@ -11,13 +11,12 @@ private:
 
 public:
 	Dog(void);
-	Dog(std::string type);
 	Dog(const Dog &existing);
 	~Dog(void);
 
 	Dog& operator = (Dog const &existing);
 
-	void makeSound();
+	void makeSound(void)const;
 	void printDogIdeas(void);
 };
 

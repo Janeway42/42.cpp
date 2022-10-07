@@ -8,14 +8,15 @@ class WrongAnimal
 protected:
 	std::string type;
 
-
 public:
 	WrongAnimal(void);
-	WrongAnimal(std::string type);
-	~WrongAnimal(void);
+    WrongAnimal(const WrongAnimal &existing);
+	virtual ~WrongAnimal(void);
+
+    WrongAnimal& operator = (WrongAnimal const &existing);
 
 	std::string getType() const;
-	void makeSound() const;
+	virtual void makeSound() const;
 
 };
 
