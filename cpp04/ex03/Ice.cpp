@@ -2,7 +2,7 @@
 
 //-----------Constructors & Destructors----------
 
-Ice::Ice(void): _type("ice")
+Ice::Ice(void): AMateria("ice")
 {
 	std::cout << "Ice default constructor called" << std::endl;
 }
@@ -10,6 +10,7 @@ Ice::Ice(void): _type("ice")
 Ice::Ice(const Ice &existing)
 {
 	std::cout << "Ice copy constructor called" << std::endl;
+    *this = existing;
 }
 
 Ice::~Ice(void)
@@ -22,14 +23,16 @@ Ice::~Ice(void)
 Ice& Ice::operator = (Ice const &existing)
 {
 	std::cout << "Ice copy assignment operator called" << std::endl;
-	*this = existing;
+	if (this != &existing)
+        setType(existing.getType());
+    return (*this);
 }
 
 //-------------Public Functions------------------
 
-Ice* Ice::clone(void)const
+AMateria* Ice::clone(void)const
 {
-	Ice* temp;
+	AMateria* temp = new Ice();
 
 	return (temp);
 }

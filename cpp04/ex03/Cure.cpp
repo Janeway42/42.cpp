@@ -2,7 +2,7 @@
 
 //-----------Constructors & Destructors----------
 
-Cure::Cure(void): _type("Cure")
+Cure::Cure(void): AMateria("cure")
 {
 	std::cout << "Cure default constructor called" << std::endl;
 }
@@ -10,6 +10,7 @@ Cure::Cure(void): _type("Cure")
 Cure::Cure(const Cure &existing)
 {
 	std::cout << "Cure copy constructor called" << std::endl;
+    *this = existing;
 }
 
 Cure::~Cure(void)
@@ -22,7 +23,9 @@ Cure::~Cure(void)
 Cure& Cure::operator = (Cure const &existing)
 {
 	std::cout << "Cure copy assignment operator called" << std::endl;
-	*this = existing;
+	if (this != &existing)
+        setType(existing.getType());
+    return (*this);
 }
 
 //-------------Public Functions------------------

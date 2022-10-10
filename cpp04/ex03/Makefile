@@ -1,7 +1,11 @@
 NAME = amateria
 
 SRC =	main.cpp\
-		AMateria.cpp
+		AMateria.cpp\
+		Ice.cpp\
+		Cure.cpp\
+		ICharacter.cpp\
+		Character.cpp
 
 OBJ = $(SRC:%.cpp=%.o)
 
@@ -13,7 +17,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 		@$(CPP) $(FLAGS) -o $@ $^
-		@echo "\033[0;31manimal ready\033[0m"
+		@echo "\033[0;31mamateria ready\033[0m"
 
 %o: %.cpp
 		@$(CPP) $(FLAG) -o $@ -c $<

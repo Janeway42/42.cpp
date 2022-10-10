@@ -8,8 +8,6 @@ class Ice: public AMateria
 {
 	private: 
 
-	std::string _type;
-
 	public: 
 		Ice(void);
 		Ice(const Ice &existing);
@@ -17,7 +15,7 @@ class Ice: public AMateria
 
 		Ice& operator = (Ice const &existing);
 
-		Ice* clone(void) const;
+		AMateria* clone(void) const;
 
 };
 
