@@ -87,8 +87,8 @@ int main()
 	generalTesting();
 	std::cout << std::endl;
 	arrayTesting();
-	std::cout << std::endl;
-	copyTesting();
+	// std::cout << std::endl;
+	// copyTesting();
 
     system("leaks -q animal");
 	return (0);
