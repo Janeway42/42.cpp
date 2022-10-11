@@ -8,8 +8,6 @@ class Cure: public AMateria
 {
 	private: 
 
-	std::string _type;
-
 	public: 
 		Cure(void);
 		Cure(const Cure &existing);
@@ -18,7 +16,7 @@ class Cure: public AMateria
 		Cure& operator = (Cure const &existing);
 
 		Cure* clone(void) const;
-
+    	// void use(ICharacter& target);
 };
 
 #endif

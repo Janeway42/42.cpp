@@ -2,9 +2,14 @@
 
 //-----------Constructors & Destructors----------
 
-ICharacter::ICharacter(void)
+ICharacter::ICharacter(void):_name("no name")
 {
     std::cout << "ICharacter default constructor called" << std::endl;
+}
+
+ICharacter::ICharacter(std::string name):_name(name)
+{
+    std::cout << "ICharacter " << this->_name << " constructor called" << std::endl;
 }
 
 ICharacter::ICharacter(const ICharacter &existing)
@@ -22,14 +27,14 @@ ICharacter::~ICharacter(void)
 ICharacter& ICharacter::operator =(ICharacter const &existing)
 {
     std::cout << "ICharacter copy assignment operator called" << std::endl;
-    if (this != &existing)
-        this->_type = existing.getType();
+    // if (this != &existing)
+    //     this->_type = existing.getType();
     return (*this);
 }
 
 //-------------Public Functions------------------
 
-std::string ICharacter::getType(void)const
+std::string const & ICharacter::getName(void)const
 {
-    return (this->_type);
+     return (this->_name);
 }

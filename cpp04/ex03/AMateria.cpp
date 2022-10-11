@@ -36,6 +36,16 @@ AMateria& AMateria::operator= (AMateria const &existing)
 }
 //-------------Public Functions------------------
 
+void AMateria::use(ICharacter& target)
+{
+    if (this->getType() == "ice")
+        std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
+    else if (this->getType().compare("cure") == 0)
+        std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
+    else
+        std::cout << "Unknown type! Unable to dance for you!" << std::endl;
+}
+
 const std::string& AMateria::getType(void)const
 {
 	return (this->_type);

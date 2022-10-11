@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "ICharacter.hpp"
+#include <ostream>
 
 class Character: public ICharacter
 {
@@ -12,14 +13,19 @@ class Character: public ICharacter
 
     public:
     	Character(void);
-    	// Character(std::string const &type);
+    	Character(std::string name);
     	Character(const Character &existing);
     	~Character(void);
 
         Character& operator = (Character const &existing);        
 
-        AMateria* getInventoryItem(int location)const;
         void equip(AMateria* m);
+        void unequip(int idx);
+        void use(int idx, ICharacter& target);
+
+        std::string const & getName(void)const;
+        AMateria* getInventoryItem(int location)const;
+        void printInventoryItemType(int location);
 
 };
 

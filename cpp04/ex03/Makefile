@@ -9,18 +9,18 @@ SRC =	main.cpp\
 
 OBJ = $(SRC:%.cpp=%.o)
 
-FLAGS = -Wall -Werror -Wextra -std=c++98
+FLAGS = -Wall -Werror -Wextra -std=c++98 -g
 
 CPP = c++
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-		@$(CPP) $(FLAGS) -o $@ $^
+		$(CPP) $(FLAGS)  -o $@ $^
 		@echo "\033[0;31mamateria ready\033[0m"
 
-%o: %.cpp
-		@$(CPP) $(FLAG) -o $@ -c $<
+%.o: %.cpp
+		$(CPP) -c $< -g -o $@
 
 clean:
 		@rm -f $(OBJ)
