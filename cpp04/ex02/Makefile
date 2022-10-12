@@ -20,7 +20,7 @@ $(NAME): $(OBJ)
 		@$(CPP) $(FLAGS) -o $@ $^
 		@echo "\033[0;31manimal ready\033[0m"
 
-%o: %.cpp
+%.o: %.cpp
 		@$(CPP) $(FLAG) -o $@ -c $<
 
 clean:

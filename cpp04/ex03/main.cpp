@@ -3,6 +3,8 @@
 #include "Cure.hpp"
 #include "ICharacter.hpp"
 #include "Character.hpp"
+#include "IMateriaSource.hpp"
+#include "MateriaSource.hpp"
 
 void checkleaks(void){
     system("leaks -q amateria");
@@ -68,12 +70,37 @@ int main(void)
 
     std::cout << "-------------- destructors --------------------\n\n";
 
-    delete(Ice1);
-    delete(Cure1);
+    // delete(Ice1);
+    // delete(Cure1);
     delete(Ice2);
     delete(Man1);
-    delete(Cure2);
+    // delete(Cure2);
     delete(Cure3);
+    std::cout << std::endl;
+
+    std::cout << "-------------- MateriaSource Tests --------------------\n\n";
+
+    IMateriaSource* materia2 = new MateriaSource();
+    std::cout << std::endl;
+
+    materia2->learnMateria(new Ice());
+    std::cout << "index learned: " << materia2->getIndex() << std::endl;
+    std::cout << "Materia learned 0: " << materia2->getLearnedMateria(0)->getType() << std::endl;
+
+    materia2->learnMateria(new Cure());
+    std::cout << "Materia learned 1: " << materia2->getLearnedMateria(1)->getType() << std::endl;
+
+    materia2->learnMateria(new Ice());
+    std::cout << "Materia learned 2: " << materia2->getLearnedMateria(2)->getType() << std::endl;
+
+    materia2->learnMateria(new Ice());
+    std::cout << "Materia learned 3: " << materia2->getLearnedMateria(3)->getType() << std::endl;
+    std::cout << std::endl;
+
+    materia2->learnMateria(new Ice());
+    std::cout << std::endl;
+
+    delete(materia2);
     std::cout << std::endl;
 
     std::cout << "-------------- leaks check --------------------\n\n";

@@ -24,6 +24,7 @@ class Character: public ICharacter
         void use(int idx, ICharacter& target);
 
         std::string const & getName(void)const;
+        int getInventorySlots(void)const;
         AMateria* getInventoryItem(int location)const;
         void printInventoryItemType(int location);
 
