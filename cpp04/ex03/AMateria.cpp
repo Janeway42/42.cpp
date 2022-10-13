@@ -22,7 +22,7 @@ AMateria::AMateria(const AMateria &existing)
 
 AMateria::~AMateria(void)
 {
-	std::cout << "Amateria destructor called" << std::endl;
+	std::cout << "AMateria destructor called" << std::endl;
 }
 
 //----------------- Operators--------------------
@@ -40,7 +40,7 @@ void AMateria::use(ICharacter& target)
 {
     if (this->getType() == "ice")
         std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
-    else if (this->getType().compare("cure") == 0)
+    else if (this->getType() == "cure")
         std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
     else
         std::cout << "Unknown type! Unable to dance for you!" << std::endl;

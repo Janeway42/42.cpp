@@ -7,19 +7,15 @@ class AMateria;
 
 class ICharacter
 {
-    private:
-
-    protected:
-        std::string _name;
-
     public:
-    	ICharacter(void);
-        ICharacter(std::string name);
-    	ICharacter(const ICharacter &existing);        
-    	virtual ~ICharacter(void);
+    	// ICharacter(void);
+        // ICharacter(std::string name);
+    	// ICharacter(const ICharacter &existing);    
+	    // ICharacter& operator = (ICharacter const &existing);
 
-	    ICharacter& operator = (ICharacter const &existing);
+        virtual AMateria* getInventoryItem(int location)const = 0;  /// but there is no inventory????
 
+    	virtual ~ICharacter(){}
         virtual std::string const & getName()const = 0;
         virtual void equip(AMateria* m) = 0;
         virtual void unequip(int idx) = 0;

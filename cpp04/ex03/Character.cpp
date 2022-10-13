@@ -10,19 +10,27 @@ Character::Character(void)
     this->_inventorySlots = 0;
 }
 
-Character::Character(std::string name): ICharacter(name)
+Character::Character(std::string name)
 {
-    printf("test\n");
     std::cout << "Character " << this->_name << " constructor called" << std::endl;
-
+    this->_name = name;
+    for (int i = 0; i < 4; i++)
+        this->_inventory[i] = NULL;
+    this->_inventorySlots = 0;
 }
 
 Character::Character(const Character &existing)
 {
     std::cout << "Character copy constructor called" << std::endl;
-    // Character* temp = new Character();  // deep copy  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-    *this = existing;
+    this->_name = existing._name;
+    for (int i = 0; i < 4; i++)
+    {
+        if (existing._inventory[i])
+            this->_inventory[i] = existing._inventory[i];
+        else
+            this->_inventory[i] = NULL;
+    }
+    this->_inventorySlots = existing._inventorySlots;
 }
 
 Character::~Character(void)
@@ -36,7 +44,7 @@ Character::~Character(void)
 
 Character& Character::operator = (Character const &existing)
 {
-    std::cout << "Character copy assignemnt operator called" << std::endl;  // deep copy
+    std::cout << "Character copy assignemnt operator called" << std::endl;
     if (this != &existing)
     {
         for (int i = 0; i < 4; i++)
@@ -46,6 +54,7 @@ Character& Character::operator = (Character const &existing)
             this->_inventory[i] = existing.getInventoryItem(i);
             i++;
         }
+        this->_name = existing._name;
         this->_inventorySlots = existing.getInventorySlots();
     }
     return (*this);
@@ -65,10 +74,15 @@ int Character::getInventorySlots(void)const
 
 AMateria* Character::getInventoryItem(int location)const
 {
-    if (location > -1 && location < 4)
-        return(this->_inventory[location]);
-    else 
-        std::cout << "Index out of range. AMAteria is NULL" << std::endl;
+    if (location < 0 || location > 3)
+        std::cout << "Character inventory index request is out of range" << std::endl;
+    else
+    {
+        if (this->_inventorySlots == 0)
+            std::cout << "Inventory is empty. AMateria is NULL." << std::endl;
+        else
+            return(this->_inventory[location]); 
+    }
     return (NULL);
 }
 
@@ -76,23 +90,33 @@ AMateria* Character::getInventoryItem(int location)const
 
 void Character::equip(AMateria* m)
 {
-
-    if (m && this->_inventorySlots < 4)
+    if (m)
     {
-        this->_inventory[this->_inventorySlots] = m;
-        _inventorySlots++;
+        if (this->_inventorySlots < 4)
+        {
+            this->_inventory[this->_inventorySlots] = m;
+            _inventorySlots++;
+        }
+        else
+            std::cout << "Character is full. No more free slots." << std::endl; 
     }
     else
-        std::cout << "Inventory full. No more free slots." << std::endl;
+        std::cout << "Unavailable AMateria input" << std::endl;
 }
 
 void Character::unequip(int indx)
 {
-    if (indx > -1 && indx < 4)
+    if (this->_inventorySlots == 0)
+        std::cout << "Character inventory is empty. Go do some shopping!" << std::endl;
+    else if (indx > -1 && indx < 4)
     {
-        this->_inventory[indx] = NULL;
-        if (this->_inventorySlots == indx - 1)
-            this->_inventorySlots--;
+        if (this->_inventory[indx] == NULL)
+            std::cout << "Character inventory slot already empty" << std::endl;
+        else
+        {
+            this->_inventory[indx] = NULL;
+            this->_inventorySlots--;   // Check !!!
+        }
     }
     else
         std::cout << "Index out of range. Unable to unequip inventory item" << std::endl;
@@ -100,5 +124,10 @@ void Character::unequip(int indx)
 
 void Character::use(int indx, ICharacter& target)
 {
-    this->getInventoryItem(indx)->use(target);
+    if (indx < 0 || indx > 3)
+        std::cout << "Input index out of range" << std::endl;
+    else if (this->_inventorySlots == 0)
+        std::cout << "This character has no inventory to use" << std::endl;
+    else
+        this->getInventoryItem(indx)->use(target);
 }

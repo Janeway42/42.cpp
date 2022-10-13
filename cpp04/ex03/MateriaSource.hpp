@@ -4,6 +4,8 @@
 #include <iostream>
 #include "IMateriaSource.hpp"
 #include "AMateria.hpp"
+#include "Ice.hpp"
+#include "Cure.hpp"
 
 class MateriaSource: public IMateriaSource
 {
@@ -13,6 +15,7 @@ class MateriaSource: public IMateriaSource
 
     public:
         MateriaSource(void);
+        MateriaSource(const MateriaSource &existing);
         ~MateriaSource(void);
 
         MateriaSource& operator = (MateriaSource const &existing);
@@ -22,7 +25,6 @@ class MateriaSource: public IMateriaSource
 
         void learnMateria(AMateria* m);
         AMateria* createMateria(std::string const &learned);
-
 };
 
 #endif

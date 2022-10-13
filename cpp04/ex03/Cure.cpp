@@ -30,9 +30,9 @@ Cure& Cure::operator = (Cure const &existing)
 
 //-------------Public Functions------------------
 
-Cure* Cure::clone(void)const
+AMateria* Cure::clone(void)const
 {
-	Cure* temp;
+	AMateria* temp = new Cure();
 
 	return (temp);
 }

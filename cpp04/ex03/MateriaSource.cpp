@@ -10,6 +10,20 @@ MateriaSource::MateriaSource(void)
     this->_indexLearned = 0;
 }
 
+MateriaSource::MateriaSource(const MateriaSource &existing)
+{
+    std::cout << "MateriaSource copy constructor called" << std::endl;
+    for (int i = 0; i < 4; i++)
+    {
+        this->_learnedMateria[i] = NULL;
+        if (existing._learnedMateria[i] != NULL)
+            this->_learnedMateria[i] = existing._learnedMateria[i];
+        else
+            this->_learnedMateria[i] = NULL;
+    }
+    this->_indexLearned = 0;
+}
+
 MateriaSource::~MateriaSource(void)
 {
     std::cout << "MateriaSource destructor called" << std::endl;
@@ -68,7 +82,7 @@ AMateria* MateriaSource::createMateria(std::string const &learned)
     if (this->_indexLearned > 0)
     {
         int i = this->_indexLearned;
-        while (this->getLearnedMateria[i]->getType().compare(learned) != 0)
+        while (this->getLearnedMateria(i)->getType().compare(learned) != 0)
             i--;
         if (learned.compare("ice") == 0)
             return (new Ice());
@@ -81,5 +95,8 @@ AMateria* MateriaSource::createMateria(std::string const &learned)
         }
     }
     else
+    {
         std::cout << "No learned materias. Come back later!" << std::endl;
+        return (0);
+    }
 }
