@@ -10,7 +10,6 @@ class Character: public ICharacter
     protected:
         std::string _name;
     	AMateria* _inventory[4];
-        int _inventorySlots;
 
     public:
     	Character(void);
@@ -28,6 +27,8 @@ class Character: public ICharacter
         int getInventorySlots(void)const;
         AMateria* getInventoryItem(int location)const;
         void printInventoryItemType(int location);
+
+        int firstEmptySlot(void);
 
 };
 

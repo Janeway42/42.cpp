@@ -43,7 +43,7 @@ void AMateria::use(ICharacter& target)
     else if (this->getType() == "cure")
         std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
     else
-        std::cout << "Unknown type! Unable to dance for you!" << std::endl;
+        std::cout << "AMateria use: Unknown type! Unable to dance for you!" << std::endl;
 }
 
 const std::string& AMateria::getType(void)const

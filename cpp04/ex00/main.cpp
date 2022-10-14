@@ -38,5 +38,6 @@ int main()
 	delete(beta);
 	delete(k);
 	delete(l);
+
 	return (0);
 }

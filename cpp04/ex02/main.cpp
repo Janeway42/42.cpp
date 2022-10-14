@@ -2,6 +2,47 @@
 #include "Cat.hpp"
 #include "WrongCat.hpp"
 
+void generalTesting(void)
+{
+	std::cout << "------General Testing-----------\n" << std::endl;
+	
+	const Animal* j = new Dog();
+	const Animal* i = new Cat();
+	const Animal* k = new Dog();
+	std::cout << std::endl;
+
+	std::cout << "type: " << j->getType() << " " << std::endl;
+	std::cout << "type: " << i->getType() << " " << std::endl;
+	std::cout << "type: " << k->getType() << " " << std::endl;
+	j->makeSound();
+	i->makeSound();
+	k->makeSound();
+	std::cout << std::endl;
+
+	delete j;
+	delete i;
+	delete k;
+}
+
+void arrayTesting(void)
+{
+	std::cout << "------Array Testing------------\n" << std::endl;
+
+	Animal *array[4];
+
+    for (int i = 0; i < 4; i++)
+    {
+        if (i % 2 == 0)
+            array[i] = new Cat();
+        else
+            array[i] = new Dog();
+    }
+	std::cout << std::endl;
+
+	for (int i = 0; i < 4; i++)
+		delete (array[i]);
+}
+
 void copyTesting(void)
 {
 	std::cout << "--------Copy Testing-------------\n" << std::endl;
@@ -41,52 +82,11 @@ void copyTesting(void)
 	std::cout << std::endl;
 }
 
-void arrayTesting(void)
-{
-	std::cout << "------Array Testing------------\n" << std::endl;
-
-	Animal *array[4];
-
-    for (int i = 0; i < 4; i++)
-    {
-        if (i % 2 == 0)
-            array[i] = new Cat();
-        else
-            array[i] = new Dog();
-    }
-	std::cout << std::endl;
-
-	for (int i = 0; i < 4; i++)
-		delete (array[i]);
-}
-
-void generalTesting(void)
-{
-	std::cout << "------General Testing-----------\n" << std::endl;
-	
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
-	const Animal* k = new Dog();
-	std::cout << std::endl;
-
-	std::cout << "type: " << j->getType() << " " << std::endl;
-	std::cout << "type: " << i->getType() << " " << std::endl;
-	std::cout << "type: " << k->getType() << " " << std::endl;
-	i->makeSound();
-	j->makeSound();
-	k->makeSound();
-	std::cout << std::endl;
-
-	delete j;
-	delete i;
-	delete k;
-}
-
 int main()
 {
 	generalTesting();
 	std::cout << std::endl;
-	arrayTesting();
+	// arrayTesting();
 	// std::cout << std::endl;
 	// copyTesting();
 

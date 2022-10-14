@@ -81,22 +81,14 @@ AMateria* MateriaSource::createMateria(std::string const &learned)
 {
     if (this->_indexLearned > 0)
     {
-        int i = this->_indexLearned;
-        while (this->getLearnedMateria(i)->getType().compare(learned) != 0)
-            i--;
-        if (learned.compare("ice") == 0)
-            return (new Ice());
-        else if (learned.compare("cure") == 0)
-            return (new Cure());
-        else
+        for (int i = 0; i < this->_indexLearned; i++)
         {
-            std::cout << "Invalid materia type. Try again!" << std::endl;
-            return (NULL);
+            if (this->getLearnedMateria(i)->getType().compare(learned) == 0)
+                return (this->getLearnedMateria(i)->clone());
         }
+        std::cout << "MateriaSource createMateria: Invalid materia type. Try again!" << std::endl;
     }
     else
-    {
-        std::cout << "No learned materias. Come back later!" << std::endl;
-        return (0);
-    }
+        std::cout << "MateriaSource createMateria: No learned materias. Come back later!" << std::endl;
+    return (0);
 }
