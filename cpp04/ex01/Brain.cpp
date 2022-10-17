@@ -10,7 +10,7 @@ Brain::Brain(void)
 
 	std::string randomSource = "0123456789";
 	for (int i = 0; i < 100; i++)
-		_ideas[i] = std::to_string(i) + "." + randomSource[rand() % randomSource.length()] + " ";
+		_ideas[i] = std::to_string(i) + "." + randomSource[rand() % randomSource.length()];
 }
 
 Brain::Brain(const Brain &existing)
@@ -42,5 +42,8 @@ Brain& Brain::operator = (Brain const &existing)
 void Brain::printIdeas(void)
 {
 	for (int i = 0; i < 100; i++)
+	{
 		std::cout << _ideas[i];
+		std::cout << " ";
+	}
 }

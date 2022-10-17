@@ -18,11 +18,14 @@ WrongAnimal::~WrongAnimal(void)
 {
 	std::cout << "WrongAnimal destructor called" << std::endl;
 }
-//------------------Operators--------------------------
+
+//-----------Overload Operator--------------
+
 
 WrongAnimal& WrongAnimal::operator =(WrongAnimal const &existing)
 {
     std::cout << "WrongAnimal copy assignment operator called" << std::endl;
+    
     if (this != &existing)
         this->type = existing.getType();
     return (*this);

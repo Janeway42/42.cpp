@@ -16,6 +16,7 @@ Brain::Brain(void)
 Brain::Brain(const Brain &existing)
 {
 	std::cout << "Brain copy constructor called" << std::endl;
+	
 	for (int i = 0; i < 100; i++)
 		this->_ideas[i] = existing._ideas[i];
 	*this = existing;

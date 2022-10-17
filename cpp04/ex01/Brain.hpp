@@ -5,17 +5,17 @@
 
 class Brain
 {
-private:
-	std::string _ideas[100];
+	private:
+		std::string _ideas[100];
 
-public:
-	Brain(void);
-	Brain(const Brain &existing);
-	~Brain(void);
+	public:
+		Brain(void);
+		Brain(const Brain &existing);
+		~Brain(void);
 
-	Brain& operator = (Brain const &existing);
+		Brain& operator = (Brain const &existing);
 	
-	void printIdeas(void);
+		void printIdeas(void);
 };
 
 #endif

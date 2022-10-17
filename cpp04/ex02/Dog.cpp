@@ -12,6 +12,7 @@ Dog::Dog(void) : Animal()
 Dog::Dog(const Dog &existing)
 {
 	std::cout << "Dog copy constructor called" << std::endl;
+	_greyCells = new Brain();
     *this = existing;
 }
 
@@ -39,10 +40,7 @@ Dog& Dog::operator = (Dog const &existing)
 
 void Dog::makeSound(void)const
 {
-    if (this->type.compare("Dog") == 0)
-        std::cout << this->type << ": Wof Wof!" << std::endl;
-    else
-        std::cout << this->type << ": Say what?!" << std::endl;
+    std::cout << this->type << ": Wof Wof!" << std::endl;
 }
 
 void Dog::printDogIdeas(void)

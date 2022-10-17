@@ -31,8 +31,5 @@ Cat& Cat::operator =(Cat const &existing)
 
 void Cat::makeSound(void)const
 {
-    if (this->type.compare("Cat") == 0)
-        std::cout << this->type << ": Miau Miau!" << std::endl;
-    else
-        std::cout << this->type << ": Say what?!" << std::endl;
+    std::cout << this->type << ": Miau Miau!" << std::endl;
 }

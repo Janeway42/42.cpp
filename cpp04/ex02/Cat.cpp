@@ -13,6 +13,7 @@ Cat::Cat (void): Animal()
 Cat::Cat(const Cat &existing)
 {
 	std::cout << "Cat copy constructor called" << std::endl;
+    this->_greyCells = new Brain();
 	*this = existing;
 }
 
@@ -30,7 +31,6 @@ Cat& Cat::operator = (Cat const &existing)
 
 	if (this != &existing)
     {
-        this->_greyCells = new Brain();
         this->type = existing.getType();
 		*this->_greyCells = *existing._greyCells;
     }
@@ -41,10 +41,7 @@ Cat& Cat::operator = (Cat const &existing)
 
 void Cat::makeSound(void)const
 {
-    if (this->type.compare("Cat") == 0)
-        std::cout << this->type << ": Miau Miau!" << std::endl;
-    else
-        std::cout << this->type << ": Say what?!" << std::endl;
+    std::cout << this->type << ": Miau Miau!" << std::endl;
 }
 
 void Cat::printCatIdeas(void)

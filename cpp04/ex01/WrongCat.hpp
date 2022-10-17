@@ -5,14 +5,17 @@
 
 class WrongCat: public WrongAnimal
 {
-public:
-	WrongCat(void);
-    WrongCat(const WrongCat &existing);
-	~WrongCat(void);
+	private:
+		Brain* _greyCells;
 
-    WrongCat& operator = (WrongCat const &existing);
+	public:
+		WrongCat(void);
+    	WrongCat(const WrongCat &existing);
+		~WrongCat(void);
 
-	void makeSound(void)const;
+    	WrongCat& operator = (WrongCat const &existing);
+
+		void makeSound(void)const;
 };
 
 #endif

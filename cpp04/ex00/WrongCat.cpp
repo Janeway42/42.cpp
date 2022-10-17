@@ -4,7 +4,7 @@
 
 WrongCat::WrongCat(): WrongAnimal()
 {
-	std::cout << "Cat default constructor called" << std::endl;
+	std::cout << "WrongCat default constructor called" << std::endl;
     this->type = "WrongCat";
 }
 
@@ -32,8 +32,5 @@ WrongCat& WrongCat::operator = (WrongCat const &existing)
 
 void WrongCat::makeSound(void)const
 {
-    if (this->type.compare("WrongCat") == 0)
-        std::cout << this->type << ": Uaim Uaim!" << std::endl;
-    else
-        std::cout << this->type << ": Say what?!" << std::endl;
+    std::cout << this->type << ": Uaim Uaim!" << std::endl;
 }

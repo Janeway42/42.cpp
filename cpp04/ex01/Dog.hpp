@@ -6,18 +6,18 @@
 
 class Dog: public Animal
 {
-private:
-	Brain* _greyCells;
+	private:
+		Brain* _greyCells;
 
-public:
-	Dog(void);
-	Dog(const Dog &existing);
-	~Dog(void);
+	public:
+		Dog(void);
+		Dog(const Dog &existing);
+		~Dog(void);
 
-	Dog& operator = (Dog const &existing);
+		Dog& operator = (Dog const &existing);
 
-	void makeSound(void)const;
-	void printDogIdeas(void);
+		void makeSound(void)const;
+		void printDogIdeas(void);
 };
 
 #endif

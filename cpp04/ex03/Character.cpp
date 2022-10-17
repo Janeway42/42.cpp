@@ -17,7 +17,7 @@ Character::Character(std::string name):_name(name)
 }
 
 Character::Character(const Character &existing)
-{
+{ 
     std::cout << "Character copy constructor called" << std::endl;
     this->_name = existing._name;
     for (int i = 0; i < 4; i++)
@@ -91,7 +91,7 @@ void Character::equip(AMateria* m)
         if (slot < 4)
             this->_inventory[slot] = m;
         else
-            std::cout << "Character equip: Full! No more free slots." << std::endl; 
+            std::cout << "Character equip: Full! No more available slots." << std::endl; 
     }
     else
         std::cout << "Character equip: Unavailable AMateria input" << std::endl;
@@ -130,8 +130,7 @@ void Character::use(int indx, ICharacter& target)
 
 int Character::firstEmptySlot(void)
 {
-    int i = 0;
-    for (i; i < 4; i++)
+    for (int i = 0; i < 4; i++)
     {
         if (this->getInventoryItem(i) == NULL)
             return (i);

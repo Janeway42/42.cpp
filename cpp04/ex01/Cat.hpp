@@ -6,19 +6,19 @@
 
 class Cat: public Animal
 {
-private:
-	Brain* _greyCells;
+	private:
+		Brain* _greyCells;
 
-public:
-	Cat(void);
-	Cat(std::string type);
-	Cat(const Cat &existing);
-	~Cat(void);
+	public:
+		Cat(void);
+		Cat(std::string type);
+		Cat(const Cat &existing);
+		~Cat(void);
 
-	Cat& operator = (Cat const &existing);
+		Cat& operator = (Cat const &existing);
 
-	void makeSound(void)const;
-	void printCatIdeas(void);
+		void makeSound(void)const;
+		void printCatIdeas(void);
 
 };
 

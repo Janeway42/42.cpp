@@ -16,11 +16,11 @@ CPP = c++
 all: $(NAME)
 
 $(NAME): $(OBJ)
-		$(CPP) $(FLAGS)  -o $@ $^
+		@$(CPP) $(FLAGS)  -o $@ $^
 		@echo "\033[0;31mamateria ready\033[0m"
 
 %.o: %.cpp
-		$(CPP) -c $< -g -o $@
+		@$(CPP) -c $< -g -o $@
 
 clean:
 		@rm -f $(OBJ)

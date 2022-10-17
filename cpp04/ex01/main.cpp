@@ -39,6 +39,7 @@ void copyTesting(void)
 	D.printCatIdeas();
 	std::cout << std::endl;
 	std::cout << std::endl;
+
 }
 
 void arrayTesting(void)
@@ -67,19 +68,24 @@ void generalTesting(void)
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
 	const Animal* k = new Dog();
+	const WrongAnimal* m = new WrongCat();
 	std::cout << std::endl;
 
 	std::cout << "type: " << j->getType() << " " << std::endl;
 	std::cout << "type: " << i->getType() << " " << std::endl;
 	std::cout << "type: " << k->getType() << " " << std::endl;
-	i->makeSound();
+	std::cout << "type: " << m->getType() << " " << std::endl;
+
 	j->makeSound();
+	i->makeSound();
 	k->makeSound();
+	m->makeSound();
 	std::cout << std::endl;
 
 	delete j;
 	delete i;
 	delete k;
+	delete m;
 }
 
 int main()
@@ -89,6 +95,7 @@ int main()
 	arrayTesting();
 	std::cout << std::endl;
 	copyTesting();
+	std::cout << std::endl;
 
     system("leaks -q animal");
 	return (0);
