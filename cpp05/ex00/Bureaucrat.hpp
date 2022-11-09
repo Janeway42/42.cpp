@@ -13,15 +13,19 @@ public:
 
 	Bureaucrat(void);
 	Bureaucrat(std::string name, int grade);
+	Bureaucrat(const Bureaucrat &existing);
 	~Bureaucrat(void);
 
-	std::string getName(void);
-	int getGrade(void);
+	std::string getName(void) const;
+	int getGrade(void) const;
 
 	Bureaucrat& operator = (Bureaucrat const &existing);
 
-	void incrementGrade(void);
-	void decrementGrade(void);
+	Bureaucrat operator++(int); // post-increment
+	Bureaucrat& operator++(void); // pre-increment 
+	Bureaucrat operator--(int); // post-decrement
+	Bureaucrat& operator--(void); // pre-increment 
+
 
 	class GradeTooHighException: public std::exception
 	{
