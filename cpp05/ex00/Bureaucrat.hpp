@@ -21,10 +21,8 @@ public:
 
 	Bureaucrat& operator = (Bureaucrat const &existing);
 
-	Bureaucrat operator++(int); // post-increment
-	Bureaucrat& operator++(void); // pre-increment 
-	Bureaucrat operator--(int); // post-decrement
-	Bureaucrat& operator--(void); // pre-increment 
+	void incrementGrade(void); 
+	void decrementGrade(void);
 
 
 	class GradeTooHighException: public std::exception

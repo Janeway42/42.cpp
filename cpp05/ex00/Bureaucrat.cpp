@@ -2,35 +2,22 @@
 
 //-----------Constructors & Destructors-----------
 
+Bureaucrat::Bureaucrat(void): _name("no name")
+{
+	this->_grade = 150;
+	std::cout << "Bureaucrat constructor " << this->_name << " with grade " << this->_grade << " created" << std::endl;
+}
+
 Bureaucrat::Bureaucrat(std::string name, int grade): _name(name)
 {
-	try
+	if (grade < 1)
+		throw GradeTooHighException();
+	else if (grade > 150)
+		throw GradeTooLowException();
+	else
 	{
-		if (grade < 1)
-		{
-			// this->_grade = 1;
-			std::cout << "grade: " << this->_grade << std::endl; 
-			throw GradeTooHighException();
-		}
-		else if (grade > 150)
-		{
-			// this->_grade = 150;
-			std::cout << "grade: " << this->_grade << std::endl; 
-			throw GradeTooLowException();
-		}
-		else
-		{
-			this->_grade = grade;
-			std::cout << "Bureaucrat constructor " << this->_name << " with grade " << this->_grade << " created" << std::endl;
-		}
-	}
-	catch(const Bureaucrat::GradeTooHighException& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	catch(const Bureaucrat::GradeTooLowException& e)
-	{
-		std::cout << e.what() << std::endl;
+		this->_grade = grade;
+		std::cout << "Bureaucrat constructor " << this->_name << " with grade " << this->_grade << " created" << std::endl;
 	}
 }
 
@@ -78,72 +65,19 @@ int Bureaucrat::getGrade(void) const
 
 //-----------Increment/Decrement Operators-------------
 
-Bureaucrat Bureaucrat::operator++(int) // post-increment // increments the value after the action
+void Bureaucrat::incrementGrade(void) // pre-increment // increments the value before using it further
 {
-	Bureaucrat temp;
-
-	temp = *this;
-	try
-	{
-		if (this->_grade < 1 || this->_grade - 1 < 1)
-			throw GradeTooHighException();
-		else
-			this->_grade += 1;
-	}
-	catch(const Bureaucrat::GradeTooHighException& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	return (temp);
+	if (this->_grade - 1 < 1)
+		throw GradeTooHighException();
+	else
+		this->_grade -= 1;
 }
 
-Bureaucrat& Bureaucrat::operator++(void) // pre-increment // increments the value before using it further
-{
-	try
-	{
-		if (this->_grade < 1 || this->_grade - 1 < 1)
-			throw GradeTooHighException();
-		else
-			this->_grade += 1;
-	}
-	catch(const Bureaucrat::GradeTooHighException& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	return (*this);
-}
 
-Bureaucrat Bureaucrat::operator--(int) // post-decrement
+void Bureaucrat::decrementGrade(void) // pre-decrement // increments the value before using it further
 {
-	Bureaucrat temp;
-
-	temp = *this;
-	try
-	{
-		if (this->_grade > 150 || this->_grade + 1 > 150)
-			throw GradeTooLowException();
-		else
-			this->_grade -= 1;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	return (temp);
-}
-
-Bureaucrat& Bureaucrat::operator--(void) // pre-decrement // increments the value before using it further
-{
-	try
-	{
-		if (this->_grade > 150 || this->_grade + 1 > 150)
-			throw GradeTooLowException();
-		else
-			this->_grade -= 1;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	return (*this);
+	if (this->_grade + 1 > 150)
+		throw GradeTooLowException();
+	else
+		this->_grade += 1;
 }
