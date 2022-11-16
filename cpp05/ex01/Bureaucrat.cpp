@@ -1,37 +1,30 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
 
 //-----------Constructors & Destructors-----------
 
+Bureaucrat::Bureaucrat(void): _name("no name")
+{
+	this->_grade = 150;
+	std::cout << "Bureaucrat constructor " << this->_name << " with grade " << this->_grade << " created" << std::endl;
+}
+
 Bureaucrat::Bureaucrat(std::string name, int grade): _name(name)
 {
-	std::cout << "Bureaucrat constructor " << this->_name << " with grade " << grade << " called" << std::endl;
+	if (grade < 1)
+		throw GradeTooHighException();
+	else if (grade > 150)
+		throw GradeTooLowException();
+	else
+	{
+		this->_grade = grade;
+		std::cout << "Bureaucrat constructor " << this->_name << " with grade " << this->_grade << " created" << std::endl;
+	}
+}
 
-	try
-	{
-		if (grade < 1)
-		{
-			this->_grade = 1;
-			throw GradeTooHighException();
-		}
-		else if (grade > 150)
-		{
-			this->_grade = 150;
-			throw GradeTooLowException();
-		}
-		else
-		{
-			this->_grade = grade;
-		}
-	}
-	catch(const Bureaucrat::GradeTooHighException& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	catch(const Bureaucrat::GradeTooLowException& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+Bureaucrat::Bureaucrat(const Bureaucrat &existing)
+{
+	std::cout << "Bureaucrat copy constructor called" << std::endl;
+	*this = existing;
 }
 
 Bureaucrat::~Bureaucrat(void)
@@ -41,54 +34,57 @@ Bureaucrat::~Bureaucrat(void)
 
 //----------Overload operators-------------------
 
-//-------------Public functions-----------------
+// this->_name is a constant and normally can not be changed. 
+// another option is to change the information at the address of the pointer. 
+// this is a concious method of bypassing the compiler const rule. 
 
-void Bureaucrat::signForm(Form paper)
+Bureaucrat& Bureaucrat::operator =(Bureaucrat const &existing)
 {
-	if (paper.getSigned() == true)
-		std::cout << this->_name << "signed" << paper.getName() << std::endl;
-	else
-		std::cout << this->_name << "couldn't sign" << paper.getName() << "because he ran out of toothpicks." << std::endl;
+	std::cout << "Bureaucrat copy assignment operator called" << std::endl;
+	if (this != &existing)
+	{
+		std::string *temp;
+		temp = (std::string *)&this->_name;
+		*temp = existing.getName();
+		this->_grade = existing.getGrade();
+	}
+	return (*this);
 }
 
-std::string Bureaucrat::getName(void)
+//-------------Public functions-----------------
+
+std::string Bureaucrat::getName(void) const
 {
 	return (this->_name);
 }
 
-int Bureaucrat::getGrade(void)
+int Bureaucrat::getGrade(void) const
 {
 	return (this->_grade);
 }
 
-//-----------Increment/Decrement Operators-------------
-
-void Bureaucrat::incrementGrade(void)
+void Bureaucrat::signForm(Form &paper)
 {
-	try
-	{
-		if (this->_grade - 1 < 1)
-			throw GradeTooHighException();
-		else
-			this->_grade += 1;
-	}
-	catch(const Bureaucrat::GradeTooHighException& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+	if (paper.getSigned() == true)
+		std::cout << this->_name << " signed " << paper.getName() << std::endl;
+	else
+		std::cout << this->_name << "couldn't sign " << paper.getName() << " because he ran out of toothpicks." << std::endl;
 }
 
-void Bureaucrat::decrementGrade(void)
+//-----------Increment/Decrement Operators-------------
+
+void Bureaucrat::incrementGrade(void) // pre-increment // increments the value before using it further
 {
-	try
-	{
-		if (this->_grade + 1 > 150)
-			throw GradeTooLowException();
-		else
-			this->_grade -= 1;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
+	if (this->_grade - 1 < 1)
+		throw GradeTooHighException();
+	else
+		this->_grade -= 1;
+}
+
+void Bureaucrat::decrementGrade(void) // pre-decrement // increments the value before using it further
+{
+	if (this->_grade + 1 > 150)
+		throw GradeTooLowException();
+	else
+		this->_grade += 1;
 }

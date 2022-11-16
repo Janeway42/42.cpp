@@ -4,6 +4,8 @@
 #include <iostream>
 #include "Form.hpp"
 
+class Form;
+
 class Bureaucrat
 {
 private:
@@ -14,17 +16,19 @@ public:
 
 	Bureaucrat(void);
 	Bureaucrat(std::string name, int grade);
+	Bureaucrat(const Bureaucrat &existing);
 	~Bureaucrat(void);
 
-	void signForm(Form paper);
-
-	std::string getName(void);
-	int getGrade(void);
+	std::string getName(void) const;
+	int getGrade(void) const;
 
 	Bureaucrat& operator = (Bureaucrat const &existing);
 
-	void incrementGrade(void);
+	void incrementGrade(void); 
 	void decrementGrade(void);
+
+	void signForm(Form &paper);
+
 
 	class GradeTooHighException: public std::exception
 	{

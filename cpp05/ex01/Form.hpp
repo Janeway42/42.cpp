@@ -4,16 +4,20 @@
 #include <iostream>
 #include "Bureaucrat.hpp"
 
+class Bureaucrat;
+
 class Form
 {
 private:
 	const std::string _name;
 	bool _signed;
-	int _grade;
+	const int _signGrade;
+	const int _executeGrade;
 
 
 public:
-	Form (std::string name, int grade);
+	Form(void);
+	Form (std::string name, int grade, int exec);
 	~Form(void);
 
 	void beSigned(Bureaucrat &office);

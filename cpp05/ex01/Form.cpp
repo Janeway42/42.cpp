@@ -1,30 +1,23 @@
 #include "Form.hpp"
-#include "Bureaucrat.hpp"
-
-#include <iostream>
 
 //-----------Constructors & Destructors-----------
 
-Form::Form(std::string name, int grade): _name(name)
+Form::Form(void): _name("no name"), _signGrade(150), _executeGrade(150)
 {
-	std::cout << "Form constructor called" << std::endl;
 	this->_signed = false;
-	try
+	std::cout << "Form default constructor created" << std::endl;
+}
+
+Form::Form(std::string name, int grade, int exec): _name(name), _signGrade(grade), _executeGrade(exec)
+{
+	if (grade < 1 || exec < 1)
+		throw GradeTooHighException();
+	else if (grade > 150 || exec > 150)
+		throw GradeTooLowException();
+	else
 	{
-		if (grade < 1)
-			throw GradeTooHighException();
-		else if (grade > 150)
-			throw GradeTooLowException();
-		else
-			this->_grade = grade;
-	}
-	catch(const GradeTooHighException& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	catch(const GradeTooLowException& e)
-	{
-		std::cout << e.what() << std::endl;
+		this->_signed = false;
+		std::cout << "Form constructor " << this->_name << " with sign grade " << this->_signGrade << " and execute grade " << this->_executeGrade << " created" << std::endl;
 	}
 }
 
@@ -39,17 +32,10 @@ Form::~Form(void)
 
 void Form::beSigned(Bureaucrat &office)
 {
-	try
-	{
-		if (office.getGrade() > this->_grade)
-			throw GradeTooLowException();
-		else
-			this->_signed = true;
-	}
-	catch(const GradeTooLowException& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+	if (office.getGrade() < this->_signGrade)
+		throw GradeTooLowException();
+	else
+		this->_signed = true;
 }
 
 bool Form::getSigned(void)
