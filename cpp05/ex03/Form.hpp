@@ -19,13 +19,16 @@ public:
 	Form(void);
 	Form (std::string name, int grade, int exec);
 	Form(Form const &existing);
-	~Form(void);
+	virtual ~Form(void);
 
 	Form& operator = (Form const &existing);
 
 	void beSigned(Bureaucrat &office);
+	void execute(Bureaucrat const &executor)const;
+	virtual void runForm(void)const = 0;
 
 	bool getSigned(void)const;
+	void copySigned(bool copy);
 	std::string getName(void)const;
 	int getSignGrade(void) const;
 	int getExecuteGrade(void) const;
@@ -49,6 +52,25 @@ public:
 	const char *what() const throw()
 	{
 		return ("Form grade too low!");
+	}
+};
+
+class ExecToolLowException: public std::exception
+{
+    public:
+        const char *what() const throw()
+        {
+            return ("Exception grade too low!");
+        }
+};
+
+class FormNotSigned: public std::exception
+{
+public: 
+
+	const char *what() const throw()
+	{
+		return ("Form not signed!");
 	}
 };
 

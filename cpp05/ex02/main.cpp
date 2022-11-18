@@ -4,47 +4,81 @@
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 
-//PresidentialPardonForm informs that <target> has been pardoned by Zaphod Beeblebrox.
 
-void presidentialTests(void)
+void checkleaks(void)
 {
-	std::cout << "Presidential tests" << std::endl;
-	std::cout << "----------------------------" << std::endl;
-
-	Bureaucrat M("kenedy", 5);
-	Bureaucrat O("bush", 50);
-	Form *C = new PresidentialPardonForm("homeee");
-	std::cout << std::endl;
+    std::cout << "\n-------------- leaks check --------------------\n\n";
+    system("leaks -q bureaucrat");
 }
 
 int main(void)
 {
-	shrubberyTests();
-	robotomyTests();
-	presidentialTests();
 
-	Bureaucrat A("Jon", 10);
-	Form AA("Jon's letter", 7);
-	Bureaucrat B("Stone", -1);
-	Bureaucrat C("Ana", 1);
-	Bureaucrat D("Tom", 150);
-	
-	std::cout << std:: endl;
-	A.decrementGrade();
-	std::cout << A.getName() << " " << A.getGrade() << std::endl;
-	std::cout << std:: endl;
-	
-	B.incrementGrade();
-	std::cout << B.getName() << " " << B.getGrade() << std::endl;
-	std::cout << std:: endl;
-	
-	C.incrementGrade();
-	std::cout << C.getName() << " " << C.getGrade() << std::endl;
-	std::cout << std:: endl;
-	
-	D.decrementGrade();
-	std::cout << C.getName() << " " << D.getGrade() << std:: endl;
-	std::cout << std:: endl;
+	std::cout << "\n------------------------- Shrubbery test ----------------------\n\n";
 
-	return (0);
+	ShrubberyCreationForm A("target A");  // 145, 137
+	Bureaucrat office("Ana", 20);
+	
+	try
+	{
+		A.beSigned(office);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+
+	try
+	{
+		A.execute(office);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+
+	std::cout << "\n------------------------- Robotomy test ----------------------\n\n";
+
+	RobotomyRequestForm B("target B"); // 72, 45
+
+	try
+	{
+		B.beSigned(office);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	try
+	{
+		B.execute(office);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+
+	std::cout << "\n------------------------- Presidential test ----------------------\n\n";
+
+	PresidentialPardonForm C("target C");
+	try
+	{
+		C.beSigned(office);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	try
+	{
+		C.execute(office);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	std::cout << std::endl;
+
+    atexit(checkleaks);
+    return (0);
 }

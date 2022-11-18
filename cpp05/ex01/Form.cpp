@@ -21,6 +21,12 @@ Form::Form(std::string name, int grade, int exec): _name(name), _signGrade(grade
 	}
 }
 
+Form::Form(Form const &existing): _name(existing._name), _signed(existing._signed),
+				_signGrade(existing._signGrade), _executeGrade(existing._executeGrade)
+{
+	std::cout << "Form copy constructor called" << std::endl;
+}
+
 Form::~Form(void)
 {
 	std::cout << "Form destructor called" << std::endl;
@@ -28,22 +34,40 @@ Form::~Form(void)
 
 //----------Overload operators-------------------
 
+Form& Form::operator = (Form const &existing)
+{
+	std::cout << "Form copy assignement operator called" << std::endl;
+	if (this != &existing)
+		this->_signed = existing.getSigned();
+	return (*this);
+}
+
 //-------------Public functions-----------------
 
 void Form::beSigned(Bureaucrat &office)
 {
-	if (office.getGrade() < this->_signGrade)
+	if (this->_signGrade > office.getGrade())
 		throw GradeTooLowException();
 	else
 		this->_signed = true;
 }
 
-bool Form::getSigned(void)
+bool Form::getSigned(void) const
 {
 	return (this->_signed);
 }
 
-std::string Form::getName(void)
+std::string Form::getName(void) const
 {
 	return (this->_name);
+}
+
+int Form::getSignGrade(void) const
+{
+	return (this->_signGrade);
+}
+
+int Form::getExecuteGrade(void) const
+{
+	return (this->_executeGrade);
 }
