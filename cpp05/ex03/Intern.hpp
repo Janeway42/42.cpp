@@ -15,7 +15,13 @@ public:
 
 	Intern& operator = (const Intern &existing);
 
-	Form* makeForm(std::string formName, std::string target);
+	Form* makeForm(std::string nameForm, std::string target);
+	int getType(std::string nameForm);
+
+	Form* makeShrubbery(Form* newForm, std::string nameForm, std::string target);
+	Form* makeRobotomy(Form* newForm, std::string nameForm, std::string target);
+	Form* makePresidential(Form* newForm, std::string nameForm, std::string target);
+	Form* makeDefault(Form* newForm);
 };
 
 #endif

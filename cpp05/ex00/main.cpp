@@ -2,12 +2,13 @@
 
 void checkleaks(void)
 {
+	std::cout << "\n-------------- leaks check --------------------\n\n";
     system("leaks -q bureaucrat");
 }
 
 int main(void)
 {
-	std::cout << " ----------------- Constructors -----------------" << std::endl;
+	std::cout << "\n----------------- Constructors -----------------" << std::endl;
 
 	try
 	{
@@ -40,7 +41,7 @@ int main(void)
 	}
 	std::cout << std::endl;
 
-	std::cout << " ----------------- Pre Increment -----------------" << std::endl;
+	std::cout << "----------------- Increment -----------------" << std::endl;
 
 	Bureaucrat *A = new Bureaucrat("Amy", 1);
 	try
@@ -83,10 +84,13 @@ int main(void)
 	}
 	delete C;
 	std::cout << std::endl;
-	
 
+	std::cout << " ----------------- << operator -----------------" << std::endl;
 
-    std::cout << "-------------- leaks check --------------------\n\n";
+	Bureaucrat V("Test", 75);
+	std::cout << std::endl;	
+	std::cout << V << std::endl;
+    std::cout << std::endl;	
     atexit(checkleaks);
     return (0);
 }

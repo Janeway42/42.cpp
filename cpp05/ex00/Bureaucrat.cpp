@@ -21,10 +21,9 @@ Bureaucrat::Bureaucrat(std::string name, int grade): _name(name)
 	}
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &existing)
+Bureaucrat::Bureaucrat(const Bureaucrat &existing): _name(existing.getName()), _grade(existing.getGrade())
 {
 	std::cout << "Bureaucrat copy constructor called" << std::endl;
-	*this = existing;
 }
 
 Bureaucrat::~Bureaucrat(void)
@@ -48,6 +47,10 @@ Bureaucrat& Bureaucrat::operator =(Bureaucrat const &existing)
 		*temp = existing.getName();
 		this->_grade = existing.getGrade();
 	}
+
+	// if (this != &existing)
+	// 	this->_grade = existing._grade;
+
 	return (*this);
 }
 
@@ -80,4 +83,12 @@ void Bureaucrat::decrementGrade(void) // pre-decrement // increments the value b
 		throw GradeTooLowException();
 	else
 		this->_grade += 1;
+}
+
+//-------------Other Public functions-----------------
+
+std::ostream& operator << (std::ostream &out, const Bureaucrat &existing)
+{
+	out << existing.getName() << " bureaucrat grade " << existing.getGrade();
+	return (out);
 }

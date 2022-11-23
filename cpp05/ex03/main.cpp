@@ -37,6 +37,10 @@ int main(void)
 	delete output;
 	std::cout << std::endl;
 
+	output = newbie.makeForm("abc", "practice");
+	delete output;
+	std::cout << std::endl;
+
     atexit(checkleaks);
     return (0);
 }

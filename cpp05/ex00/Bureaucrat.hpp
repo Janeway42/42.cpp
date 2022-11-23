@@ -7,7 +7,7 @@ class Bureaucrat
 {
 private:
 	const std::string _name;
-	int _grade;
+	int _grade;  // lowest 150 - highest 1
 
 public:
 
@@ -16,14 +16,12 @@ public:
 	Bureaucrat(const Bureaucrat &existing);
 	~Bureaucrat(void);
 
+	Bureaucrat& operator = (Bureaucrat const &existing);
+	
 	std::string getName(void) const;
 	int getGrade(void) const;
-
-	Bureaucrat& operator = (Bureaucrat const &existing);
-
 	void incrementGrade(void); 
 	void decrementGrade(void);
-
 
 	class GradeTooHighException: public std::exception
 	{
@@ -46,5 +44,7 @@ public:
 	};
 
 };
+
+std::ostream& operator << (std::ostream &out, const Bureaucrat &existing);
 
 #endif
