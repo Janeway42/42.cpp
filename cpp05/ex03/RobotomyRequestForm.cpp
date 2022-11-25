@@ -41,15 +41,20 @@ RobotomyRequestForm& RobotomyRequestForm::operator = (const RobotomyRequestForm 
 
 //-------------Public functions-----------------
 
-void RobotomyRequestForm::runForm(void)const
+void RobotomyRequestForm::runForm(int grade)const
 {
-    std::cout << "making drilling noises" << std::endl;
-
-    srand(time(0));
-    int x = rand();
-
-    if (x % 2 == 0)
-        std::cout << this->_target << " has been robotomised succesfully!" << std::endl;
+	if (grade > 45)
+        throw ExecToolLowException();
     else
-        std::cout << this->_target << " robotomy has failed!" << std::endl;
+	{
+	    std::cout << "making drilling noises" << std::endl;
+
+	    srand(time(0));
+		int x = rand();
+
+    	if (x % 2 == 0)
+        	std::cout << this->_target << " has been robotomised succesfully!" << std::endl;
+    	else
+        	std::cout << this->_target << " robotomy has failed!" << std::endl;
+	}
 }

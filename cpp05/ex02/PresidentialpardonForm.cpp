@@ -10,7 +10,7 @@ PresidentialPardonForm::PresidentialPardonForm(void): Form("Presidential Form", 
 
 PresidentialPardonForm::PresidentialPardonForm(std::string target): Form("Presidential Form", 25, 5)
 {
-    std::cout << "PresidentialPardonform target constructor called" << std::endl;
+    std::cout << "PresidentialPardonform with target constructor called" << std::endl;
     _target = target;
 }
 
@@ -41,7 +41,10 @@ PresidentialPardonForm& PresidentialPardonForm::operator = (const PresidentialPa
 
 //-------------Public functions-----------------
 
-void PresidentialPardonForm::runForm(void)const
+void PresidentialPardonForm::runForm(int grade)const
 {
-    std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox!" << std::endl;
+	if (grade > 5)
+        throw ExecToolLowException();
+    else
+        std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox!" << std::endl;
 }

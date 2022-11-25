@@ -41,7 +41,10 @@ PresidentialPardonForm& PresidentialPardonForm::operator = (const PresidentialPa
 
 //-------------Public functions-----------------
 
-void PresidentialPardonForm::runForm(void)const
+void PresidentialPardonForm::runForm(int grade)const
 {
-    std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox!" << std::endl;
+	if (grade > 5)
+        throw ExecToolLowException();
+    else
+        std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox!" << std::endl;
 }

@@ -34,14 +34,6 @@ Form::~Form(void)
 
 //----------Overload operators-------------------
 
-Form& Form::operator = (Form const &existing)
-{
-	std::cout << "Form copy assignement operator called" << std::endl;
-	if (this != &existing)
-		this->_signed = existing.getSigned();
-	return (*this);
-}
-
 //-------------Public functions-----------------
 
 void Form::beSigned(Bureaucrat &office)
@@ -70,4 +62,11 @@ int Form::getSignGrade(void) const
 int Form::getExecuteGrade(void) const
 {
 	return (this->_executeGrade);
+}
+
+std::ostream& operator << (std::ostream& out, const Form& existing)
+{
+	out << "name: " << existing.getName() << ", signed: " << existing.getSigned()
+		<< ", signGrade: " << existing.getSignGrade() << ", executeGrade: " << existing.getExecuteGrade();
+	return (out);
 }

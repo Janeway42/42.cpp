@@ -13,21 +13,22 @@ void checkleaks(void)
 
 int main(void)
 {
-
+    atexit(checkleaks);
 	std::cout << "\n------------------------- Shrubbery test ----------------------\n\n";
 
-	ShrubberyCreationForm A("target A");  // 145, 137
-	Bureaucrat office("Ana", 20);
+	Bureaucrat office("ANA", 5);
+	Bureaucrat office2("MARIA", 150);
+	ShrubberyCreationForm A("TARGET A");  // 145, 137
+	std::cout << std::endl;
 	
 	try
 	{
-		A.beSigned(office);
+		office.signForm(A);
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
 	}
-
 	try
 	{
 		A.execute(office);
@@ -36,14 +37,24 @@ int main(void)
 	{
 		std::cerr << e.what() << '\n';
 	}
+	std::cout << std::endl;
+	try
+	{
+		A.execute(office2);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 
 	std::cout << "\n------------------------- Robotomy test ----------------------\n\n";
 
-	RobotomyRequestForm B("target B"); // 72, 45
+	RobotomyRequestForm B("TARGET B"); // 72, 45
+	std::cout << std::endl;
 
 	try
 	{
-		B.beSigned(office);
+		office.signForm(B);
 	}
 	catch(const std::exception& e)
 	{
@@ -57,13 +68,24 @@ int main(void)
 	{
 		std::cerr << e.what() << '\n';
 	}
+	std::cout << std::endl;
+	try
+	{
+		B.execute(office2);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 
 	std::cout << "\n------------------------- Presidential test ----------------------\n\n";
 
-	PresidentialPardonForm C("target C");
+	PresidentialPardonForm C("TARGET C"); // 25, 5
+	std::cout << std::endl;
+
 	try
 	{
-		C.beSigned(office);
+		office.signForm(C);
 	}
 	catch(const std::exception& e)
 	{
@@ -78,7 +100,15 @@ int main(void)
 		std::cerr << e.what() << '\n';
 	}
 	std::cout << std::endl;
+	try
+	{
+		C.execute(office2);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	std::cout << std::endl;
 
-    atexit(checkleaks);
     return (0);
 }

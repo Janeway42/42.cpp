@@ -2,6 +2,7 @@
 #define FORM_HPP
 
 #include <iostream>
+#include <ostream>
 #include "Bureaucrat.hpp"
 
 class Bureaucrat;
@@ -13,7 +14,7 @@ private:
 	bool _signed;
 	const int _signGrade;
 	const int _executeGrade;
-
+	Form& operator = (Form const &existing);
 
 public:
 	Form(void);
@@ -21,7 +22,6 @@ public:
 	Form(Form const &existing);
 	~Form(void);
 
-	Form& operator = (Form const &existing);
 
 	void beSigned(Bureaucrat &office);
 
@@ -52,5 +52,6 @@ public:
 	}
 };
 
+std::ostream& operator << (std::ostream& out, const Form& existing);
 
 #endif

@@ -13,6 +13,7 @@ private:
 	bool _signed;
 	const int _signGrade;
 	const int _executeGrade;
+	Form& operator = (Form const &existing);
 
 
 public:
@@ -21,11 +22,9 @@ public:
 	Form(Form const &existing);
 	virtual ~Form(void);
 
-	Form& operator = (Form const &existing);
-
 	void beSigned(Bureaucrat &office);
 	void execute(Bureaucrat const &executor)const;
-	virtual void runForm(void)const = 0;
+	virtual void runForm(int grade)const = 0;
 
 	bool getSigned(void)const;
 	void copySigned(bool copy);

@@ -17,7 +17,7 @@ class PresidentialPardonForm: public Form
 
 		PresidentialPardonForm& operator =(const PresidentialPardonForm &existing);
 
-        void runForm(void)const;
+        void runForm(int grade)const;
 };
 
 #endif

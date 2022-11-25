@@ -37,14 +37,6 @@ Form::~Form(void)
 
 //----------Overload operators-------------------
 
-Form& Form::operator = (Form const &existing)
-{
-	std::cout << "Form copy assignement operator called" << std::endl;
-	if (this != &existing)
-		this->_signed = existing.getSigned();
-	return (*this);
-}
-
 //-------------Public functions-----------------
 
 void Form::beSigned(Bureaucrat &office)
@@ -60,12 +52,7 @@ void Form::execute(Bureaucrat const &executor)const
 	if (_signed == false)
 		throw FormNotSigned();
 	else
-	{
-    	if (executor.getGrade() > 137)
-            throw ExecToolLowException();
-        else
-            this->runForm();
-    }
+        this->runForm(executor.getGrade());
 }
 
 //---------Other Public Functions----------------

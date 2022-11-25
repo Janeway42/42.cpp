@@ -33,27 +33,6 @@ Bureaucrat::~Bureaucrat(void)
 
 //----------Overload operators-------------------
 
-// this->_name is a constant and normally can not be changed. 
-// another option is to change the information at the address of the pointer. 
-// this is a concious method of bypassing the compiler const rule. 
-
-Bureaucrat& Bureaucrat::operator =(Bureaucrat const &existing)
-{
-	std::cout << "Bureaucrat copy assignment operator called" << std::endl;
-	if (this != &existing)
-	{
-		std::string *temp;
-		temp = (std::string *)&this->_name;
-		*temp = existing.getName();
-		this->_grade = existing.getGrade();
-	}
-
-	// if (this != &existing)
-	// 	this->_grade = existing._grade;
-
-	return (*this);
-}
-
 //-------------Public functions-----------------
 
 std::string Bureaucrat::getName(void) const

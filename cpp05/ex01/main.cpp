@@ -3,16 +3,18 @@
 
 void checkleaks(void)
 {
+    std::cout << "\n-------------- leaks check --------------------\n\n";
     system("leaks -q bureaucrat");
 }
 
 int main(void)
 {
-	std::cout << " ----------------- Constructors -----------------" << std::endl;
+    atexit(checkleaks);
+	std::cout << "----------------- Constructors -----------------\n\n" << std::endl;
 
 	try
 	{
-		Form *A = new Form("paper", 200, 150);
+		Form *A = new Form("PAPER", 200, 150);
 		delete A;
 	}
 	catch(const std::exception& e)
@@ -22,16 +24,17 @@ int main(void)
 
 	try
 	{
-		Form *B = new Form("paper", -20, 150);
+		Form *B = new Form("PAPER", -20, 150);
 		delete B;
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
 	}
+
 	try
 	{
-		Form *C = new Form("paper", 5, 100);
+		Form *C = new Form("PAPER", 5, 100);
 		delete C;
 	}
 	catch(const std::exception& e)
@@ -40,33 +43,23 @@ int main(void)
 	}	
 	std::cout << std::endl;
 
-	std::cout << " ----------------- Sign Form -----------------" << std::endl;
+	std::cout << "----------------- Sign Form -----------------\n\n" << std::endl;
 
-	Form *A = new Form("paper", 100, 150);
-	Bureaucrat *X = new Bureaucrat("office", 10);
+	Form A("PAPER 1", 100, 150);
+	Bureaucrat *X = new Bureaucrat("OFFICE", 10);
 	try
 	{
-		A->beSigned(*X);
+		X->signForm(A);
 
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
 	}
-	try
-	{
-		X->signForm(*A);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	delete A;
 	delete X;
-	std::cout << std::endl;
 
-	Form *C = new Form("red tape",50, 150);
-	Bureaucrat *Y = new Bureaucrat("office", 100);
+	Form *C = new Form("RED TAPE",50, 150);
+	Bureaucrat *Y = new Bureaucrat("OFFICE", 100);
 	try
 	{
 		Y->signForm(*C);
@@ -79,43 +72,11 @@ int main(void)
 	delete Y;
 	std::cout << std::endl;
 
-	std::cout << " ----------------- Copy Form -----------------" << std::endl;
+	std::cout << "----------------- operator << -----------------\n\n" << std::endl;
 
- 	Form E = Form("copy", 5, 25);
-	Bureaucrat Z("office", 6);
-	try
-	{
-		E.beSigned(Z);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	std::cout << " Form E: name - " << E.getName() << std::endl;
-	std::cout << " Form E: signed - " << E.getSigned() << std::endl;
-	std::cout << " Form E: signGrade - " << E.getSignGrade() << std::endl;
-	std::cout << " Form E: executeGrade - " << E.getExecuteGrade() << std::endl;
+	Form K("PRINT TEST", 5, 15);
+	std::cout << K << std::endl;
 	std::cout << std::endl;
 
-	Form *B = new Form("paste", 150, 20);
-	std::cout << " Form B: name - " << B->getName() << std::endl;
-	std::cout << " Form B: signed - " << B->getSigned() << std::endl;
-	std::cout << " Form B: signGrade - " << B->getSignGrade() << std::endl;
-	std::cout << " Form B: executeGrade - " << B->getExecuteGrade() << std::endl;
-	std::cout << std::endl;
-
-	*B = E;
-	std::cout << std::endl;
-
-	std::cout << " Form B: name - " << B->getName() << std::endl;
-	std::cout << " Form B: signed - " << B->getSigned() << std::endl;
-	std::cout << " Form B: signGrade - " << B->getSignGrade() << std::endl;
-	std::cout << " Form B: executeGrade - " << B->getExecuteGrade() << std::endl;
-	std::cout << std::endl;
-
-	delete B;
-
-    std::cout << "-------------- leaks check --------------------\n\n";
-    atexit(checkleaks);
     return (0);
 }

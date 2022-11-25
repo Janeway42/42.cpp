@@ -17,27 +17,7 @@ class ShrubberyCreationForm: public Form
 
 		ShrubberyCreationForm& operator = (const ShrubberyCreationForm &existing);
 
-        void runForm(void)const;
-
-		// class GradeTooHighException: public std::exception
-		// {
-		// 	public:
-
-		// 	const char *what() const throw()
-		// 	{
-		// 		return ("Form grade too high!");
-		// 	}
-		// };
-
-		// class GradeTooLowException: public std::exception
-		// {
-		// 	public: 
-
-		// 	const char *what() const throw()
-		// 	{
-		// 		return ("Form grade too low!");
-		// 	}
-		// };
+        void runForm(int grade)const;
 		
 };
 

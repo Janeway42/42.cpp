@@ -17,7 +17,7 @@ class RobotomyRequestForm: public Form
 
 		RobotomyRequestForm& operator = (const RobotomyRequestForm &existing);
 
-        void runForm(void)const;
+        void runForm(int grade)const;
 };
 
 #endif

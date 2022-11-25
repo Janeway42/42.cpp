@@ -8,6 +8,7 @@ class Bureaucrat
 private:
 	const std::string _name;
 	int _grade;  // lowest 150 - highest 1
+	Bureaucrat& operator = (Bureaucrat const &existing);
 
 public:
 
@@ -16,8 +17,6 @@ public:
 	Bureaucrat(const Bureaucrat &existing);
 	~Bureaucrat(void);
 
-	Bureaucrat& operator = (Bureaucrat const &existing);
-	
 	std::string getName(void) const;
 	int getGrade(void) const;
 	void incrementGrade(void); 
