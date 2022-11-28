@@ -8,11 +8,12 @@ void checkleaks(void)
 
 int main(void)
 {
+    atexit(checkleaks);
 	std::cout << "\n----------------- Constructors -----------------" << std::endl;
 
 	try
 	{
-		Bureaucrat *A = new Bureaucrat("Jon", 10);
+		Bureaucrat *A = new Bureaucrat("JON", 10);
 		delete A;
 	}
 	catch(const std::exception &e)
@@ -22,7 +23,7 @@ int main(void)
 
 	try
 	{
-		Bureaucrat *B = new Bureaucrat("Doe", - 10);
+		Bureaucrat *B = new Bureaucrat("DOE", - 10);
 		delete B;
 	}
 	catch(const std::exception &e)
@@ -32,7 +33,7 @@ int main(void)
 
 	try
 	{
-		Bureaucrat *C = new Bureaucrat("Doeee", 160);
+		Bureaucrat *C = new Bureaucrat("DOEEEE", 160);
 		delete C;
 	}
 	catch(const std::exception &e)
@@ -57,7 +58,7 @@ int main(void)
 	delete A;
 	std::cout << std::endl;
 	
-	Bureaucrat *B = new Bureaucrat("Winehouse", 150);
+	Bureaucrat *B = new Bureaucrat("WINEHOUSE", 150);
 	try
 	{
 		std::cout << "B: " << B->getGrade() << std::endl;
@@ -71,7 +72,7 @@ int main(void)
 	delete B;
 	std::cout << std::endl;
 	
-	Bureaucrat *C = new Bureaucrat("Winehouse", 100);
+	Bureaucrat *C = new Bureaucrat("AMY", 100);
 	try
 	{
 		std::cout << "C: " << C->getGrade() << std::endl;
@@ -85,12 +86,11 @@ int main(void)
 	delete C;
 	std::cout << std::endl;
 
-	std::cout << " ----------------- << operator -----------------" << std::endl;
+	std::cout << "----------------- << operator -----------------" << std::endl;
 
-	Bureaucrat V("Test", 75);
+	Bureaucrat V("TYPE TEST", 75);
 	std::cout << std::endl;	
 	std::cout << V << std::endl;
     std::cout << std::endl;	
-    atexit(checkleaks);
     return (0);
 }

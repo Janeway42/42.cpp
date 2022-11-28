@@ -47,7 +47,7 @@ int Bureaucrat::getGrade(void) const
 
 //-----------Increment/Decrement Operators-------------
 
-void Bureaucrat::incrementGrade(void) // pre-increment // increments the value before using it further
+void Bureaucrat::incrementGrade(void)
 {
 	if (this->_grade - 1 < 1)
 		throw GradeTooHighException();
@@ -56,7 +56,7 @@ void Bureaucrat::incrementGrade(void) // pre-increment // increments the value b
 }
 
 
-void Bureaucrat::decrementGrade(void) // pre-decrement // increments the value before using it further
+void Bureaucrat::decrementGrade(void)
 {
 	if (this->_grade + 1 > 150)
 		throw GradeTooLowException();
@@ -68,6 +68,6 @@ void Bureaucrat::decrementGrade(void) // pre-decrement // increments the value b
 
 std::ostream& operator << (std::ostream &out, const Bureaucrat &existing)
 {
-	out << existing.getName() << " bureaucrat grade " << existing.getGrade();
+	out << existing.getName() << ", bureaucrat grade " << existing.getGrade();
 	return (out);
 }

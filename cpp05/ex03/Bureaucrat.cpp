@@ -31,22 +31,7 @@ Bureaucrat::~Bureaucrat(void)
 	std::cout << "Bureaucrat destructor called" << std::endl;
 }
 
-//----------Overload operators-------------------
-
-// this->_name is a constant and normally can not be changed. 
-// another option is to change the information at the address of the pointer. 
-// this is a concious method of bypassing the compiler const rule. 
-//		std::string *temp;
-//		temp = (std::string *)&this->_name;
-//		*temp = existing.getName();
-
-Bureaucrat& Bureaucrat::operator =(Bureaucrat const &existing)
-{
-	std::cout << "Bureaucrat copy assignment operator called" << std::endl;
-	if (this != &existing)
-		this->_grade = existing.getGrade();
-	return (*this);
-}
+//------------Overload operators----------------
 
 //-------------Public functions-----------------
 
@@ -69,9 +54,23 @@ void Bureaucrat::signForm(Form &paper)
 		std::cout << this->_name << "couldn't sign " << paper.getName() << " because he ran out of toothpicks." << std::endl;
 }
 
+void Bureaucrat::executeForm(Form const &office)
+{
+	try
+	{
+		office.execute(*this);
+		std::cout << this->_name << " executed " << office.getName() << std::endl;
+
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << "Unable to execute " << office.getName() << " due to weather conditions" << std::endl;
+	}
+}
+
 //-----------Increment/Decrement Operators-------------
 
-void Bureaucrat::incrementGrade(void) // pre-increment // increments the value before using it further
+void Bureaucrat::incrementGrade(void)
 {
 	if (this->_grade - 1 < 1)
 		throw GradeTooHighException();
@@ -79,10 +78,18 @@ void Bureaucrat::incrementGrade(void) // pre-increment // increments the value b
 		this->_grade -= 1;
 }
 
-void Bureaucrat::decrementGrade(void) // pre-decrement // increments the value before using it further
+void Bureaucrat::decrementGrade(void)
 {
 	if (this->_grade + 1 > 150)
 		throw GradeTooLowException();
 	else
 		this->_grade += 1;
+}
+
+//-------------Other Public functions-----------------
+
+std::ostream& operator << (std::ostream &out, const Bureaucrat &existing)
+{
+	out << existing.getName() << ", bureaucrat grade " << existing.getGrade();
+	return (out);
 }

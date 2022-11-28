@@ -81,3 +81,10 @@ void Form::copySigned(bool copy)
 {
 	this->_signed = copy;
 }
+
+std::ostream& operator << (std::ostream& out, const Form& existing)
+{
+	out << "name: " << existing.getName() << ", signed: " << existing.getSigned()
+		<< ", signGrade: " << existing.getSignGrade() << ", executeGrade: " << existing.getExecuteGrade();
+	return (out);
+}

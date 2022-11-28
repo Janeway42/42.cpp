@@ -44,14 +44,14 @@ void Form::beSigned(Bureaucrat &office)
 		this->_signed = true;
 }
 
-bool Form::getSigned(void) const
-{
-	return (this->_signed);
-}
-
 std::string Form::getName(void) const
 {
 	return (this->_name);
+}
+
+bool Form::getSigned(void) const
+{
+	return (this->_signed);
 }
 
 int Form::getSignGrade(void) const

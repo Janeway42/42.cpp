@@ -22,14 +22,12 @@ public:
 	Form(Form const &existing);
 	~Form(void);
 
-
 	void beSigned(Bureaucrat &office);
 
-	bool getSigned(void)const;
 	std::string getName(void)const;
+	bool getSigned(void)const;
 	int getSignGrade(void) const;
 	int getExecuteGrade(void) const;
-
 };
 
 class GradeTooHighException: public std::exception

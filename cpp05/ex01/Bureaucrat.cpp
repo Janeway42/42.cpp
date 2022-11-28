@@ -47,16 +47,20 @@ int Bureaucrat::getGrade(void) const
 
 void Bureaucrat::signForm(Form &paper)
 {
-	paper.beSigned(*this);
-	if (paper.getSigned() == true)
+	try
+	{
+		paper.beSigned(*this);
 		std::cout << this->_name << " signed " << paper.getName() << std::endl;
-	else
-		std::cout << this->_name << "couldn't sign " << paper.getName() << " because he ran out of toothpicks." << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << this->_name << " couldn't sign " << paper.getName() << " because there are no more toothpicks." << std::endl;
+	}
 }
 
 //-----------Increment/Decrement Operators-------------
 
-void Bureaucrat::incrementGrade(void) // pre-increment // increments the value before using it further
+void Bureaucrat::incrementGrade(void)
 {
 	if (this->_grade - 1 < 1)
 		throw GradeTooHighException();
@@ -64,10 +68,18 @@ void Bureaucrat::incrementGrade(void) // pre-increment // increments the value b
 		this->_grade -= 1;
 }
 
-void Bureaucrat::decrementGrade(void) // pre-decrement // increments the value before using it further
+void Bureaucrat::decrementGrade(void)
 {
 	if (this->_grade + 1 > 150)
 		throw GradeTooLowException();
 	else
 		this->_grade += 1;
+}
+
+//-------------Other Public functions-----------------
+
+std::ostream& operator << (std::ostream &out, const Bureaucrat &existing)
+{
+	out << existing.getName() << ", bureaucrat grade " << existing.getGrade();
+	return (out);
 }

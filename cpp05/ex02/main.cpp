@@ -108,7 +108,30 @@ int main(void)
 	{
 		std::cerr << e.what() << '\n';
 	}
+
+	std::cout << "\n------------------------- Bureaucrat execute ----------------------\n\n";
+
+	Bureaucrat N("BORING", 40);
+	Bureaucrat M("TO SIGN", 1);
+	PresidentialPardonForm S("OTHER TARGET");
+	RobotomyRequestForm P("TARGET");
 	std::cout << std::endl;
+
+	try
+	{
+		M.signForm(S);
+		M.signForm(P);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	std::cout << std::endl;
+	N.executeForm(S);
+	std::cout << std::endl;
+	N.executeForm(P);
+	std::cout << std::endl;
+
 
     return (0);
 }

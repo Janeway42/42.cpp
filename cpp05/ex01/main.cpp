@@ -10,11 +10,11 @@ void checkleaks(void)
 int main(void)
 {
     atexit(checkleaks);
-	std::cout << "----------------- Constructors -----------------\n\n" << std::endl;
+	std::cout << "\n----------------- Constructors -----------------\n" << std::endl;
 
 	try
 	{
-		Form *A = new Form("PAPER", 200, 150);
+		Form *A = new Form("PAPER", 50, 175);
 		delete A;
 	}
 	catch(const std::exception& e)
@@ -41,12 +41,13 @@ int main(void)
 	{
 		std::cerr << e.what() << '\n';
 	}	
-	std::cout << std::endl;
 
-	std::cout << "----------------- Sign Form -----------------\n\n" << std::endl;
+	std::cout << "\n----------------- Sign Form -----------------\n" << std::endl;
 
 	Form A("PAPER 1", 100, 150);
 	Bureaucrat *X = new Bureaucrat("OFFICE", 10);
+	std::cout << std::endl;
+
 	try
 	{
 		X->signForm(A);
@@ -58,8 +59,8 @@ int main(void)
 	}
 	delete X;
 
-	Form *C = new Form("RED TAPE",50, 150);
-	Bureaucrat *Y = new Bureaucrat("OFFICE", 100);
+	Form *C = new Form("RED TAPE", 50, 150);
+	Bureaucrat *Y = new Bureaucrat("OFFICEE", 100);
 	try
 	{
 		Y->signForm(*C);
@@ -68,11 +69,12 @@ int main(void)
 	{
 		std::cerr << e.what() << '\n';
 	}
-	delete C;
-	delete Y;
 	std::cout << std::endl;
 
-	std::cout << "----------------- operator << -----------------\n\n" << std::endl;
+	delete C;
+	delete Y;
+
+	std::cout << "\n----------------- operator << -----------------\n" << std::endl;
 
 	Form K("PRINT TEST", 5, 15);
 	std::cout << K << std::endl;

@@ -29,6 +29,7 @@ clean:
 fclean:
 		@rm -f $(OBJ)
 		@rm -f $(NAME)
+		@rm -f *_shrubbery*
 		@echo "fclean done"
 
 re: fclean all

@@ -26,9 +26,9 @@ public:
 	void execute(Bureaucrat const &executor)const;
 	virtual void runForm(int grade)const = 0;
 
+	std::string getName(void)const;
 	bool getSigned(void)const;
 	void copySigned(bool copy);
-	std::string getName(void)const;
 	int getSignGrade(void) const;
 	int getExecuteGrade(void) const;
 

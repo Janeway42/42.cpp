@@ -49,10 +49,7 @@ void ShrubberyCreationForm::runForm(int grade)const
     else
 	{
 	    std::ofstream new_file;
-   		// std::ifstream fs_new;
-
     	new_file.open(this->_target + "_shrubbery", std::ios::out | std::ios::trunc);
-    	// fs_new.open(thsi->_target + "_shrubbery", std::ios::in | std::ios::out | std::ios::app);
 
     	if (new_file)
     	{

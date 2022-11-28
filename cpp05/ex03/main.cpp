@@ -14,8 +14,8 @@ void checkleaks(void)
 
 int main(void)
 {
-
-	std::cout << "\n------------------------- Shrubbery test ----------------------\n\n";
+    atexit(checkleaks);
+	std::cout << "\n------------------------- Make Form ----------------------\n\n";
 
 	Intern newbie;
 	Form* output;
@@ -39,8 +39,17 @@ int main(void)
 
 	output = newbie.makeForm("abc", "practice");
 	delete output;
+
+
+	std::cout << "\n------------------------- Print test ----------------------\n\n";
+
+	Bureaucrat A("NAME", 120);
+	PresidentialPardonForm B("TARGET");
 	std::cout << std::endl;
 
-    atexit(checkleaks);
+	std::cout << A << std::endl;
+	std::cout << B << std::endl;
+	std::cout << std::endl;
+
     return (0);
 }
