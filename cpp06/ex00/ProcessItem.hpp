@@ -6,9 +6,7 @@
 # include <ctype.h>
 # include <cmath>
 # include <iomanip>
-
-// #define std::string specialNAN[] = {"nan", "nanf"}
-// #define std::string specialINF[] = {"inf, inff, -inf, +inf, -inff, +inff"}
+# include <float.h>
 
 int processInput(std::string str);
 int processChar(char c);
@@ -22,7 +20,7 @@ public:
 
 	const char *what() const throw()
 	{
-		return ("Conversion not possible");
+		return ("Conversion failed");
 	}
 };
 

@@ -17,12 +17,26 @@ int processFloat(std::string str)
 	{
 		float temp = stof(str);
 
-		std::cout << "Non displayable" << std::endl;
-		std::cout << "int: " << static_cast<int>(temp);
+		std::cout << "char: Non displayable" << std::endl;
+		if (temp > INT_MAX)
+			std::cout << "int: impossible" << std::endl;
+		else
+			std::cout << "int: " << static_cast<int>(temp) << std::endl;
 		std::cout.precision(3);
 		std::cout << "float: " << std::showpoint << temp << std::endl;
-		std::cout << "double: " << std::showpoint << static_cast<double>(temp) << std::endl;
-	}
+		if (temp > DBL_MAX)
+			std::cout << "double: impossible" << std::endl;
+		else
+			std::cout << "double: " << std::showpoint << static_cast<double>(temp) << std::endl;		
+	}	
+	catch(std::out_of_range const& ex)
+    {
+		std::cout << "char: Non displayable" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: impossible" << std::endl;
+		std::cout << "double: impossible" << std::endl;
+		return (0);
+    }
 	catch(const std::exception& e)
 	{
 		std::cout << "Stof failed" << std::endl;
@@ -43,6 +57,14 @@ int processInt(std::string str)
 		std::cout << "float: " << std::showpoint << static_cast<float>(temp) << "f" << std::endl;
 		std::cout << "double: " << std::showpoint<< static_cast<double>(temp) << std::endl;
 	}
+	catch(std::out_of_range const& ex)
+    {
+		std::cout << "char: Non displayable" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: impossible" << std::endl;
+		std::cout << "double: impossible" << std::endl;
+		return (0);
+    }
 	catch(const std::exception& e)
 	{
 		std::cout << "Stoi failed" << std::endl;
@@ -58,11 +80,22 @@ int processDouble(std::string str)
 		double temp = stod(str);
 
 		std::cout << "char: Non displayable" << std::endl;
-		std::cout << "int: " << static_cast<int>(temp) << std::endl;
+		if (temp > INT_MAX)
+			std::cout << "int: impossible" << std::endl;
+		else
+			std::cout << "int: " << static_cast<int>(temp) << std::endl;
 		std::cout.precision(3);
 		std::cout << "float: " << std::showpoint<< static_cast<float>(temp) << "f" << std::endl;
 		std::cout << "double: " << std::showpoint << temp << std::endl;
 	}
+	catch(std::out_of_range const& ex)
+    {
+		std::cout << "char: Non displayable" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: impossible" << std::endl;
+		std::cout << "double: impossible" << std::endl;
+		return (0);
+    }
 	catch(const std::exception& e)
 	{
 		std::cout << "Stod failed" << std::endl;
@@ -71,29 +104,44 @@ int processDouble(std::string str)
 	return (0);
 }
 
-// int outputNAN(void)
-// {
 
-// }
+int outputNAN(void)
+{
+	std::cout << "char: impossible" << std::endl;
+	std::cout << "int: impossible" << std::endl;
+	std::cout << "float: nanf" << std::endl;
+	std::cout << "double: nan" << std::endl;
+	return (0);
+}
 
-// int comapreSpecials(std::string str, std::string array)
-// {
-// 	std::string specials1[] = {"nan", "nanf"};
+int outputINF(char sign)
+{
+	std::cout << "char: impossible" << std::endl;
+	std::cout << "int: impossible" << std::endl;
+	std::cout << "float: " << sign << "inff" << std::endl;
+	std::cout << "double: " << sign << "inf" << std::endl;
+	return (0);
+}
 
-// 	for(int i = 0; i < array->length(); i++)
-// 	{
-// 		if (str.compare(array[i]) == 0)
-// 			return (1);
-// 	}
-// 	return (0);
-// }
+int compareINF(std::string str, const std::string array[], int size)
+{
+	for (int i = 0; i < size != '\0'; i++)
+	{
+		if (str == array[i])
+			return (0);
+	}
+	return (1);
+}
 
 int processInput(std::string str)
 {
-	// if (compareSpecials(str, specialNAN) == 1)
-	// 	return (outputNAN());
-	// if (compareSpecials(str, specialINF) == 1)
-	// 	return (outputINF());
+	const std::string array1[] = {"nan", "nanf"};
+	const std::string array2[] = {"+inf", "-inf", "+inff", "-inff"};
+
+	if (compareINF(str, array1, 2) == 0)
+		return (outputNAN());
+	if (compareINF(str, array2, 4) == 0)
+		return (outputINF(str[0]));
 
 	//char
 	if (checkChar(str) == 0)
@@ -101,7 +149,7 @@ int processInput(std::string str)
 	else
 	{
 		//float
-		if (str[str.length() - 1] == 'f' || str[str.length() - 1] == 'F')
+		if (checkFloat(str) == 0)
 			return (processFloat(str));
 		//int
 		else if (checkDigit(str) == 0)

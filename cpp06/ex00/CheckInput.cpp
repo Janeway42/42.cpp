@@ -1,5 +1,19 @@
 #include "CheckInput.hpp"
 
+int checkFloat(std::string str)
+{
+	if (str[str.length() - 1] == 'f' || str[str.length() - 1] == 'F')
+	{
+		std::string substrTemp;
+		if (str[0] == '+' || str[0] == '_')
+			substrTemp = str.substr(1, str.length() - 1);
+		if (checkDouble(substrTemp) == 1)
+			return (1);
+		return (0);
+	}
+	return (1);
+}
+
 int checkDouble(std::string str)
 {
 	int dot = 0;
