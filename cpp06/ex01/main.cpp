@@ -1,5 +1,11 @@
 #include "Serialization.hpp"
 
+void checkleaks(void)
+{
+    std::cout << "\n-------------- leaks check --------------------\n\n";
+    system("leaks -q reinterpret");
+}
+
 uintptr_t serialize(Data* ptr)
 {
 	uintptr_t pointer = reinterpret_cast<uintptr_t>(ptr);
@@ -15,6 +21,8 @@ Data* deserialize(uintptr_t raw)
 
 int main(void)
 {
+	atexit(checkleaks);
+
 	Data example;
 	Data *deserializedExample;
 	uintptr_t pointer;
