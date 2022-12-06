@@ -3,12 +3,6 @@
 #include "B.hpp"
 #include "C.hpp"
 
-void checkleaks(void)
-{
-    std::cout << "\n-------------- leaks check --------------------\n\n";
-    system("leaks -q identify");
-}
-
 Base* generate(void)
 {
 	srand(time(0));
@@ -90,7 +84,6 @@ void identify(Base& p)
 
 int main(void)
 {
-	atexit(checkleaks);
 	Base *test = generate();
 
 	identify(test);

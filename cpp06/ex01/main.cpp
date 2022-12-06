@@ -1,10 +1,16 @@
 #include "Serialization.hpp"
 
-void checkleaks(void)
-{
-    std::cout << "\n-------------- leaks check --------------------\n\n";
-    system("leaks -q reinterpret");
-}
+// uintptr_t is an unsigned integer type 
+// with the property that any valid pointer to void can be converted to this type, 
+// then converted back to pointer to void, 
+// and the result will compare equal to the original pointer".
+
+// A pointer to void is a general-purpose pointer 
+// used to hold references to any data type.
+
+// reinterpret_cast is used to convert a pointer of some data type 
+// into a pointer of another data type, even if the data types before and after conversion are different.
+// It does not check if the pointer type and data pointed by the pointer is same or not.
 
 uintptr_t serialize(Data* ptr)
 {
@@ -21,8 +27,6 @@ Data* deserialize(uintptr_t raw)
 
 int main(void)
 {
-	atexit(checkleaks);
-
 	Data example;
 	Data *deserializedExample;
 	uintptr_t pointer;

@@ -7,7 +7,7 @@
 # include <cmath>
 # include <iomanip>
 # include <float.h>
-# include <climits>
+# include <limits>
 
 int processInput(std::string str);
 int processChar(char c);

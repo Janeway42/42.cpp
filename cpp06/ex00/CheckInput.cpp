@@ -1,20 +1,15 @@
 #include "CheckInput.hpp"
 
-int checkFloat(std::string str)
+int checkChar(std::string str)
 {
-	if (str[str.length() - 1] == 'f' || str[str.length() - 1] == 'F')
-	{
-		std::string substrTemp;
-		if (str[0] == '+' || str[0] == '_')
-			substrTemp = str.substr(1, str.length() - 1);
-		if (checkDouble(substrTemp) == 1)
-			return (1);
+	if (str.length() == 1 && isascii((int)str[0]) != 0)
 		return (0);
-	}
 	return (1);
 }
 
-int checkDouble(std::string str)
+// -------------------------------------------------------------
+
+int checkDot(std::string str)
 {
 	int dot = 0;
 
@@ -28,33 +23,52 @@ int checkDouble(std::string str)
 				return (1);
 		}
 	}
-	if (dot != 1)
+	if (dot > 1)
 		return (1);
 	return (0);
 }
 
-int checkDigit(std::string str)
+int checkFloat(std::string str)
 {
-	for (size_t i = 0; i < str.length(); i++)
+	if (str[str.length() - 1] == 'f' || str[str.length() - 1] == 'F')
 	{
-		if (isdigit((int)str[i]) == 0)
+		std::string substrTemp;
+		if (str[0] == '+' || str[0] == '-')
+			substrTemp = str.substr(1, str.length() - 2);
+		else
+			substrTemp = str.substr(0, str.length() - 2);
+		if (checkDot(substrTemp) == 1)
 			return (1);
-	}
-	return (0);
-}
-
-int checkChar(std::string str)
-{
-	if (str.length() == 1 && isalpha((int)str[0]) != 0)
 		return (0);
+	}
 	return (1);
 }
 
-int checkPrintable(std::string str)
+int checkDouble(std::string str)
 {
-	for (size_t i = 0; i < str.length(); i++)
+	std::string substrTemp;
+	if (str[0] == '+' || str[0] == '-')
+		substrTemp = str.substr(1, str.length() - 2);
+	else
+		substrTemp = str.substr(0, str.length() - 2);
+	if (checkDot(substrTemp) == 1)
+		return (1);
+	return (0);
+}
+
+// -------------------------------------------------------------
+
+
+int checkDigit(std::string str)
+{
+	std::string substrTemp;
+	if (str[0] == '+' || str[0] == '-')
+		substrTemp = str.substr(1);
+	else
+		substrTemp = str;
+	for (size_t i = 0; i < substrTemp.length(); i++)
 	{
-		if (isprint((int)str[i]) == 0)
+		if (isdigit((int)substrTemp[i]) == 0)
 			return (1);
 	}
 	return (0);
