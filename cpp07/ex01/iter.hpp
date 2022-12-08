@@ -8,15 +8,18 @@
 template <typename T>
 void display(T elem)
 {
-	std::cout << elem << std::endl;
+	std::cout << elem;;
 }
 
 template <typename Array, typename S, typename element>
-void iter(Array *a, S length, (* function)(element))
+void iter(Array *a, S length, void(* function)(element))
 {
-	for (S i = 0; i < length; i++)
-		(* function)(a[i]);
+	for (S i = 0; i < length - 1; i++)
+	{
+		(*function)(a[i]);
+		std::cout << " ";
+	}
+	std::cout << std::endl;
 }
-
 
 #endif

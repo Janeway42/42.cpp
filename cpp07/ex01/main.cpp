@@ -3,10 +3,11 @@
 int main (void)
 {
 
-	char array1[] = {'A','V','N','U','L','E'};
-	iter(&array1, 6, &display);
+	std::string array1[] = {"Alpha", "Beta", "Gamma", "Delta"};
+	iter(array1, 4, &display<std::string>);
 
-	int array2[] = {9, 8, 7, 6, 5, 4};
-	iter(&array2, 6, &display);
+	int array2[] = {99, 88, 77, 66, 55, 44};
+	iter(array2, 6, &display<int>);
+
 	return (0);
 }

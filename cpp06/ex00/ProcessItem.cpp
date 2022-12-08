@@ -26,12 +26,10 @@ int processInt(std::string str)
 			else
 				std::cout << "char: " << static_cast<unsigned char>(temp) << std::endl;
 		}
-
 		std::cout << "int: " << temp << std::endl;
-		
-		std::cout.precision(4);
-		std::cout << "float: " << std::showpoint << static_cast<float>(temp) << "f" << std::endl;
-		std::cout << "double: " << std::showpoint<< static_cast<double>(temp) << std::endl;
+		std::cout.precision(1);
+		std::cout << "float: "  << std::fixed << std::showpoint << static_cast<float>(temp) << "f" << std::endl;
+		std::cout << "double: " << std::fixed << std::showpoint<< static_cast<double>(temp) << std::endl;
 	}
 	catch(std::out_of_range const& ex)
     {
@@ -68,9 +66,9 @@ int processFloat(std::string str)
 			std::cout << "int: impossible" << std::endl;
 		else
 			std::cout << "int: " << static_cast<int>(temp) << std::endl;
-		std::cout.precision(3);
-		std::cout << "float: " << std::showpoint << temp << "f" << std::endl;
-		std::cout << "double: " << std::showpoint << static_cast<double>(temp) << std::endl;		
+		std::cout.precision(1);
+		std::cout << "float: " << std::fixed << std::showpoint << temp << "f" << std::endl;
+		std::cout << "double: " << std::fixed << std::showpoint << static_cast<double>(temp) << std::endl;		
 	}	
 	catch(std::out_of_range const& ex)
     {
@@ -103,19 +101,16 @@ int processDouble(std::string str)
 			else
 				std::cout << "char: " << static_cast<unsigned char>(temp) << std::endl;
 		}
-			
 		if (temp > INT_MAX || temp < INT_MIN)
 			std::cout << "int: impossible" << std::endl;
 		else
 			std::cout << "int: " << static_cast<int>(temp) << std::endl;
-
-		std::cout.precision(3);
-		if (temp > FLT_MAX || temp < -FLT_MAX)  // between 0 and float min and 0 and negative float min 
+		std::cout.precision(1);
+		if (temp > FLT_MAX || temp < -FLT_MAX)
 			std::cout << "float: impossible" << std::endl;
 		else
-			std::cout << "float: " << std::showpoint << static_cast<float>(temp) << "f" << std::endl;
-		
-		std::cout << "double: " << std::showpoint << temp << std::endl;
+			std::cout << "float: " << std::fixed << std::showpoint << static_cast<float>(temp) << "f" << std::endl;
+		std::cout << "double: " << std::fixed << std::showpoint << temp << std::endl;
 	}
 	catch(std::out_of_range const& ex)
     {

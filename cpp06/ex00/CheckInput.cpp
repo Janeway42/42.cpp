@@ -2,7 +2,7 @@
 
 int checkChar(std::string str)
 {
-	if (str.length() == 1 && isascii((int)str[0]) != 0)
+	if (str.length() == 1 && isascii((int)str[0]) != 0 && isdigit((int) str[0]) == 0)
 		return (0);
 	return (1);
 }
