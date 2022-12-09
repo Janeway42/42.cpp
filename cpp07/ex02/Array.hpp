@@ -25,9 +25,11 @@ class Array
 			std::cout << "constructor with value" << std::endl;
 		}
 
-		Array(const Array &existing): _element(new T[existing.size()]), _size(existing.size())
+		Array(const Array &existing): _element(new T[existing._size]), _size(existing._size)
 		{
 			std::cout << "copy constructor" << std::endl;
+			for (unsigned int i = 0; i < existing._size; i++)
+					_element[i] = existing._element[i];
 		}
 
 		~Array(void)
@@ -42,30 +44,28 @@ class Array
 			if (this != &existing)
 			{
 				delete[] _element;
-				this->_size = existing._size();
-				for (int i = 0; i < existing.size(); i++)
-					_element[i] = existing.getElement()[i];
+				this->_size = existing._size;
+				_element = new T[_size];
+				for (unsigned int i = 0; i < existing._size; i++)
+					_element[i] = existing._element[i];
 			}
 			return (*this);
 		}
 
-		T operator [] (unsigned int index)
+		T& operator [] (unsigned int index)
 		{
+			// std::cout << "test" << std::endl;
 			if (index > _size)
-			{
 				throw IndexOutOfBound();
-				exit(1);
-			}
-			return(_element[index]);		
+			return(_element[index]);	
 		}
 
-
-		unsigned int size(void)
+		unsigned int size(void) const
 		{
 			return (this->_size);
 		}
 
-		T& getElement(void)
+		T* getElement(void)
 		{
 			return (this->_element);
 		}
@@ -74,13 +74,9 @@ class Array
 		{
 			const char * what() const throw()
 			{
-				return ("Grade too low!");
+				return ("Index out of range!");
 			}	 
 		};
-
-
-
-
 
 };
 
