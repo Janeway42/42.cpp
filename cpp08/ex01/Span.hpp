@@ -2,7 +2,20 @@
 #define SPAN_HPP
 
 #include <iostream>
+#include <algorithm>
+#include <numeric>
 #include <vector>
+#include <list>
+
+template <typename T> 
+void printContainer(T element)
+{
+	for (typename T::iterator it = element.begin(); it != element.end(); it++)
+	{
+		std::cout << *it << " "; 
+	}
+	std::cout << std::endl;
+}
 
 class Span
 {
@@ -21,7 +34,19 @@ class Span
 		void addNumber(int newElem);
 		int shortestSpan(void);
 		int longestSpan(void);
-		// void rangeInterators(int element);
+
+		void printStorage(void);
+		int getSize(void);
+		std::vector<int> getStorage(void);
+		
+	template <typename T> 
+	void rangeIterators(T element)
+	{
+		for (typename T::iterator it = element.begin(); it != element.end(); it++)
+		{
+			_storage.push_back(*it);
+		}
+	}
 
 	class OutOfSpaceException: public std::exception
 	{

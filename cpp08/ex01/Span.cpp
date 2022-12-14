@@ -56,15 +56,10 @@ int Span::shortestSpan(void)
 	if (_storage.size() < 2)
 		throw NoSpanException();
 
-	int shortest = _storage[0] - _storage[1];
-	for(size_t i = 0; i < _storage.size() - 1; i++)
-	{
-		for(size_t j = i + 1; i < _storage.size(); j++)
-		{
-			if (_storage[i] - _storage[j] < shortest)
-				shortest = _storage[i] - _storage[j]; 
-		}
-	}
+	std::vector<int> output(_size);
+	std::sort(_storage.begin(), _storage.end());
+	std::adjacent_difference(_storage.begin(), _storage.end(), output.begin());
+	int shortest = *std::min_element(output.begin() + 1, output.end());
 	return (shortest);
 }
 
@@ -73,20 +68,26 @@ int Span::longestSpan(void)
 	if (_storage.size() < 2)
 		throw NoSpanException();
 
-	int shortest = _storage[0] - _storage[1];
-	for(size_t i = 0; i < _storage.size() - 1; i++)
-	{
-		for(size_t j = i + 1; i < _storage.size(); j++)
-		{
-			if (_storage[i] - _storage[j] > shortest)
-				shortest = _storage[i] - _storage[j]; 
-		}
-	}
+	std::sort(_storage.begin(), _storage.end());
+	int shortest = abs(*(_storage.end() - 1) - *_storage.begin());
 	return (shortest);
 }
 
-// void Span::rangeInterators(int element)
-// {
-// 	for (int n : element)
-// 		_storage.push_back(n);
-// }
+void Span::printStorage(void)
+{
+	for (std::vector<int>::iterator it = _storage.begin(); it < _storage.end(); it++)
+	{
+		std::cout << *it << " ";
+	}
+	std::cout << std::endl;
+}
+
+int Span::getSize(void)
+{
+	return (this->_size);
+}
+
+std::vector<int> Span::getStorage(void)
+{
+	return (this->_storage);
+}

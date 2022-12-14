@@ -1,7 +1,6 @@
-NAME = span
+NAME = mutatedStack
 
 SRC =	main.cpp\
-		Span.cpp\
 
 OBJ = $(SRC:%.cpp=%.o)
 
@@ -13,7 +12,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 		$(CPP) $(FLAGS) -o $@ $^
-		@echo "\033[0;31mspan ready\033[0m"
+		@echo "\033[0;31mmutatedStack ready\033[0m"
 
 %.o: %.cpp
 		$(CPP) $(FLAGS) -o $@ -c $<

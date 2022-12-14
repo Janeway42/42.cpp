@@ -10,7 +10,7 @@ int main(void)
 		list.push_back(i);
 	}
 
-	printVector(list);
+	printContainer(list);
 	easyfind(list, 5);
 
 	// string 
@@ -22,7 +22,7 @@ int main(void)
 		list2.push_back(array[i]);
 	}
 
-	printVector(list2);
+	printContainer(list2);
 	easyfind(list2, 453);
 
 	//error

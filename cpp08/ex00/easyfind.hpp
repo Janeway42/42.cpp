@@ -9,30 +9,23 @@
 template <typename T>
 int easyfind(T elem, int x)
 {
-	size_t i;
-	for (i = 0; i < elem.size(); i++)
-	{
-		if (elem[i] == x)
-		{
-			std::cout << "postion of int is " << i + 1 << "th element (counting from 1)\n" << std::endl;
-			return (i + 1);
-		}
-	}
-	if (i == elem.size())
-	{
+	typename T::iterator it;
+	it = std::find(elem.begin(), elem.end(), x);
+	if (it != elem.end())
+		std::cout << "postion of int is " << it - elem.begin() << "th element (counting from 0)\n" << std::endl;
+	else
 		std::cout << "postion of int is no where to be found!" << std::endl;
-		return (-1);
-	}
 	return (0);
 }
 
-template <typename T>
-void printVector(T elem)
+template <typename T> 
+void printContainer(T element)
 {
-	for (size_t i = 0; i < elem.size(); i++)
+	for (typename T::iterator it = element.begin(); it != element.end(); it++)
 	{
-		std::cout << elem[i] << " ";
+		std::cout << *it << " "; 
 	}
 	std::cout << std::endl;
 }
+
 #endif
