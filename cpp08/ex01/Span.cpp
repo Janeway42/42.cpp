@@ -3,7 +3,7 @@
 // --------constructors & destructors -----------
 Span::Span(void):_size(0)
 {
-	std::cout << "default constructor called" << std::endl;
+	std::cout << "Default constructor called" << std::endl;
 }
 
 Span::Span(unsigned int N):_size(N)

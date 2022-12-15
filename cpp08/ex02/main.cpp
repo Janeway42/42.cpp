@@ -30,7 +30,7 @@ int main()
 	}
 	std::cout << std::endl;
 	std::stack<int> s(mstack);  // stack copy constructor 
-	std::cout << "size s: " << s.size() << std::endl;
+	std::cout << "size s (copy): " << s.size() << std::endl;
 	std::cout << "Last added: " << s.top() << std::endl;
 	s.pop();
 	std::cout << "Last added: " << s.top() << std::endl;

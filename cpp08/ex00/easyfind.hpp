@@ -3,8 +3,7 @@
 
 #include <iostream>
 #include <vector>
-#include <string>
-#include <sstream>
+#include <algorithm> 
 
 template <typename T>
 int easyfind(T elem, int x)

@@ -5,7 +5,7 @@ SRC =	main.cpp\
 
 OBJ = $(SRC:%.cpp=%.o)
 
-FLAGS = -Wall -Werror -Wextra -g
+FLAGS = -Wall -Werror -Wextra -std=c++98 -g
 
 CPP = c++
 
