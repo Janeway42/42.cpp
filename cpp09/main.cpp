@@ -2,7 +2,7 @@
 #include <fcntl.h>
 #include <fstream>
 
-int fsCleanUp(std::fstream *fsIn, std::fstream *fsData)
+void fsCleanUp(std::fstream *fsIn, std::fstream *fsData)
 {
 	if ((*fsIn).is_open())
 		fsIn->close();

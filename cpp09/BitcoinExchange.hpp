@@ -5,18 +5,20 @@
 #include <iostream>
 #include <fstream>
 
-typedef struct s_date
+typedef struct s_data
 {
 	std::string day;
 	std::string month;
 	std::string year;
-}				t_date;
+
+
+}				t_data;
 
 class BitcoinExchange
 {
 	private:
-		std::map<t_date, double> input;
-		std::map<t_date, double> database;
+		std::map<std::string, std::string> input;
+		std::map<std::string, std::string> database;
 
 	public:
 
@@ -25,6 +27,7 @@ class BitcoinExchange
 		~BitcoinExchange();
 
 		void runExchange();
+		std::map<std::string, std::string> createMap(std::fstream *fs, std::string separator);
 
 };
 
