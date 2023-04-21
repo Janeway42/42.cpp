@@ -1,24 +1,23 @@
 #ifndef BITCOINEXCHANGE_HPP
 #define BITCOINEXCHANGE_HPP
 
-#include <map>
+#include <vector>
 #include <iostream>
 #include <fstream>
 
-typedef struct s_data
+typedef struct s_date
 {
-	std::string day;
-	std::string month;
-	std::string year;
-
-
-}				t_data;
+	std::string date;
+	int year;
+	int month;
+	int day;
+}		t_date;
 
 class BitcoinExchange
 {
 	private:
-		std::map<std::string, std::string> input;
-		std::map<std::string, std::string> database;
+		std::vector<std::pair<t_date, std::string> > input;
+		std::vector<std::pair<t_date, std::string> > database;
 
 	public:
 
@@ -27,7 +26,8 @@ class BitcoinExchange
 		~BitcoinExchange();
 
 		void runExchange();
-		std::map<std::string, std::string> createMap(std::fstream *fs, std::string separator);
+		std::vector<std::pair<t_date, std::string> > createMap(std::fstream *fs, std::string separator);
+		void findClosest(std::vector<std::pair<t_date, std::string> > *item);
 
 };
 
