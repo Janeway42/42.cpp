@@ -28,6 +28,7 @@ class BitcoinExchange
 		void runExchange();
 		std::vector<std::pair<t_date, std::string> > createMap(std::fstream *fs, std::string separator);
 		void findClosest(std::vector<std::pair<t_date, std::string> > *item);
+		int checkDate(t_date *item);
 
 };
 
