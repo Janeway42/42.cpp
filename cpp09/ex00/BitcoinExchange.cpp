@@ -38,6 +38,7 @@ void BitcoinExchange::runExchange()
 		{
 			try
 			{
+				// A valid value must be either a float or a positive integer between 0 and 1000.
 				double quantity = stod(itInput->second);
 				if (quantity > INT_MAX)
 					std::cout << "Error: too large a number." << std::endl;
