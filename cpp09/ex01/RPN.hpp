@@ -26,6 +26,7 @@ class rpn
 		~rpn();
 
 		int checkToken(std::string token);
+		void runList();
 		void printList();
 
 

@@ -19,15 +19,19 @@ int main(int argc, char **argv)
 		return (1);
 	}
 
-	fs.open(argv[1], std::fstream::in);
-	getline(fs, buffer);
+	// for (int i = 1; argv[i]; i++)
+	// {
+	// 	std::cout << argv[i] << " ";
+	// }
+	// std::cout << std::endl;
+	buffer = argv[1];
 
-	std::cout << "buffer: " << buffer << std::endl;
+	// std::cout << "buffer: " << buffer << std::endl;
 	
 	// if (verifyInput(buffer) == 1)
 	// 	return (1);
 
-	rpn storage;
+	rpn storage(buffer);
 	// storage.runList();
 
 	storage.printList();
