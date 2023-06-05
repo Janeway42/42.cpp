@@ -1,4 +1,13 @@
-#include "PmergeMe.hpp"
+#include <iostream>
+#include <string>
+#include <vector>
+
+void printList(std::vector<int> elem, int start, int end)
+{
+	for (int i = start; i >=start && i <= end; i++)
+		std::cout << elem[i] << " ";
+	std::cout << "\n";
+}
 
 int main(int argc, char **argv)
 {
@@ -13,25 +22,19 @@ int main(int argc, char **argv)
 	{
 		std::cout << argv[i] << " ";
 	}
-	std::cout << "\n";
+	std::cout << "test \n";
 
-	// first container: vector
-	// std::clock_t startList = std::clock();
 	std::vector<int> One;
+	std::cout <<"test\n";
 	for (int i = 1; i < argc; i++)
 	{
+		std::cout << argv[i] << std::endl;
 		std::string tempStr(argv[i]);
+		std::cout << tempStr << std::endl;
 		int temp = std::stoi(tempStr);
 		One.push_back(temp);
-
 	}
-		// One.push_back(*argv[i] - '0');
-	mergeSortList(One, 0, One.size());
 	printList(One, 0, One.size());
-	// time?! 
-
-	// second container: deque
-
 
 	return (0);
 }

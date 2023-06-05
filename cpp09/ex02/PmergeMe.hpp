@@ -1,7 +1,9 @@
 #include <iostream>
 #include <string>
-#include <list>
+#include <vector>
 #include <ctime>
 
-void sortList(std::list<int> &one);
+void mergeSortList(std::vector<int> &one, int start, int end);
+void insertList(std::vector<int> &one, int start, int median, int end);
+void printList(std::vector<int> elem, int start, int end);
 // sortDeque();
