@@ -1,7 +1,7 @@
 NAME = PmergeMe
 
 SRC =	main.cpp\
-		PmergeMe.cpp
+		PmergeMeCopy.cpp
 
 OBJ = $(SRC:%.cpp=%.o)
 

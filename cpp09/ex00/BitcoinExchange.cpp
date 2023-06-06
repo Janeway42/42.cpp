@@ -9,7 +9,7 @@ BitcoinExchange::BitcoinExchange(std::fstream *fsInput, std::fstream *fsCsv)
 	database = createMap(fsCsv, ",");
 	input = createMap(fsInput, "|");
 	// std::cout << "-------------------------- print Input Constructor ---------------------------------\n";
-	// for (std::vector<std::pair<std::string, std::string> >::iterator it = input.begin(); it != input.end(); it++)
+	// for (std::list<std::pair<std::string, std::string> >::iterator it = input.begin(); it != input.end(); it++)
 	// {
 	// 	std::cout << "itInput->first: " << it->first << " itInput->second: " << it->second << std::endl;
 	// }
@@ -22,11 +22,11 @@ BitcoinExchange::~BitcoinExchange(){}
 
 void BitcoinExchange::runExchange()
 {
-	std::vector<std::pair<t_date, std::string> >::iterator itInput;
-	std::vector<std::pair<t_date, std::string> >::iterator itDatabase;
+	std::list<std::pair<t_date, std::string> >::iterator itInput;
+	std::list<std::pair<t_date, std::string> >::iterator itDatabase;
 
 	// std::cout << "-------------------------- print Input ---------------------------------\n";
-	// for (std::vector<std::pair<std::string, std::string> >::iterator it = input.begin(); it != input.end(); it++)
+	// for (std::list<std::pair<std::string, std::string> >::iterator it = input.begin(); it != input.end(); it++)
 	// {
 	// 	std::cout << "itInput->first: " << it->first << " itInput->second: " << it->second << std::endl;
 	// }
@@ -34,13 +34,14 @@ void BitcoinExchange::runExchange()
 
 	for (itInput = input.begin(); itInput != input.end(); itInput++)
 	{
+		// std::cout << "input: " << itInput->second << std::endl;
 		if (itInput->second != "") //  || itInput->first.date != ""
 		{
 			try
 			{
 				// A valid value must be either a float or a positive integer between 0 and 1000.
 				double quantity = stod(itInput->second);
-				if (quantity > INT_MAX)
+				if (quantity > INT_MAX || quantity > 1000)
 					std::cout << "Error: too large a number." << std::endl;
 				else if (quantity < 0)
 					std::cout << "Error: not a positive number.\n";
@@ -64,7 +65,7 @@ void BitcoinExchange::runExchange()
 							std::cout << "Error: Invalid date\n";
 						else 
 						{
-							std::vector<std::pair<t_date, std::string> > temp;
+							std::list<std::pair<t_date, std::string> > temp;
 							temp.push_back(make_pair(itInput->first, itInput->second));
 							findClosest(&temp);
 						}
@@ -90,9 +91,9 @@ void BitcoinExchange::runExchange()
 
 
 
-void BitcoinExchange::findClosest(std::vector<std::pair<t_date, std::string> > *item)
+void BitcoinExchange::findClosest(std::list<std::pair<t_date, std::string> > *item)
 {
-	std::vector<std::pair<t_date, std::string> >::iterator itDatabase = database.begin();	
+	std::list<std::pair<t_date, std::string> >::iterator itDatabase = database.begin();	
 
 	for (; itDatabase != database.end() && itDatabase->first.year <= item->front().first.year; itDatabase++){
 		if (item->front().first.year == itDatabase->first.year)
@@ -155,10 +156,10 @@ void BitcoinExchange::findClosest(std::vector<std::pair<t_date, std::string> > *
 	}
 }
 
-std::vector<std::pair<t_date, std::string> > BitcoinExchange::createMap(std::fstream *fs, std::string separator)
+std::list<std::pair<t_date, std::string> > BitcoinExchange::createMap(std::fstream *fs, std::string separator)
 {
 	std::string buffer;
-	std::vector <std::pair<t_date, std::string> > dest;
+	std::list <std::pair<t_date, std::string> > dest;
 
 	getline((*fs), buffer);
 	while (!(*fs).eof())
@@ -176,22 +177,27 @@ std::vector<std::pair<t_date, std::string> > BitcoinExchange::createMap(std::fst
 			out = buffer.find(separator);
 			// std::cout << "out: " << out << std::endl;
 			temp.date = buffer.substr(0, out);
+			// std::cout << "temp.date: " << temp.date << "|" << std::endl;
 
 			int len = 0;		
 			for (int i = temp.date.length(); temp.date[i - 1] == ' '; i--){
 				len++;}
 			temp.date = temp.date.substr(0, temp.date.length() - len);
-			try 
-			{
-				temp.year = stoi(temp.date.substr(0,4));
-				temp.month = stoi(temp.date.substr(5,7));
-				temp.day = stoi(temp.date.substr(8,10));
-			}
-			catch(std::invalid_argument const& ex)
-			{
-				// std::cout << "#1: " << ex.what() << '\n';
-			}
+			// std::cout << "temp.date: " << temp.date << "|" << std::endl;
 
+			if (temp.date != "")
+			{
+				try 
+				{
+					temp.year = stoi(temp.date.substr(0,4));
+					temp.month = stoi(temp.date.substr(5,7));
+					temp.day = stoi(temp.date.substr(8,10));
+				}
+				catch(std::invalid_argument const& ex)
+				{
+					std::cout << ex.what() << '\n';
+				}
+			}
 
 			if (out == std::string::npos)
 				val = "";
@@ -204,7 +210,7 @@ std::vector<std::pair<t_date, std::string> > BitcoinExchange::createMap(std::fst
 	}
 
 	// std::cout << "-------------------------- print Input createMap ---------------------------------\n";
-	// for (std::vector<std::pair<std::string, std::string> >::iterator it = dest.begin(); it != dest.end(); it++)
+	// for (std::list<std::pair<std::string, std::string> >::iterator it = dest.begin(); it != dest.end(); it++)
 	// {
 	// 	std::cout << "itInput->first: " << it->first << " itInput->second: " << it->second << std::endl;
 	// }
@@ -215,11 +221,29 @@ std::vector<std::pair<t_date, std::string> > BitcoinExchange::createMap(std::fst
 
 int BitcoinExchange::checkDate(t_date *item)
 {
-	if ((*item).year == -55 || (*item).month == -55 || (*item).day == -55)
+	int year = (*item).year;
+	int month = (*item).month;
+	int day = (*item).day;
+
+	if (year == -55 || month == -55 || day == -55)
 		return (1);
-	if ((*item).month < 1 || (*item).month > 12)
+	if (month < 1 || month > 12)
 		return (1);
-	if ((*item).day < 1 || (*item).day > 31)
-		return (1);
+
+	if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))
+	{
+		if (day < 1 && day > 29)
+			return (1);
+	}
+	else if ((month > 8 && month % 2 != 0) || (month < 7 && month % 2 == 0)) // 4 6  9 11
+	{
+		if (day < 1 && day > 30)
+			return (1);
+	}
+	else if ((month > 7 && month % 2 == 0) || (month < 8 && month % 2 != 0)) // 1 3 5 7  8 10 12
+	{
+		if (day < 1 && day > 31)
+			return (1);
+	}
 	return (0);
 }

@@ -9,7 +9,7 @@ BitcoinExchange::BitcoinExchange(std::fstream *fsInput, std::fstream *fsCsv)
 	database = createMap(fsCsv, ",");
 	input = createMap(fsInput, "|");
 	// std::cout << "-------------------------- print Input Constructor ---------------------------------\n";
-	// for (std::list<std::pair<std::string, std::string> >::iterator it = input.begin(); it != input.end(); it++)
+	// for (std::vector<std::pair<std::string, std::string> >::iterator it = input.begin(); it != input.end(); it++)
 	// {
 	// 	std::cout << "itInput->first: " << it->first << " itInput->second: " << it->second << std::endl;
 	// }
@@ -22,11 +22,11 @@ BitcoinExchange::~BitcoinExchange(){}
 
 void BitcoinExchange::runExchange()
 {
-	std::list<std::pair<t_date, std::string> >::iterator itInput;
-	std::list<std::pair<t_date, std::string> >::iterator itDatabase;
+	std::vector<std::pair<t_date, std::string> >::iterator itInput;
+	std::vector<std::pair<t_date, std::string> >::iterator itDatabase;
 
 	// std::cout << "-------------------------- print Input ---------------------------------\n";
-	// for (std::list<std::pair<std::string, std::string> >::iterator it = input.begin(); it != input.end(); it++)
+	// for (std::vector<std::pair<std::string, std::string> >::iterator it = input.begin(); it != input.end(); it++)
 	// {
 	// 	std::cout << "itInput->first: " << it->first << " itInput->second: " << it->second << std::endl;
 	// }
@@ -64,7 +64,7 @@ void BitcoinExchange::runExchange()
 							std::cout << "Error: Invalid date\n";
 						else 
 						{
-							std::listr<std::pair<t_date, std::string> > temp;
+							std::vector<std::pair<t_date, std::string> > temp;
 							temp.push_back(make_pair(itInput->first, itInput->second));
 							findClosest(&temp);
 						}
@@ -90,9 +90,9 @@ void BitcoinExchange::runExchange()
 
 
 
-void BitcoinExchange::findClosest(std::list<std::pair<t_date, std::string> > *item)
+void BitcoinExchange::findClosest(std::vector<std::pair<t_date, std::string> > *item)
 {
-	std::list<std::pair<t_date, std::string> >::iterator itDatabase = database.begin();	
+	std::vector<std::pair<t_date, std::string> >::iterator itDatabase = database.begin();	
 
 	for (; itDatabase != database.end() && itDatabase->first.year <= item->front().first.year; itDatabase++){
 		if (item->front().first.year == itDatabase->first.year)
@@ -155,10 +155,10 @@ void BitcoinExchange::findClosest(std::list<std::pair<t_date, std::string> > *it
 	}
 }
 
-std::list<std::pair<t_date, std::string> > BitcoinExchange::createMap(std::fstream *fs, std::string separator)
+std::vector<std::pair<t_date, std::string> > BitcoinExchange::createMap(std::fstream *fs, std::string separator)
 {
 	std::string buffer;
-	std::list <std::pair<t_date, std::string> > dest;
+	std::vector <std::pair<t_date, std::string> > dest;
 
 	getline((*fs), buffer);
 	while (!(*fs).eof())
@@ -204,7 +204,7 @@ std::list<std::pair<t_date, std::string> > BitcoinExchange::createMap(std::fstre
 	}
 
 	// std::cout << "-------------------------- print Input createMap ---------------------------------\n";
-	// for (std::list<std::pair<std::string, std::string> >::iterator it = dest.begin(); it != dest.end(); it++)
+	// for (std::vector<std::pair<std::string, std::string> >::iterator it = dest.begin(); it != dest.end(); it++)
 	// {
 	// 	std::cout << "itInput->first: " << it->first << " itInput->second: " << it->second << std::endl;
 	// }

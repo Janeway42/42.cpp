@@ -1,7 +1,7 @@
 #ifndef BITCOINEXCHANGE_HPP
 #define BITCOINEXCHANGE_HPP
 
-#include <list>
+#include <vector>
 #include <iostream>
 #include <fstream>
 
@@ -16,8 +16,8 @@ typedef struct s_date
 class BitcoinExchange
 {
 	private:
-		std::list<std::pair<t_date, std::string> > input;
-		std::list<std::pair<t_date, std::string> > database;
+		std::vector<std::pair<t_date, std::string> > input;
+		std::vector<std::pair<t_date, std::string> > database;
 
 	public:
 
@@ -26,8 +26,8 @@ class BitcoinExchange
 		~BitcoinExchange();
 
 		void runExchange();
-		std::list<std::pair<t_date, std::string> > createMap(std::fstream *fs, std::string separator);
-		void findClosest(std::list<std::pair<t_date, std::string> > *item);
+		std::vector<std::pair<t_date, std::string> > createMap(std::fstream *fs, std::string separator);
+		void findClosest(std::vector<std::pair<t_date, std::string> > *item);
 		int checkDate(t_date *item);
 
 };

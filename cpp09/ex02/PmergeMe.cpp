@@ -1,35 +1,55 @@
 #include "PmergeMe.hpp"
 
-void mergeSortList(std::vector<int> &one, int start, int end)
+void splitList(std::vector<int> &one, int start, int end)
 {
+	// std::cout << "start: " << start << " | end: " << end << std::endl;
+	// if (start < end)
+	// {
+	// 	int median = (start + end) / 2;
+	// 	std::cout << "median: " << median << " median value: " << one[median] << "\n";
+	// 	splitList(one, start, median);
+	// 	splitList(one, median + 1, end);
+	// 	mergeInsertList(one, start, median, end);
+	// 	// printList(one, start, end);
+	// }
+
 	std::cout << "start: " << start << " | end: " << end << std::endl;
-	if (start < end)
+	int median = (start + end) / 2;
+	if (end - start >  1)
 	{
-		int median = (start + end) / 2;
-		std::cout << "median: " << median << "\n";
-		mergeSortList(one, start, median);
-		mergeSortList(one, median + 1, end);
-		insertList(one, start, median, end);
-		printList(one, start, end);
+		std::cout << "median: " << median << " median value: " << one[median] << "\n";
+		splitList(one, start, median);
+		splitList(one, median + 1, end);
+		// printList(one, start, end);
 	}
+	else
+		mergeInsertList(one, start, median, end);
+
 }
 
-void insertList(std::vector<int> &one, int start, int median, int end)
+void mergeInsertList(std::vector<int> &one, int start, int median, int end)
 {
 	int size1 = median - start + 1;
 	int size2 = end - median;	
 
-	std::vector<int> left(one.begin(), one.begin() + median + 1);
-	std::vector<int> right(one.begin() + median + 1, one.begin() + end + 1);
+	std::cout << "size1: " << size1 << " | size2: " << size2 << " ---------------------------------------------------------\n" << std::endl;
 
-	std::cout<< "left: " << left.size() << " | ";
+	int i = 0;
+	std::vector<int> left;
+	for (; i < size1; i++)
+		left.push_back(one[i]);
+	std::vector<int> right;
+	for (; i <= end; i++)
+		right.push_back(one[i]);
+
+	std::cout<< "left size: " << left.size() << " | left itself: ";
 	printList(left, 0, left.size());
 	std::cout << std::endl;
 	std::cout<< "right: ";
 	printList(right, 0, right.size());
 	std::cout << std::endl;
 
-	int i = 0;
+	i = 0;
 	int j = 0;
 	int k = 0;
 
@@ -54,7 +74,8 @@ void insertList(std::vector<int> &one, int start, int median, int end)
 
 void printList(std::vector<int> elem, int start, int end)
 {
-	for (int i = start; i >=start && i <= end; i++)
+	std::cout << "\nprint ends: start: " << start << " end: " << end << std::endl;
+	for (int i = start; i >=start && i < end; i++)
 		std::cout << elem[i] << " ";
 	std::cout << "\n";
 }
