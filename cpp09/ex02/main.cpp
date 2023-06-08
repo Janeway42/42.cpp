@@ -13,17 +13,41 @@ int main(int argc, char **argv)
 		std::cout << argv[i] << " ";
 	std::cout << "\n";
 
+	for (int i = 1; i < argc; i++)
+	{
+		std::string temp(argv[i]);
+		for (std::string::iterator it = temp.begin(); it != temp.end(); it++)
+		{
+			if (*it < 48 || *it > 57)
+			{
+				std::cout << "Error: wrong input\n";
+				return (0);
+			}
+		}
+	}
+
 	// first container: vector
 	std::clock_t startVector = std::clock();
 	std::vector<unsigned long> One;
 	for (int i = 1; i < argc; i++)
 	{
 		std::string tempStr(argv[i]);
-		unsigned long temp = std::stol(tempStr);
-		if (temp < 0)
-			std::cout << "Error: not a positive integer\n";
-		One.push_back(temp);
+		unsigned long temp;
+		try
+		{
+			temp = std::strtoul(argv[i], NULL, 0);
+			if (temp > INT_MAX)
+			{
+				std::cout << "Error: not an integer\n";
+				return (0);
+			}
+		}
+		catch (const std::exception& e)
+		{
+			std::cout << "Error: Failed stol!\n";
+		}
 
+		One.push_back(temp);
 	}
 	sort(One, 0, One.size() - 1);
 	std::clock_t	endVector = std::clock();
@@ -36,9 +60,20 @@ int main(int argc, char **argv)
 	std::deque<unsigned long> Two;
 	for (int j = 1; j < argc; j++)
 	{
-		unsigned long temp = std::strtoul(argv[j], NULL, 0);
-		if (temp < 0)
-			std::cout << "Error: not a positive integer\n";
+		unsigned long temp;
+		try
+		{
+			temp = std::strtoul(argv[j], NULL, 0);
+			if (temp > INT_MAX)
+			{
+				std::cout << "Error: not an integer\n";
+				return (0);
+			}
+		}
+		catch(const std::exception& e)
+		{
+			std::cout << "Error: Failed stol!\n";
+		}
 		Two.push_back(temp);
 	}
 

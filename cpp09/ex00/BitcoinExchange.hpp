@@ -23,12 +23,16 @@ class BitcoinExchange
 
 		BitcoinExchange();
 		BitcoinExchange(std::fstream *fsInput, std::fstream *fsCsv);
+		BitcoinExchange(const BitcoinExchange& existing);
 		~BitcoinExchange();
 
 		void runExchange();
 		std::list<std::pair<t_date, std::string> > createMap(std::fstream *fs, std::string separator);
 		void findClosest(std::list<std::pair<t_date, std::string> > *item);
 		int checkDate(t_date *item);
+
+		std::list<std::pair<t_date, std::string> > getInput() const;
+		std::list<std::pair<t_date, std::string> > getDatabase() const;
 
 };
 

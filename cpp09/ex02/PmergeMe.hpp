@@ -4,8 +4,9 @@
 #include <deque>
 #include <ctime>
 
-#define limit 5
+#define min_size 5
 
+// Step 3: merge the two small containers after they have been sorted 
 template <typename T>
 void merge(T &elem, int start, int median, int end)
 {
@@ -48,6 +49,7 @@ void merge(T &elem, int start, int median, int end)
 	}
 }
 
+// Step 2: sort and insert the smallest containers resulted from "sort"
 template <typename T>
 void insertionSort(T &elem, int start, int end)
 {
@@ -64,10 +66,11 @@ void insertionSort(T &elem, int start, int end)
 	}
 }
 
+// Step 1: divide the given n elements of the container into (n/min_size) groups of each group of size min_size
 template <typename T>
 void sort(T &elem, int start, int end)
 {
-	if (end - start > limit)
+	if (end - start > min_size)
 	{
 		int median = (start + end) / 2;
 		sort(elem, start, median);

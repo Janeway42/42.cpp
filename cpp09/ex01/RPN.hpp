@@ -2,6 +2,7 @@
 #define BITCOINEXCHANGE_HPP
 
 #include <stack>
+#include <vector>
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -9,26 +10,25 @@
 class rpn
 {
 	private:
-		std::stack <int> _numbers;
 		std::string _input;
 
 	public:
 
 		rpn();
 		rpn(std::string input);
+		rpn(const rpn& existing);
 		~rpn();
 
-		// int checkToken(std::string token);
-		void runStack();
-		void operation(int pos);
-		// void printList();
+		rpn& operator = (const rpn& existing);
 
-		// --------------------
-		std::string	spaceCleanup(std::string input);
-		void	checkInput();
+		void runStack();
+		void operation(std::stack <int> &numbers, int pos);
+
+		std::string	checkInput(std::string input);
 		int		checkOperand(char c);
 		int		checkChar(char c);
 
+		std::string getInput() const;
 
 		class rpnBadInput: public std::exception
 		{

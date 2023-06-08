@@ -5,68 +5,50 @@
 rpn::rpn()
 {
 	std::string input = "";
-	_input = spaceCleanup(input);
-	checkInput();
+	_input = checkInput(input);
 }
 
 rpn::rpn(std::string input)
 {
-	_input = spaceCleanup(input);
-	checkInput();
+	_input = checkInput(input);
+}
+
+rpn::rpn(const rpn& existing)
+{
+	_input = existing.getInput();
+}
+
+rpn& rpn::operator = (const rpn& existing)
+{
+	if (this != &existing)
+		_input = existing.getInput();
+	return(*this);
 }
 
 // ------------------ Input Functions ------------------
 
-std::string rpn::spaceCleanup(std::string input)
+std::string rpn::checkInput(std::string input)
 {
-	std::cout << "input: |" << input << "|" << std::endl;
-
-	int size = input.size();
-	int i = 0;
-	int j = 0;
-
-	for (; input[i] == ' '; i++){}
-	for (; input[(size - 1) - j] == ' '; j++){}
-
-	std::string temp = input.substr(i, size - i - j);
-	// std::cout << "temp: |" << temp << "|" << std::endl;
-
-	return (temp);
-}
-
-void rpn::checkInput()
-{
-	std::cout << "input: |" << _input << "|" << std::endl;
-	if (_input.size() == 1 && checkChar(_input[0]) == 1)
-		return ;
-	if (checkChar(_input[0]) == 0 || checkChar(_input[2]) == 0)
+	if (input.size() == 1 && checkChar(input[0]) == 1)
+		return (input);
+	if (checkChar(input[0]) == 0 || checkChar(input[2]) == 0)
 	{
 		std::cout << "Baaaaad input\n";
-		throw rpnBadInput();
 	}
-	for (int i = 0; _input[i] != '\0'; i++)
+	for (int i = 0; input[i] != '\0'; i++)
 	{
-		// std::cout << "i = " << i << std::endl;
-
-		if (checkChar(_input[i]) == 1 && _input[i + 1] != ' ')  // if number and not space after 
-		{
-			std::cout << "one\n";
+		if (checkChar(input[i]) == 1 && input[i + 1] != ' ')  // if number and not space after 
 			throw rpnBadInput();
-		}
-		else if (checkOperand(_input[i]) == 1 && (_input[i + 1] != ' ' && _input[i + 1] != '\0'))
-		{
-			std::cout << "two\n";
+		else if (checkOperand(input[i]) == 1 && (input[i + 1] != ' ' && input[i + 1] != '\0'))
 			throw rpnBadInput();
-		}
-		if (_input[i + 1] == '\0')
-			return ;
-
+		if (input[i + 1] == '\0')
+			break ;
 	}
+	return (input);
 }
 
 int rpn::checkChar(char c)
 {
-	// std::cout << "char checkChar: " << c << std::endl;
 	if (c > 47 && c < 58)
 		return (1);
 	return (0);
@@ -85,16 +67,16 @@ int rpn::checkOperand(char c)
 
 // ------------------ Run functions ------------------
 
-void rpn::operation(int pos)
+void rpn::operation(std::stack <int> &numbers, int pos)
 {
 	int one;
 	int two;
 	int tempRes = 0;
 
-	one = _numbers.top();
-	_numbers.pop();
-	two = _numbers.top();
-	_numbers.pop();
+	one = numbers.top();
+	numbers.pop();
+	two = numbers.top();
+	numbers.pop();
 			
 	if (_input[pos] == '+')
 		tempRes = two + one;
@@ -104,12 +86,12 @@ void rpn::operation(int pos)
 		tempRes = two * one;
 	else if (_input[pos] == '/')
 		tempRes = two / one;
-	_numbers.push(tempRes);
-	// std::cout << "tempRes: " << tempRes << std::endl;
+	numbers.push(tempRes);
 }
 
 void rpn::runStack()
 {
+	std::stack <int> numbers;
 	if (_input.size() == 1)
 	{
 		std::cout << _input << std::endl;
@@ -119,32 +101,36 @@ void rpn::runStack()
 	{
 		for (; checkChar(_input[i]) == 1; i += 2)
 		{
-			// std::cout << "i runStack: " << i << std::endl;
 			try
 			{
 				std::string tempStr = &_input[i];
 				int tempInt = stoi(tempStr);
-				// std::cout << "tempInt: " << tempInt << std::endl;
-				_numbers.push(tempInt);
+				numbers.push(tempInt);
 			}
 			catch(const std::exception& e)
 			{
 				std::cerr << e.what() << '\n';
 			}
 		}
-		// std::cout << "runStack point: " << _input[i] << std::endl;
 	
 		if (_input[i + 1] == ' ')
-			operation(i);
+			operation(numbers, i);
 		else if (_input[i + 1] == '\0')
 		{
-			while (_numbers.size() != 1)
-				operation(i);
+			while (numbers.size() != 1)
+				operation(numbers, i);
 		}
 	}
-	std::cout << "output: " << _numbers.top() << std::endl; 
+	std::cout << "output: " << numbers.top() << std::endl; 
 }
 
 // -------------------- Destructors -------------------
 
 rpn::~rpn(){}
+
+// -------------------- Getters -------------------
+
+std::string rpn::getInput() const
+{
+	return (_input);
+}
