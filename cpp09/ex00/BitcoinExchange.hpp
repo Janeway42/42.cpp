@@ -26,6 +26,8 @@ class BitcoinExchange
 		BitcoinExchange(const BitcoinExchange& existing);
 		~BitcoinExchange();
 
+		BitcoinExchange& operator = (const BitcoinExchange &existing);
+
 		void runExchange();
 		std::list<std::pair<t_date, std::string> > createMap(std::fstream *fs, std::string separator);
 		void findClosest(std::list<std::pair<t_date, std::string> > *item);
