@@ -1,5 +1,7 @@
 #include "PmergeMe.hpp"
 
+// make re && ./PmergeMe `jot -r 20 1 100 | tr '\n' ' ' `
+
 int main(int argc, char **argv)
 {
 	if (argc == 1)
@@ -53,7 +55,7 @@ int main(int argc, char **argv)
 	std::clock_t	endVector = std::clock();
 	long double		timeVector = 1000.0 * (endVector - startVector) / CLOCKS_PER_SEC;
 	printContainer(One);
-	std::cout << "Time to process a range of " << argc - 1 << " elements with std::vector: " << timeVector << " us"<< std::endl;
+	std::cout << "\nTime to process a range of " << argc - 1 << " elements with std::vector: " << timeVector << " us"<< std::endl;
 
 	// second container: deque
 	std::clock_t startDeque = std::clock();

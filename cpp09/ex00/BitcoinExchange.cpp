@@ -18,9 +18,9 @@ BitcoinExchange& BitcoinExchange:: operator = (const BitcoinExchange &existing)
 {
 	if (this != &existing)
 	{
-		for (std::list<std::pair<t_date, std::string>>::iterator it = existing.getInput().begin(); it != existing.getInput().end(); it++)
+		for (std::list<std::pair<t_date, std::string> >::iterator it = existing.getInput().begin(); it != existing.getInput().end(); it++)
 			input.push_back(make_pair(it->first, it->second));
-		for (std::list<std::pair<t_date, std::string>>::iterator it = existing.getDatabase().begin(); it != existing.getDatabase().end(); it++)
+		for (std::list<std::pair<t_date, std::string> >::iterator it = existing.getDatabase().begin(); it != existing.getDatabase().end(); it++)
 			database.push_back(make_pair(it->first, it->second));
 	}
 	return (*this);
