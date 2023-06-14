@@ -13,7 +13,7 @@ int main(int argc, char **argv)
 	std::cout << "Before:	";
 	for (int i = 1; i < argc; i++ )
 		std::cout << argv[i] << " ";
-	std::cout << "\n";
+	std::cout << "\n\n";
 
 	for (int i = 1; i < argc; i++)
 	{
@@ -55,7 +55,7 @@ int main(int argc, char **argv)
 	std::clock_t	endVector = std::clock();
 	long double		timeVector = 1000.0 * (endVector - startVector) / CLOCKS_PER_SEC;
 	printContainer(One);
-	std::cout << "\nTime to process a range of " << argc - 1 << " elements with std::vector: " << timeVector << " us"<< std::endl;
+	std::cout << "\nTime to process a range of " << argc - 1 << " elements with std::vector: " << timeVector << " us\n\n";
 
 	// second container: deque
 	std::clock_t startDeque = std::clock();
@@ -83,6 +83,6 @@ int main(int argc, char **argv)
 	std::clock_t	endDeque = std::clock();
 	long double		timeDeque = 1000.0 * (endDeque - startDeque) / CLOCKS_PER_SEC;
 	printContainer(Two);
-	std::cout << "Time to process a range of " << argc - 1 << " elements with std::deque: " << timeDeque << " us" << std::endl;
+	std::cout << "\nTime to process a range of " << argc - 1 << " elements with std::deque: " << timeDeque << " us\n\n";
 	return (0);
 }
