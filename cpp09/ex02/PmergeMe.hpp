@@ -6,6 +6,18 @@
 
 #define min_size 5
 
+void printContainer(std::vector<int> elem);
+void merge(std::vector<int> &elem, int start, int median, int end);
+void insertionSort(std::vector<int> &elem, int start, int end);
+void sort(std::vector<int> &elem, int start, int end);
+
+void printContainer(std::deque<int> elem);
+void merge(std::deque<int> &elem, int start, int median, int end);
+void insertionSort(std::deque<int> &elem, int start, int end);
+void sort(std::deque<int> &elem, int start, int end);
+
+
+
 template <typename T>
 void printContainer(T elem)
 {

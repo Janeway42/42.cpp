@@ -10,9 +10,7 @@ BitcoinExchange::BitcoinExchange(std::fstream *fsInput, std::fstream *fsCsv)
 	input = createMap(fsInput, "|");
 }
 
-BitcoinExchange::BitcoinExchange(const BitcoinExchange &existing): input(existing.getInput()), database(existing.getDatabase())
-{
-}
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &existing): input(existing.getInput()), database(existing.getDatabase()){}
 
 BitcoinExchange& BitcoinExchange:: operator = (const BitcoinExchange &existing)
 {
@@ -35,6 +33,11 @@ void BitcoinExchange::runExchange()
 	std::list<std::pair<t_date, std::string> >::iterator itInput;
 	std::list<std::pair<t_date, std::string> >::iterator itDatabase;
 
+	if (input.size() == 0)
+	{
+		std::cout << "Empty file. Nothing to process!\n";
+		return ;
+	}
 	for (itInput = input.begin(); itInput != input.end(); itInput++)
 	{
 		if (itInput->second != "" && itInput->first.date != "")
@@ -77,7 +80,7 @@ void BitcoinExchange::runExchange()
 		}
 		else
 		{
-			std::cout << "Error bad input => ";
+			std::cout << "Error: bad input => ";
 			if (itInput->first.date != "")
 				std::cout << itInput->first.date;
 			std::cout << std::endl;
@@ -95,7 +98,7 @@ void BitcoinExchange::findClosest(std::list<std::pair<t_date, std::string> > *it
 	}
 	if (itDatabase == database.begin())
 	{
-		std::cout << "ERROR\n";
+		std::cout << "Error: value unavailable/no value before to select from.\n";
 		return ;
 	}
 	else if (itDatabase == database.end())
@@ -146,9 +149,13 @@ std::list<std::pair<t_date, std::string> > BitcoinExchange::createMap(std::fstre
 	std::list <std::pair<t_date, std::string> > dest;
 
 	getline((*fs), buffer);
+	while (buffer == "date | value" || buffer == "date,exchange_rate")
+		getline((*fs), buffer);
+
+	std::cout << "buffer: " << buffer << std::endl;
+
 	while (!(*fs).eof())
 	{
-		getline((*fs), buffer);
 		if (buffer != "")
 		{
 			t_date temp;
@@ -185,6 +192,7 @@ std::list<std::pair<t_date, std::string> > BitcoinExchange::createMap(std::fstre
 				val = buffer.substr(out + 1);
 			dest.push_back(make_pair(temp, val));
 		}
+		getline((*fs), buffer);
 	}
 	return (dest);
 }

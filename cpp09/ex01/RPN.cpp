@@ -29,21 +29,60 @@ rpn& rpn::operator = (const rpn& existing)
 
 std::string rpn::checkInput(std::string input)
 {
-	if (input.size() == 1 && checkChar(input[0]) == 1)
-		return (input);
-	if (checkChar(input[0]) == 0 || checkChar(input[2]) == 0)
+	// remove front and back spaces 
+	int start = 0;
+	int end = 0;
+	for (; input[start] == ' '; start++){}
+	for(end = input.size() - 1; input[end] == ' '; end--){}
+	input = input.substr(start, end + 1);
+
+	// if only one character 
+	if (input.size() == 1)
 	{
-		std::cout << "Baaaaad input\n";
+		if (isdigit(input[0]) != 0)
+			return (input);
+		else 
+			throw BadInput("size input == 1 but not a digit");
 	}
+
+	// check characters tokens and space 
+	size_t token = 0;
+	std::string allowed = "+-*/ ";
 	for (int i = 0; input[i] != '\0'; i++)
 	{
-		if (checkChar(input[i]) == 1 && input[i + 1] != ' ')  // if number and not space after 
-			throw rpnBadInput();
-		else if (checkOperand(input[i]) == 1 && (input[i + 1] != ' ' && input[i + 1] != '\0'))
-			throw rpnBadInput();
-		if (input[i + 1] == '\0')
-			break ;
+		token = allowed.find(input[i]);
+		if (token == std::string::npos && isdigit(input[i]) == 0)
+			throw BadInput("character not allowed");
 	}
+
+	// check nr of tokens versus nr of digits 
+	if (isdigit(input[0]) == 0 || isdigit(input[2] == 0))
+		throw rpnBadInput();
+	int digits = 0;
+	int tokens = 0;
+	std::string tokensAllowed = "+-*/";
+	for (int i = 0; input[i] != '\0'; i++)
+	{
+		if (isdigit(input[i]) != 0)
+		{
+			if (input[i + 1] != ' ')
+				throw BadInput("wrong input after digit");;
+			digits++;
+		}
+		else if (tokensAllowed.find(input[i]) != std::string::npos)
+		{
+			if (input[i + 1] != ' ' && input[i + 1] != '\0')
+				throw BadInput("wrong input after token");
+			tokens++;
+		}
+		else if (input[i] == ' ')
+		{
+			if (isdigit(input[i + 1]) == 0 && tokensAllowed.find(input[i + 1]) == std::string::npos)
+				throw BadInput("wrong input after space");
+		}
+	}
+	if (digits - 1 != tokens)
+		throw BadInput("wrong ratio tokens to digits");
 	return (input);
 }
 
@@ -56,10 +95,9 @@ int rpn::checkChar(char c)
 
 int rpn::checkOperand(char c)
 {
-	std::string operands = "+-*/";
-	for (int i = 0; operands[i] != '\0'; i++)
+	for (int i = 0; TOKENS[i] != '\0'; i++)
 	{
-		if (operands[i] == c)
+		if (TOKENS[i] == c)
 			return (1);
 	}
 	return (0);
@@ -121,7 +159,7 @@ void rpn::runStack()
 				operation(numbers, i);
 		}
 	}
-	std::cout << "output: " << numbers.top() << std::endl; 
+	std::cout << "result: " << numbers.top() << std::endl; 
 }
 
 // -------------------- Destructors -------------------

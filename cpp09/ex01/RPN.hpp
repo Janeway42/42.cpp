@@ -2,10 +2,15 @@
 #define BITCOINEXCHANGE_HPP
 
 #include <stack>
-#include <vector>
 #include <string>
 #include <iostream>
 #include <fstream>
+
+#define PLUS
+#define MIN "-"
+#define MULTI "*"
+#define DIV "/"
+#define TOKENS "+-*/"
 
 class rpn
 {
@@ -38,6 +43,24 @@ class rpn
 					return ("Bad Input");
 				}
 		};
+
+		class BadInput: public std::exception
+        {
+            private:
+                std::string _errorMessage;
+
+            public:
+                // explicit: https://leimao.github.io/blog/CPP-Explicit-Constructor/
+                explicit BadInput(const std::string& message) throw()
+                {
+                    _errorMessage = message;
+                }
+                virtual const char* what() const throw()
+                {
+                    return (_errorMessage.c_str());
+                }
+                virtual ~BadInput() throw(){}
+        };
 };
 
 #endif
