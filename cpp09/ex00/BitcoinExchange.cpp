@@ -8,6 +8,12 @@ BitcoinExchange::BitcoinExchange(std::fstream *fsInput, std::fstream *fsCsv)
 {
 	database = createMap(fsCsv, ",");
 	input = createMap(fsInput, "|");
+	std::list<std::pair<t_date, std::string> >::iterator it;
+	for (it = input.begin(); it != input.end(); it++)
+	{
+		std::cout << it->second << " ";
+	}
+	std::cout << std::endl;
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &existing): input(existing.getInput()), database(existing.getDatabase()){}
@@ -152,9 +158,7 @@ std::list<std::pair<t_date, std::string> > BitcoinExchange::createMap(std::fstre
 	while (buffer == "date | value" || buffer == "date,exchange_rate")
 		getline((*fs), buffer);
 
-	std::cout << "buffer: " << buffer << std::endl;
-
-	while (!(*fs).eof())
+	while (1)
 	{
 		if (buffer != "")
 		{
@@ -192,6 +196,8 @@ std::list<std::pair<t_date, std::string> > BitcoinExchange::createMap(std::fstre
 				val = buffer.substr(out + 1);
 			dest.push_back(make_pair(temp, val));
 		}
+		if ((*fs).eof())
+			break ;
 		getline((*fs), buffer);
 	}
 	return (dest);
