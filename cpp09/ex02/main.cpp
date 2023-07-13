@@ -51,11 +51,10 @@ int main(int argc, char **argv)
 
 		One.push_back(temp);
 	}
-	sort(One, 0, One.size() - 1);
+	sortVector(One, 0, One.size() - 1);
 	std::clock_t	endVector = std::clock();
 	long double		timeVector = 1000.0 * (endVector - startVector) / CLOCKS_PER_SEC;
-	printContainer(One);
-	std::cout << "\nTime to process a range of " << argc - 1 << " elements with std::vector: " << timeVector << " us\n\n";
+	printContainerVector(One);
 
 	// second container: deque
 	std::clock_t startDeque = std::clock();
@@ -79,10 +78,12 @@ int main(int argc, char **argv)
 		Two.push_back(temp);
 	}
 
-	sort(Two, 0, Two.size() - 1);
+	sortDeque(Two, 0, Two.size() - 1);
 	std::clock_t	endDeque = std::clock();
 	long double		timeDeque = 1000.0 * (endDeque - startDeque) / CLOCKS_PER_SEC;
-	printContainer(Two);
-	std::cout << "\nTime to process a range of " << argc - 1 << " elements with std::deque: " << timeDeque << " us\n\n";
+	printContainerDeque(Two);
+
+	std::cout << "\nTime to process a range of " << argc - 1 << " elements with std::deque:  " << timeDeque << " us\n";
+	std::cout << "Time to process a range of " << argc - 1 << " elements with std::vector: " << timeVector << " us\n";
 	return (0);
 }

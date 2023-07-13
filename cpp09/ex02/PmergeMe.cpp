@@ -4,17 +4,17 @@
 // -----------------------------------------------------------------------
 // -----------------------------------------------------------------------
 
-void printContainer(std::vector<int> elem)
+void printContainerVector(std::vector<unsigned long> elem)
 {
 	std::cout << "After:	";
-	std::vector<int>::iterator it;
+	std::vector<unsigned long>::iterator it;
 	for (it = elem.begin(); it != elem.end(); it++)
 		std::cout << *it << " ";
 	std::cout << "\n";
 }
 
 // Step 3: merge the two small containers after they have been sorted 
-void merge(std::vector<int> &elem, int start, int median, int end)
+void mergeVector(std::vector<unsigned long> &elem, int start, int median, int end)
 {
 	int sizeLeft = median - start + 1;
 	int sizeRight = end - median;
@@ -60,7 +60,7 @@ void merge(std::vector<int> &elem, int start, int median, int end)
 }
 
 // Step 2: sort and insert the smallest containers resulted from "sort"
-void insertionSort(std::vector<int> &elem, int start, int end)
+void insertionSortVector(std::vector<unsigned long> &elem, int start, int end)
 {
 	for (int i = start; i < end; i++)
 	{
@@ -76,34 +76,34 @@ void insertionSort(std::vector<int> &elem, int start, int end)
 }
 
 // Step 1: divide the given n elements of the container into (n/min_size) groups of each group of size min_size
-void sort(std::vector<int> &elem, int start, int end)
+void sortVector(std::vector<unsigned long> &elem, int start, int end)
 {
 	if (end - start > min_size)
 	{
 		int median = (start + end) / 2;
-		sort(elem, start, median);
-		sort(elem, median + 1, end);
-		merge(elem, start, median, end);
+		sortVector(elem, start, median);
+		sortVector(elem, median + 1, end);
+		mergeVector(elem, start, median, end);
 	}
 	else
-		insertionSort(elem, start, end);
+		insertionSortVector(elem, start, end);
 }
 
 // dque 
 // -----------------------------------------------------------------------
 // -----------------------------------------------------------------------
 
-void printContainer(std::deque<int> elem)
+void printContainerDeque(std::deque<unsigned long> elem)
 {
 	std::cout << "After:	";
-	std::deque<int>::iterator it;
+	std::deque<unsigned long>::iterator it;
 	for (it = elem.begin(); it != elem.end(); it++)
 		std::cout << *it << " ";
 	std::cout << "\n";
 }
 
 // Step 3: merge the two small containers after they have been sorted 
-void merge(std::deque<int> &elem, int start, int median, int end)
+void mergeDeque(std::deque<unsigned long> &elem, int start, int median, int end)
 {
 	int sizeLeft = median - start + 1;
 	int sizeRight = end - median;
@@ -149,7 +149,7 @@ void merge(std::deque<int> &elem, int start, int median, int end)
 }
 
 // Step 2: sort and insert the smallest containers resulted from "sort"
-void insertionSort(std::deque<int> &elem, int start, int end)
+void insertionSortDeque(std::deque<unsigned long> &elem, int start, int end)
 {
 	for (int i = start; i < end; i++)
 	{
@@ -165,16 +165,16 @@ void insertionSort(std::deque<int> &elem, int start, int end)
 }
 
 // Step 1: divide the given n elements of the container into (n/min_size) groups of each group of size min_size
-void sort(std::deque<int> &elem, int start, int end)
+void sortDeque(std::deque<unsigned long> &elem, int start, int end)
 {
 	if (end - start > min_size)
 	{
 		int median = (start + end) / 2;
-		sort(elem, start, median);
-		sort(elem, median + 1, end);
-		merge(elem, start, median, end);
+		sortDeque(elem, start, median);
+		sortDeque(elem, median + 1, end);
+		mergeDeque(elem, start, median, end);
 	}
 	else
-		insertionSort(elem, start, end);
+		insertionSortDeque(elem, start, end);
 }
 

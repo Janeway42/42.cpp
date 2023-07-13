@@ -8,12 +8,6 @@ BitcoinExchange::BitcoinExchange(std::fstream *fsInput, std::fstream *fsCsv)
 {
 	database = createMap(fsCsv, ",");
 	input = createMap(fsInput, "|");
-	std::list<std::pair<t_date, std::string> >::iterator it;
-	for (it = input.begin(); it != input.end(); it++)
-	{
-		std::cout << it->second << " ";
-	}
-	std::cout << std::endl;
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &existing): input(existing.getInput()), database(existing.getDatabase()){}
@@ -104,7 +98,7 @@ void BitcoinExchange::findClosest(std::list<std::pair<t_date, std::string> > *it
 	}
 	if (itDatabase == database.begin())
 	{
-		std::cout << "Error: value unavailable/no value before to select from.\n";
+		std::cout << "Error: value unavailable.\n";
 		return ;
 	}
 	else if (itDatabase == database.end())
@@ -155,12 +149,14 @@ std::list<std::pair<t_date, std::string> > BitcoinExchange::createMap(std::fstre
 	std::list <std::pair<t_date, std::string> > dest;
 
 	getline((*fs), buffer);
-	while (buffer == "date | value" || buffer == "date,exchange_rate")
-		getline((*fs), buffer);
+	// while (buffer == "date | value" || buffer == "date,exchange_rate")
+	// 	getline((*fs), buffer);
 
-	while (1)
+	while (getline((*fs), buffer))
 	{
-		if (buffer != "")
+		if ((buffer == "date | value" || buffer == "date,exchange_rate"))
+			getline((*fs), buffer);
+		else if (buffer != "")
 		{
 			t_date temp;
 			temp.year = -55;
@@ -196,9 +192,6 @@ std::list<std::pair<t_date, std::string> > BitcoinExchange::createMap(std::fstre
 				val = buffer.substr(out + 1);
 			dest.push_back(make_pair(temp, val));
 		}
-		if ((*fs).eof())
-			break ;
-		getline((*fs), buffer);
 	}
 	return (dest);
 }
